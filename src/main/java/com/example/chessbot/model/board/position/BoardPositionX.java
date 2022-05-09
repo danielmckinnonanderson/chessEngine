@@ -16,5 +16,5 @@ public enum BoardPositionX {
         this.value = value;
     }
 
-    int getValue() { return this.value; }
+    public int getValue() { return this.value; }
 }

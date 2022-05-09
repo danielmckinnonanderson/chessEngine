@@ -1,6 +1,5 @@
 package com.example.chessbot.model.board;
 
-import com.example.chessbot.model.board.exceptions.IllegalTeamException;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.board.position.BoardPosition;
 
@@ -11,13 +10,7 @@ public class ConcreteBoard implements Board {
 
     private Map<BoardPosition, Piece> piecesInPlay = new HashMap<>();
 
-    private byte x = 125;
-
     public ConcreteBoard() {
-    }
-
-    private ConcreteBoard(Map<BoardPosition, Piece> piecesInPlay) throws IllegalTeamException {
-        this.piecesInPlay = piecesInPlay;
     }
 
     public Board setPiecesInPlay(Map<BoardPosition, Piece> piecesInPlay) {

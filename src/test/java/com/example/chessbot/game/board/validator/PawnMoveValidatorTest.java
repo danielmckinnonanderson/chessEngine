@@ -4,6 +4,8 @@ import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.ConcreteBoard;
 import com.example.chessbot.model.board.exceptions.IllegalTeamException;
 import com.example.chessbot.model.board.position.BoardPosition;
+import com.example.chessbot.model.board.position.BoardPositionX;
+import com.example.chessbot.model.board.position.BoardPositionY;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
 import org.assertj.core.api.Assertions;
@@ -16,8 +18,8 @@ public class PawnMoveValidatorTest {
     public void noFirstTurnNoEnemy_whenWhitePawnMovesBackward_isInvalid() throws IllegalTeamException {
         final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
 
-        final BoardPosition currentPosition = new BoardPosition(3, 6);
-        final BoardPosition desiredPosition = new BoardPosition(3, 5);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.C, BoardPositionY.SIX);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.C, BoardPositionY.FIVE);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -39,8 +41,8 @@ public class PawnMoveValidatorTest {
     public void noFirstTurnNoEnemy_whenWhitePawnMovesInvalidSpace_isInvalid() throws IllegalTeamException {
         final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
 
-        final BoardPosition currentPosition = new BoardPosition(0, 1);
-        final BoardPosition desiredPosition = new BoardPosition(6, 3);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.F, BoardPositionY.TWO);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -62,8 +64,8 @@ public class PawnMoveValidatorTest {
     public void givenFirstTurnNoEnemy_thenWhitePawnMoves1Space() throws IllegalTeamException {
         final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
 
-        final BoardPosition currentPosition = new BoardPosition(0, 1);
-        final BoardPosition desiredPosition = new BoardPosition(0, 2);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.TWO);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -85,8 +87,8 @@ public class PawnMoveValidatorTest {
     public void givenFirstTurnNoEnemy_thenWhitePawnMoves2Space_isValid() throws IllegalTeamException {
         final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
 
-        final BoardPosition currentPosition = new BoardPosition(0, 1);
-        final BoardPosition desiredPosition = new BoardPosition(0, 3);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -109,9 +111,9 @@ public class PawnMoveValidatorTest {
         final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
         final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
 
-        final BoardPosition currentPosition = new BoardPosition(0, 1);
-        final BoardPosition desiredPosition = new BoardPosition(0, 3);
-        final BoardPosition blackPawnPosition = new BoardPosition(0, 3);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
+        final BoardPosition blackPawnPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -134,8 +136,8 @@ public class PawnMoveValidatorTest {
     public void givenFirstTurnEnemy_whenWhitePawnAttacksFromInvalidPosition_isInvalid() throws IllegalTeamException {
         final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
 
-        final BoardPosition currentPosition = new BoardPosition(0, 1);
-        final BoardPosition desiredPosition = new BoardPosition(0, 3);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -157,8 +159,8 @@ public class PawnMoveValidatorTest {
     public void noFirstTurnNoEnemy_whenBlackPawnMovesBackward_isInvalid() throws IllegalTeamException {
         final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
 
-        final BoardPosition currentPosition = new BoardPosition(3, 6);
-        final BoardPosition desiredPosition = new BoardPosition(3, 7);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.C, BoardPositionY.SIX);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.C, BoardPositionY.SEVEN);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -180,8 +182,8 @@ public class PawnMoveValidatorTest {
     public void noFirstTurnNoEnemy_whenBlackPawnMovesInvalidSpace_isInvalid() throws IllegalTeamException {
         final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
 
-        final BoardPosition currentPosition = new BoardPosition(0, 1);
-        final BoardPosition desiredPosition = new BoardPosition(6, 3);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.EIGHT);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.E, BoardPositionY.ONE);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -203,8 +205,8 @@ public class PawnMoveValidatorTest {
     public void givenFirstTurnNoEnemy_thenBlackPawnMoves1Space() throws IllegalTeamException {
         final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
 
-        final BoardPosition currentPosition = new BoardPosition(7, 7);
-        final BoardPosition desiredPosition = new BoardPosition(7, 6);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.D, BoardPositionY.SIX);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.D, BoardPositionY.FOUR);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -226,8 +228,8 @@ public class PawnMoveValidatorTest {
     public void givenFirstTurnNoEnemy_thenBlackPawnMoves2Space_isValid() throws IllegalTeamException {
         final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
 
-        final BoardPosition currentPosition = new BoardPosition(7, 7);
-        final BoardPosition desiredPosition = new BoardPosition(7, 5);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.H, BoardPositionY.SEVEN);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.H, BoardPositionY.FIVE);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -250,9 +252,9 @@ public class PawnMoveValidatorTest {
         final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
         final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
 
-        final BoardPosition currentPosition = new BoardPosition(0, 1);
-        final BoardPosition desiredPosition = new BoardPosition(0, 3);
-        final BoardPosition blackPawnPosition = new BoardPosition(0, 3);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.FIVE);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
+        final BoardPosition blackPawnPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
 
         Board fakeBoard = new ConcreteBoard();
 
@@ -275,8 +277,8 @@ public class PawnMoveValidatorTest {
     public void givenFirstTurnEnemy_whenBlackPawnAttacksFromInvalidPosition_isInvalid() throws IllegalTeamException {
         final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
 
-        final BoardPosition currentPosition = new BoardPosition(0, 1);
-        final BoardPosition desiredPosition = new BoardPosition(0, 3);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
 
         Board fakeBoard = new ConcreteBoard();
 

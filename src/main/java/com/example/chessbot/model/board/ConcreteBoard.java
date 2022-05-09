@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConcreteBoard implements Board {
-
     private Map<BoardPosition, Piece> piecesInPlay = new HashMap<>();
 
     public ConcreteBoard() {

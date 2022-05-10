@@ -4,6 +4,8 @@ import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.ConcreteBoard;
 import com.example.chessbot.model.board.exceptions.IllegalTeamException;
 import com.example.chessbot.model.board.position.BoardPosition;
+import com.example.chessbot.model.board.position.BoardPositionX;
+import com.example.chessbot.model.board.position.BoardPositionY;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,8 +31,8 @@ public class BoardMoveValidatorTest {
     public void testGivenPieceIsPawn_whenBoardPositionValidatorReads_shouldSendToPawn() throws IllegalTeamException {
         final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
 
-        final BoardPosition currentPosition = new BoardPosition(0, 1);
-        final BoardPosition desiredPosition = new BoardPosition(0, 2);
+        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
+        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.TWO);
 
         Board fakeBoard = new ConcreteBoard();
 

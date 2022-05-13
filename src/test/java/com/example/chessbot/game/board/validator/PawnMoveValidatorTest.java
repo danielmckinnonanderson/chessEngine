@@ -2,12 +2,12 @@ package com.example.chessbot.game.board.validator;
 
 import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.ConcreteBoard;
-import com.example.chessbot.model.board.exceptions.IllegalTeamException;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.board.position.BoardPositionX;
 import com.example.chessbot.model.board.position.BoardPositionY;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
+import com.example.chessbot.model.piece.PieceTeam;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +15,8 @@ public class PawnMoveValidatorTest {
     private final PawnMoveValidator pawnMoveValidator = new PawnMoveValidator();
 
     @Test
-    public void noFirstTurnNoEnemy_whenWhitePawnMovesBackward_isInvalid() throws IllegalTeamException {
-        final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
+    public void noFirstTurnNoEnemy_whenWhitePawnMovesBackward_isInvalid() {
+        final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.C, BoardPositionY.SIX);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.C, BoardPositionY.FIVE);
@@ -38,8 +38,8 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void noFirstTurnNoEnemy_whenWhitePawnMovesInvalidSpace_isInvalid() throws IllegalTeamException {
-        final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
+    public void noFirstTurnNoEnemy_whenWhitePawnMovesInvalidSpace_isInvalid() {
+        final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.F, BoardPositionY.TWO);
@@ -61,8 +61,8 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void givenFirstTurnNoEnemy_thenWhitePawnMoves1Space() throws IllegalTeamException {
-        final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
+    public void givenFirstTurnNoEnemy_thenWhitePawnMoves1Space() {
+        final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.TWO);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
@@ -84,8 +84,8 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void givenFirstTurnNoEnemy_thenWhitePawnMoves2Space_isValid() throws IllegalTeamException {
-        final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
+    public void givenFirstTurnNoEnemy_thenWhitePawnMoves2Space_isValid() {
+        final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
@@ -107,9 +107,9 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void givenFirstTurnEnemy_whenWhitePawnAttacksFromInvalidPosition_isNotValid() throws IllegalTeamException {
-        final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
-        final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
+    public void givenFirstTurnEnemy_whenWhitePawnAttacksFromInvalidPosition_isNotValid() {
+        final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
+        final Piece blackPawn = new Piece(PieceNames.PAWN, PieceTeam.BLACK);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
@@ -133,8 +133,8 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void givenFirstTurnEnemy_whenWhitePawnAttacksFromInvalidPosition_isInvalid() throws IllegalTeamException {
-        final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
+    public void givenFirstTurnEnemy_whenWhitePawnAttacksFromInvalidPosition_isInvalid() {
+        final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
@@ -156,8 +156,8 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void noFirstTurnNoEnemy_whenBlackPawnMovesBackward_isInvalid() throws IllegalTeamException {
-        final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
+    public void noFirstTurnNoEnemy_whenBlackPawnMovesBackward_isInvalid() {
+        final Piece blackPawn = new Piece(PieceNames.PAWN, PieceTeam.BLACK);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.C, BoardPositionY.SIX);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.C, BoardPositionY.SEVEN);
@@ -179,8 +179,8 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void noFirstTurnNoEnemy_whenBlackPawnMovesInvalidSpace_isInvalid() throws IllegalTeamException {
-        final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
+    public void noFirstTurnNoEnemy_whenBlackPawnMovesInvalidSpace_isInvalid() {
+        final Piece blackPawn = new Piece(PieceNames.PAWN, PieceTeam.BLACK);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.EIGHT);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.E, BoardPositionY.ONE);
@@ -202,8 +202,8 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void givenFirstTurnNoEnemy_thenBlackPawnMoves1Space() throws IllegalTeamException {
-        final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
+    public void givenFirstTurnNoEnemy_thenBlackPawnMoves1Space() {
+        final Piece blackPawn = new Piece(PieceNames.PAWN, PieceTeam.BLACK);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.D, BoardPositionY.SIX);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.D, BoardPositionY.FOUR);
@@ -225,8 +225,8 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void givenFirstTurnNoEnemy_thenBlackPawnMoves2Space_isValid() throws IllegalTeamException {
-        final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
+    public void givenFirstTurnNoEnemy_thenBlackPawnMoves2Space_isValid() {
+        final Piece blackPawn = new Piece(PieceNames.PAWN, PieceTeam.BLACK);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.H, BoardPositionY.SEVEN);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.H, BoardPositionY.FIVE);
@@ -248,9 +248,9 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void givenFirstTurnEnemy_whenBlackPawnAttacksFromInvalidPosition_isNotValid() throws IllegalTeamException {
-        final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
-        final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
+    public void givenFirstTurnEnemy_whenBlackPawnAttacksFromInvalidPosition_isNotValid() {
+        final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.BLACK);
+        final Piece blackPawn = new Piece(PieceNames.PAWN, PieceTeam.BLACK);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.FIVE);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
@@ -274,8 +274,8 @@ public class PawnMoveValidatorTest {
     }
 
     @Test
-    public void givenFirstTurnEnemy_whenBlackPawnAttacksFromInvalidPosition_isInvalid() throws IllegalTeamException {
-        final Piece blackPawn = new Piece(PieceNames.PAWN, 1);
+    public void givenFirstTurnEnemy_whenBlackPawnAttacksFromInvalidPosition_isInvalid() {
+        final Piece blackPawn = new Piece(PieceNames.PAWN, PieceTeam.BLACK);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.THREE);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);

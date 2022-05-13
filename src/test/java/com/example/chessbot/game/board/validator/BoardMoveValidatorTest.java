@@ -2,12 +2,12 @@ package com.example.chessbot.game.board.validator;
 
 import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.ConcreteBoard;
-import com.example.chessbot.model.board.exceptions.IllegalTeamException;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.board.position.BoardPositionX;
 import com.example.chessbot.model.board.position.BoardPositionY;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
+import com.example.chessbot.model.piece.PieceTeam;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +28,8 @@ public class BoardMoveValidatorTest {
     }
 
     @Test
-    public void testGivenPieceIsPawn_whenBoardPositionValidatorReads_shouldSendToPawn() throws IllegalTeamException {
-        final Piece whitePawn = new Piece(PieceNames.PAWN, 0);
+    public void testGivenPieceIsPawn_whenBoardPositionValidatorReads_shouldSendToPawn() {
+        final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.TWO);
@@ -38,10 +38,10 @@ public class BoardMoveValidatorTest {
 
         fakeBoard.getPiecesInPlay().put(currentPosition, whitePawn);
 
-        Mockito.when(mockPawnMoveValidator.isMoveValid(anyInt(), anyBoolean(), anyBoolean(), any(), any())).thenReturn(true);
+        Mockito.when(mockPawnMoveValidator.isMoveValid(any(), anyBoolean(), anyBoolean(), any(), any())).thenReturn(true);
 
         boolean result = boardPositionValidator.isPositionValid(whitePawn, true, false, currentPosition, desiredPosition);
 
-        verify(mockPawnMoveValidator, Mockito.times(1)).isMoveValid(anyInt(), anyBoolean(), anyBoolean(), any(), any());
+        verify(mockPawnMoveValidator, Mockito.times(1)).isMoveValid(any(), anyBoolean(), anyBoolean(), any(), any());
     }
 }

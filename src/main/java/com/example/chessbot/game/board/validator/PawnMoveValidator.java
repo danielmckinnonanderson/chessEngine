@@ -1,10 +1,11 @@
 package com.example.chessbot.game.board.validator;
 
 import com.example.chessbot.model.board.position.BoardPosition;
+import com.example.chessbot.model.piece.PieceTeam;
 
 public class PawnMoveValidator {
 
-    public boolean isMoveValid(int pieceTeam, boolean isFirstTurn, boolean opponentIsPresentInDesiredPosition, BoardPosition currentPosition, BoardPosition desiredPosition) {
+    public boolean isMoveValid(PieceTeam pieceTeam, boolean isFirstTurn, boolean opponentIsPresentInDesiredPosition, BoardPosition currentPosition, BoardPosition desiredPosition) {
         int deltaX = desiredPosition.getPositionX().getValue() - currentPosition.getPositionX().getValue();
         int deltaY = desiredPosition.getPositionY().getValue() - currentPosition.getPositionY().getValue();
         int absValueDeltaX = Math.abs(deltaX);
@@ -24,8 +25,8 @@ public class PawnMoveValidator {
         return false;
     }
 
-    private boolean onlyMovesForward(int pieceTeam, int deltaY) {
-        return pieceTeam == 0 ?  deltaY > 0 : deltaY < 0;
+    private boolean onlyMovesForward(PieceTeam pieceTeam, int deltaY) {
+        return pieceTeam == PieceTeam.WHITE ?  deltaY > 0 : deltaY < 0;
     }
 
     private boolean isDesiredPositionInCaptureRange(int deltaX, int deltaY) {

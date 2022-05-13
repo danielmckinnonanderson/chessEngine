@@ -1,14 +1,12 @@
 package com.example.chessbot.model.piece;
 
-import com.example.chessbot.model.board.exceptions.IllegalTeamException;
-
 public class Piece {
     private PieceNames name;
     private PieceTeam team;
 
     private Piece() {}
 
-    public Piece(PieceNames name, PieceTeam team) throws IllegalTeamException {
+    public Piece(PieceNames name, PieceTeam team) {
         this.team = team;
         this.name = name;
     }

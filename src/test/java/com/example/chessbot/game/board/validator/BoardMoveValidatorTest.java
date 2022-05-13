@@ -2,7 +2,6 @@ package com.example.chessbot.game.board.validator;
 
 import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.ConcreteBoard;
-import com.example.chessbot.model.board.exceptions.IllegalTeamException;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.board.position.BoardPositionX;
 import com.example.chessbot.model.board.position.BoardPositionY;
@@ -29,7 +28,7 @@ public class BoardMoveValidatorTest {
     }
 
     @Test
-    public void testGivenPieceIsPawn_whenBoardPositionValidatorReads_shouldSendToPawn() throws IllegalTeamException {
+    public void testGivenPieceIsPawn_whenBoardPositionValidatorReads_shouldSendToPawn() {
         final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);

@@ -13,7 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import org.mockito.Mockito;
 
-import static org.mockito.Matchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.verify;
 
 public class BoardMoveValidatorTest {

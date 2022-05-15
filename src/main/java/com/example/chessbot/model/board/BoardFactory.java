@@ -1,7 +1,5 @@
-package com.example.chessbot.game.board;
+package com.example.chessbot.model.board;
 
-import com.example.chessbot.model.board.Board;
-import com.example.chessbot.model.board.ConcreteBoard;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.board.position.BoardPosition;
 

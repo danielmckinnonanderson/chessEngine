@@ -1,6 +1,7 @@
 package com.example.chessbot.game.board;
 
 import com.example.chessbot.model.board.Board;
+import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.board.position.BoardPositionX;
 import com.example.chessbot.model.board.position.BoardPositionY;
 import com.example.chessbot.model.piece.Piece;

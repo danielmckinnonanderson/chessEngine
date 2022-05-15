@@ -3,16 +3,7 @@ package com.example.chessbot.game.state;
 import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.board.Board;
 
-public class ConcreteGameState implements GameState {
-
-    private final Board board;
-
-    private final int moveNumber;
-
-    ConcreteGameState(Board board, int moveNumber) {
-        this.board = board;
-        this.moveNumber = moveNumber;
-    }
+public record ConcreteGameState(Board board, int moveNumber) implements GameState {
 
     public Board getBoard() {
         return this.board;

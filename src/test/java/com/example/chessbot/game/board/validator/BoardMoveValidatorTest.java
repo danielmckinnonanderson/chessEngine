@@ -1,5 +1,7 @@
 package com.example.chessbot.game.board.validator;
 
+import com.example.chessbot.game.state.ConcreteGameState;
+import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.ConcreteBoard;
 import com.example.chessbot.model.board.position.BoardPosition;
@@ -13,36 +15,37 @@ import org.junit.jupiter.api.Test;
 
 import org.mockito.Mockito;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 
 public class BoardMoveValidatorTest {
 
     private PawnMoveValidator mockPawnMoveValidator;
+    private RookMoveValidator mockRookMoveValidator;
     private BoardMoveValidator boardPositionValidator;
 
     @BeforeEach
     public void setup_mockPawnMoveValidator() {
         this.mockPawnMoveValidator = Mockito.mock(PawnMoveValidator.class);
-        this.boardPositionValidator = new BoardMoveValidator(mockPawnMoveValidator);
+        this.boardPositionValidator = new BoardMoveValidator(mockPawnMoveValidator, mockRookMoveValidator);
     }
 
     @Test
     public void testGivenPieceIsPawn_whenBoardPositionValidatorReads_shouldSendToPawn() {
+        Board board = new ConcreteBoard().initializeEmptyBoard();
+
         final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
 
         final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
         final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.TWO);
 
-        Board fakeBoard = new ConcreteBoard();
+        board.getPiecesInPlay().put(currentPosition, whitePawn);
+        GameState gameState = new ConcreteGameState(board, -2103);
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, whitePawn);
+        Mockito.when(mockPawnMoveValidator.validate(any(),any(), any())).thenReturn(true);
 
-        Mockito.when(mockPawnMoveValidator.isMoveValid(any(), anyBoolean(), anyBoolean(), any(), any())).thenReturn(true);
+        boolean result = boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
 
-        boolean result = boardPositionValidator.isPositionValid(whitePawn, true, false, currentPosition, desiredPosition);
-
-        verify(mockPawnMoveValidator, Mockito.times(1)).isMoveValid(any(), anyBoolean(), anyBoolean(), any(), any());
+        verify(mockPawnMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
 }

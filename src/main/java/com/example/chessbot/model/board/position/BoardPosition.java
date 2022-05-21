@@ -1,29 +1,29 @@
 package com.example.chessbot.model.board.position;
 
 public class BoardPosition {
-    private BoardPositionX x;
-    private BoardPositionY y;
+    private int x;
+    private int y;
 
-    public BoardPosition(BoardPositionX x, BoardPositionY y) {
+    public BoardPosition(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public BoardPosition setBoardPositionX(BoardPositionX x) {
+    public BoardPosition setBoardPositionX(int x) {
         this.x = x;
         return this;
     }
 
-    public BoardPosition setBoardPositionY(BoardPositionY y) {
+    public BoardPosition setBoardPositionY(int y) {
         this.y = y;
         return this;
     }
 
-    public BoardPositionX getPositionX() {
+    public int getPositionX() {
         return this.x;
     }
 
-    public BoardPositionY getPositionY() {
+    public int getPositionY() {
         return this.y;
     }
 }

@@ -6,8 +6,8 @@ import com.example.chessbot.model.piece.PieceTeam;
 public class PawnMoveValidator {
 
     public boolean isMoveValid(PieceTeam pieceTeam, boolean isFirstTurn, boolean opponentIsPresentInDesiredPosition, BoardPosition currentPosition, BoardPosition desiredPosition) {
-        int deltaX = desiredPosition.getPositionX().getValue() - currentPosition.getPositionX().getValue();
-        int deltaY = desiredPosition.getPositionY().getValue() - currentPosition.getPositionY().getValue();
+        int deltaX = desiredPosition.getPositionX() - currentPosition.getPositionX();
+        int deltaY = desiredPosition.getPositionY() - currentPosition.getPositionY();
         int absValueDeltaX = Math.abs(deltaX);
         int absValueDeltaY = Math.abs(deltaY);
 

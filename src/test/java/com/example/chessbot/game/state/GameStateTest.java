@@ -4,8 +4,6 @@ import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.ConcreteBoard;
 import com.example.chessbot.model.board.position.BoardPosition;
-import com.example.chessbot.model.board.position.BoardPositionX;
-import com.example.chessbot.model.board.position.BoardPositionY;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
 import com.example.chessbot.model.piece.PieceTeam;
@@ -22,7 +20,7 @@ public class GameStateTest {
     @Test
     public void whenGameStateFactoryCreatesNewGameState_shouldMatchInitialValues() {
         Map<BoardPosition, Piece> MOCK_PIECES_IN_PLAY = new HashMap<>();
-        MOCK_PIECES_IN_PLAY.put(new BoardPosition(BoardPositionX.D, BoardPositionY.SIX), new Piece(PieceNames.BISHOP, PieceTeam.WHITE));
+        MOCK_PIECES_IN_PLAY.put(new BoardPosition(4, 6), new Piece(PieceNames.BISHOP, PieceTeam.WHITE));
 
         Board MOCK_BOARD = new ConcreteBoard().setPiecesInPlay(MOCK_PIECES_IN_PLAY);
 

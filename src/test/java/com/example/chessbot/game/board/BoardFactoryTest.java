@@ -2,8 +2,6 @@ package com.example.chessbot.game.board;
 
 import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.BoardFactory;
-import com.example.chessbot.model.board.position.BoardPositionX;
-import com.example.chessbot.model.board.position.BoardPositionY;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
 import com.example.chessbot.model.board.position.BoardPosition;
@@ -17,77 +15,77 @@ import java.util.Map;
 public class BoardFactoryTest {
     private Map<BoardPosition, Piece> constructMockPiecesInPlay_inInitialBoardPosition() {
         Map<BoardPosition, Piece> mockInitialPiecesInPlay = new HashMap<>();
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.A, BoardPositionY.ONE), new Piece(PieceNames.ROOK, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.B, BoardPositionY.ONE), new Piece(PieceNames.KNIGHT, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.C, BoardPositionY.ONE), new Piece(PieceNames.BISHOP, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.D, BoardPositionY.ONE), new Piece(PieceNames.QUEEN, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.E, BoardPositionY.ONE), new Piece(PieceNames.KING, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.F, BoardPositionY.ONE), new Piece(PieceNames.BISHOP, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.G, BoardPositionY.ONE), new Piece(PieceNames.KNIGHT, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.H, BoardPositionY.ONE), new Piece(PieceNames.ROOK, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(1, 1), new Piece(PieceNames.ROOK, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(2, 1), new Piece(PieceNames.KNIGHT, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(3, 1), new Piece(PieceNames.BISHOP, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(4, 1), new Piece(PieceNames.QUEEN, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(5, 1), new Piece(PieceNames.KING, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(6, 1), new Piece(PieceNames.BISHOP, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(7, 1), new Piece(PieceNames.KNIGHT, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(8, 1), new Piece(PieceNames.ROOK, PieceTeam.WHITE));
 
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.A, BoardPositionY.TWO), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.B, BoardPositionY.TWO), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.C, BoardPositionY.TWO), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.D, BoardPositionY.TWO), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.E, BoardPositionY.TWO), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.F, BoardPositionY.TWO), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.G, BoardPositionY.TWO), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.H, BoardPositionY.TWO), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(1, 2), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(2, 2), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(3, 2), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(4, 2), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(5, 2), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(6, 2), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(7, 2), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
+        mockInitialPiecesInPlay.put(new BoardPosition(8, 2), new Piece(PieceNames.PAWN, PieceTeam.WHITE));
 
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.A, BoardPositionY.THREE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.B, BoardPositionY.THREE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.C, BoardPositionY.THREE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.D, BoardPositionY.THREE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.E, BoardPositionY.THREE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.F, BoardPositionY.THREE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.G, BoardPositionY.THREE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.H, BoardPositionY.THREE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(1, 3), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(2, 3), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(3, 3), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(4, 3), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(5, 3), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(6, 3), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(7, 3), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(8, 3), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
 
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.A, BoardPositionY.FOUR), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.B, BoardPositionY.FOUR), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.C, BoardPositionY.FOUR), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.D, BoardPositionY.FOUR), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.E, BoardPositionY.FOUR), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.F, BoardPositionY.FOUR), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.G, BoardPositionY.FOUR), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.H, BoardPositionY.FOUR), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(1, 4), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(2, 4), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(3, 4), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(4, 4), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(5, 4), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(6, 4), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(7, 4), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(8, 4), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
 
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.A, BoardPositionY.FIVE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.B, BoardPositionY.FIVE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.C, BoardPositionY.FIVE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.D, BoardPositionY.FIVE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.E, BoardPositionY.FIVE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.F, BoardPositionY.FIVE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.G, BoardPositionY.FIVE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.H, BoardPositionY.FIVE), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(1, 5), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(2, 5), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(3, 5), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(4, 5), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(5, 5), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(6, 5), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(7, 5), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(8, 5), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
 
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.A, BoardPositionY.SIX), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.B, BoardPositionY.SIX), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.C, BoardPositionY.SIX), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.D, BoardPositionY.SIX), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.E, BoardPositionY.SIX), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.F, BoardPositionY.SIX), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.G, BoardPositionY.SIX), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.H, BoardPositionY.SIX), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(1, 6), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(2, 6), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(3, 6), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(4, 6), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(5, 6), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(6, 6), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(7, 6), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
+        mockInitialPiecesInPlay.put(new BoardPosition(8, 6), new Piece(PieceNames.EMPTY, PieceTeam.NONE));
 
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.A, BoardPositionY.SEVEN), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.B, BoardPositionY.SEVEN), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.C, BoardPositionY.SEVEN), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.D, BoardPositionY.SEVEN), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.E, BoardPositionY.SEVEN), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.F, BoardPositionY.SEVEN), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.G, BoardPositionY.SEVEN), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.H, BoardPositionY.SEVEN), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(1, 7), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(2, 7), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(3, 7), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(4, 7), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(5, 7), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(6, 7), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(7, 7), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(8, 7), new Piece(PieceNames.PAWN, PieceTeam.BLACK));
 
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.A, BoardPositionY.EIGHT), new Piece(PieceNames.ROOK, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.B, BoardPositionY.EIGHT), new Piece(PieceNames.KNIGHT, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.C, BoardPositionY.EIGHT), new Piece(PieceNames.BISHOP, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.D, BoardPositionY.EIGHT), new Piece(PieceNames.QUEEN, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.E, BoardPositionY.EIGHT), new Piece(PieceNames.KING, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.F, BoardPositionY.EIGHT), new Piece(PieceNames.BISHOP, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.G, BoardPositionY.EIGHT), new Piece(PieceNames.KNIGHT, PieceTeam.BLACK));
-        mockInitialPiecesInPlay.put(new BoardPosition(BoardPositionX.H, BoardPositionY.EIGHT), new Piece(PieceNames.ROOK, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(1, 8), new Piece(PieceNames.ROOK, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(2, 8), new Piece(PieceNames.KNIGHT, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(3, 8), new Piece(PieceNames.BISHOP, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(4, 8), new Piece(PieceNames.QUEEN, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(5, 8), new Piece(PieceNames.KING, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(6, 8), new Piece(PieceNames.BISHOP, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(7, 8), new Piece(PieceNames.KNIGHT, PieceTeam.BLACK));
+        mockInitialPiecesInPlay.put(new BoardPosition(8, 8), new Piece(PieceNames.ROOK, PieceTeam.BLACK));
         return mockInitialPiecesInPlay;
     }
 
@@ -105,19 +103,19 @@ public class BoardFactoryTest {
 
             switch (key.getPositionY()) {
 
-                case THREE, FOUR, FIVE, SIX -> Assertions.assertThat(pieceName).isEqualTo(PieceNames.EMPTY);
-                case TWO, SEVEN -> Assertions.assertThat(pieceName).isEqualTo(PieceNames.PAWN);
-                case ONE, EIGHT -> {
+                case 3, 4, 5, 6 -> Assertions.assertThat(pieceName).isEqualTo(PieceNames.EMPTY);
+                case 2, 7 -> Assertions.assertThat(pieceName).isEqualTo(PieceNames.PAWN);
+                case 1, 8 -> {
                     switch (key.getPositionX()) {
-                        case A, H -> Assertions.assertThat(pieceName)
+                        case 1, 8 -> Assertions.assertThat(pieceName)
                                 .isEqualTo(PieceNames.ROOK);
-                        case B, G -> Assertions.assertThat(pieceName)
+                        case 2, 7 -> Assertions.assertThat(pieceName)
                                 .isEqualTo(PieceNames.KNIGHT);
-                        case C, F -> Assertions.assertThat(pieceName)
+                        case 3, 6 -> Assertions.assertThat(pieceName)
                                 .isEqualTo(PieceNames.BISHOP);
-                        case D -> Assertions.assertThat(pieceName)
+                        case 4 -> Assertions.assertThat(pieceName)
                                 .isEqualTo(PieceNames.QUEEN);
-                        case E -> Assertions.assertThat(pieceName)
+                        case 5 -> Assertions.assertThat(pieceName)
                                 .isEqualTo(PieceNames.KING);
                     }
                 }

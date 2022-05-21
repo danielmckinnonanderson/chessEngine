@@ -3,8 +3,6 @@ package com.example.chessbot.game.board.validator;
 import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.ConcreteBoard;
 import com.example.chessbot.model.board.position.BoardPosition;
-import com.example.chessbot.model.board.position.BoardPositionX;
-import com.example.chessbot.model.board.position.BoardPositionY;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
 import com.example.chessbot.model.piece.PieceTeam;
@@ -32,8 +30,8 @@ public class BoardMoveValidatorTest {
     public void testGivenPieceIsPawn_whenBoardPositionValidatorReads_shouldSendToPawn() {
         final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
 
-        final BoardPosition currentPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.ONE);
-        final BoardPosition desiredPosition = new BoardPosition(BoardPositionX.A, BoardPositionY.TWO);
+        final BoardPosition currentPosition = new BoardPosition(1, 1);
+        final BoardPosition desiredPosition = new BoardPosition(1, 2);
 
         Board fakeBoard = new ConcreteBoard();
 

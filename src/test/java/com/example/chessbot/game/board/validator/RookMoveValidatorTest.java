@@ -10,6 +10,7 @@ import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
 import com.example.chessbot.model.piece.PieceTeam;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -17,11 +18,17 @@ import java.util.Map;
 public class RookMoveValidatorTest {
     private final RookMoveValidator rookMoveValidator = new RookMoveValidator();
 
-    private final Board emptyBoard = BoardFactory.createEmptyBoard();
+    private Board emptyBoard;
+
+    @BeforeEach()
+    public void setupBoard() {
+        this.emptyBoard = BoardFactory.createEmptyBoard();
+    }
 
     @Test
     public void givenNoPiecesInWay_RookCanMoveVertically() {
         Map<BoardPosition, Piece> piecesInPlayOne = emptyBoard.getPiecesInPlay();
+        System.out.println(piecesInPlayOne);
 
         final BoardPosition startingPosition = new BoardPosition(1, 1);
         final BoardPosition endingPosition = new BoardPosition(1, 5);
@@ -63,12 +70,12 @@ public class RookMoveValidatorTest {
 
         final BoardPosition startingPositionTwo = new BoardPosition(3, 3);
         final BoardPosition endingPositionTwo = new BoardPosition(5, 3);
-        final Piece blackRook = new Piece(PieceNames.ROOK, PieceTeam.WHITE);
+        final Piece blackRook = new Piece(PieceNames.ROOK, PieceTeam.BLACK);
 
         Map<BoardPosition, Piece> piecesInPlayTwo = emptyBoard.getPiecesInPlay();
 
         piecesInPlayTwo.put(startingPositionTwo, blackRook);
-        GameState gameStateTwo = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayOne), 1);
+        GameState gameStateTwo = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayTwo), 1);
 
         final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isTrue();
@@ -161,8 +168,8 @@ public class RookMoveValidatorTest {
 
         final BoardPosition oneRankBehindWhiteRook = new BoardPosition(3, 2);
         final BoardPosition oneRankFrontWhiteRook = new BoardPosition(3, 4);
-        final BoardPosition oneFileRightWhiteRook = new BoardPosition(3, 3);
-        final BoardPosition oneFileLeftWhiteRook = new BoardPosition(3, 3);
+        final BoardPosition oneFileRightWhiteRook = new BoardPosition(4, 3);
+        final BoardPosition oneFileLeftWhiteRook = new BoardPosition(2, 3);
 
         final Piece blackRook = new Piece(PieceNames.ROOK, PieceTeam.BLACK);
         final Piece blackBishop = new Piece(PieceNames.BISHOP, PieceTeam.BLACK);
@@ -286,6 +293,8 @@ public class RookMoveValidatorTest {
 
         piecesInPlayOne.put(startingPosition, whiteRook);
         piecesInPlayOne.put(endingPosition, whiteKnight);
+
+        Assertions.assertThat(piecesInPlayOne.size()).isEqualTo(64);
         GameState gameStateOne = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayOne), -9_999_999);
 
         final boolean resultOne = rookMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
@@ -294,14 +303,13 @@ public class RookMoveValidatorTest {
 
         final BoardPosition startingPositionTwo = new BoardPosition(5, 6);
         final BoardPosition endingPositionTwo = new BoardPosition(5, 2);
-        final Piece blackRook = new Piece(PieceNames.ROOK, PieceTeam.WHITE);
+        final Piece blackRook = new Piece(PieceNames.ROOK, PieceTeam.BLACK);
         final Piece blackQueen = new Piece(PieceNames.QUEEN, PieceTeam.BLACK);
 
         Map<BoardPosition, Piece> piecesInPlayTwo = emptyBoard.getPiecesInPlay();
-
         piecesInPlayTwo.put(startingPositionTwo, blackRook);
-        piecesInPlayOne.put(endingPosition, blackQueen);
-        GameState gameStateTwo = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayOne), 238_100);
+        piecesInPlayTwo.put(endingPositionTwo, blackQueen);
+        GameState gameStateTwo = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayTwo), 238_100);
 
         final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isFalse();
@@ -309,11 +317,79 @@ public class RookMoveValidatorTest {
 
     @Test
     public void givenEnemyPieceInSpot_RookCanCapture() {
+        Map<BoardPosition, Piece> piecesInPlayOne = emptyBoard.getPiecesInPlay();
 
+        final BoardPosition startingPosition = new BoardPosition(1, 1);
+        final BoardPosition endingPosition = new BoardPosition(3, 1);
+        final Piece whiteRook = new Piece(PieceNames.ROOK, PieceTeam.WHITE);
+        final Piece blackKing = new Piece(PieceNames.KNIGHT, PieceTeam.BLACK);
+
+        piecesInPlayOne.put(startingPosition, whiteRook);
+        piecesInPlayOne.put(endingPosition, blackKing);
+        GameState gameStateOne = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayOne), 9001);
+
+        final boolean resultOne = rookMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
+        Assertions.assertThat(resultOne).isTrue();
+
+
+        final BoardPosition startingPositionTwo = new BoardPosition(3, 8);
+        final BoardPosition endingPositionTwo = new BoardPosition(3, 4);
+        final Piece blackRook = new Piece(PieceNames.ROOK, PieceTeam.BLACK);
+        final Piece whiteKing = new Piece(PieceNames.BISHOP, PieceTeam.WHITE);
+
+        Map<BoardPosition, Piece> piecesInPlayTwo = emptyBoard.getPiecesInPlay();
+
+        piecesInPlayTwo.put(startingPositionTwo, blackRook);
+        piecesInPlayTwo.put(endingPositionTwo, whiteKing);
+        GameState gameStateTwo = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayTwo), 1);
+
+        final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
+        Assertions.assertThat(resultTwo).isTrue();
+    }
+
+    @Test
+    public void givenKingInSpot_RookCannotCapture() {
+        Map<BoardPosition, Piece> piecesInPlayOne = emptyBoard.getPiecesInPlay();
+
+        final BoardPosition startingPosition = new BoardPosition(1, 1);
+        final BoardPosition endingPosition = new BoardPosition(3, 1);
+        final Piece whiteRook = new Piece(PieceNames.ROOK, PieceTeam.WHITE);
+        final Piece blackKing = new Piece(PieceNames.KING, PieceTeam.BLACK);
+
+        piecesInPlayOne.put(startingPosition, whiteRook);
+        piecesInPlayOne.put(endingPosition, blackKing);
+        GameState gameStateOne = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayOne), 9001);
+
+        final boolean resultOne = rookMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
+        Assertions.assertThat(resultOne).isFalse();
+
+
+        final BoardPosition startingPositionTwo = new BoardPosition(3, 8);
+        final BoardPosition endingPositionTwo = new BoardPosition(3, 4);
+        final Piece blackRook = new Piece(PieceNames.ROOK, PieceTeam.BLACK);
+        final Piece whiteKing = new Piece(PieceNames.KING, PieceTeam.WHITE);
+
+        Map<BoardPosition, Piece> piecesInPlayTwo = emptyBoard.getPiecesInPlay();
+
+        piecesInPlayTwo.put(startingPositionTwo, blackRook);
+        piecesInPlayTwo.put(endingPositionTwo, whiteKing);
+        GameState gameStateTwo = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayTwo), 1);
+
+        final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
+        Assertions.assertThat(resultTwo).isFalse();
     }
 
     @Test
     public void whenDesiredPositionIsSamePositionAsCurrent_ThenRookCannotStandStill() {
+        final BoardPosition startingPosition = new BoardPosition(3, 8);
+        final Piece blackRook = new Piece(PieceNames.ROOK, PieceTeam.BLACK);
 
+        Map<BoardPosition, Piece> piecesInPlayTwo = emptyBoard.getPiecesInPlay();
+
+        piecesInPlayTwo.put(startingPosition, blackRook);
+        GameState gameStateTwo = new ConcreteGameState(new ConcreteBoard().setPiecesInPlay(piecesInPlayTwo), 1);
+
+        final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPosition, startingPosition);
+        Assertions.assertThat(resultTwo).isFalse();
     }
 }

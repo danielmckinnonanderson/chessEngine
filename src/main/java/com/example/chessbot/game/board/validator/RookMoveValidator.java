@@ -4,6 +4,7 @@ import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
+import com.example.chessbot.model.piece.PieceTeam;
 
 import java.util.Map;
 
@@ -13,67 +14,170 @@ public class RookMoveValidator implements MoveValidator {
         Map<BoardPosition, Piece> piecesInPlay = gameState.getBoard().getPiecesInPlay();
         Piece pieceToMove = piecesInPlay.get(currentPosition);
         Piece pieceInDesiredPosition = piecesInPlay.get(desiredPosition);
+        System.out.println("Desired Postion Piece = " + pieceInDesiredPosition.getPieceName());
 
-        if (isMoveEitherHorizontalOrVertical(currentPosition, desiredPosition)) {
-            if (isMoveHorizontal(currentPosition, desiredPosition)) {
-
-            }
-
-            if (isTherePieceInDesiredPosition(pieceToMove, pieceInDesiredPosition)
-                    && pieceInDesiredPositionIsEnemy(pieceToMove, pieceInDesiredPosition)) {
-
+        if (!moveIsEitherHorizontalOrVertical(currentPosition, desiredPosition)) {
+            return false;
+        } else {
+            if (moveIsHorizontal(currentPosition, desiredPosition)) {
+                if (moveIsPositive(currentPosition.getX(), desiredPosition.getX())) {
+                    return validateMoveToRight(piecesInPlay, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
+                } else {
+                    return validateMoveToLeft(piecesInPlay, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
+                }
+            } else {
+                if (moveIsPositive(currentPosition.getY(), desiredPosition.getY())) {
+                    return validateMoveUp(piecesInPlay, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
+                } else {
+                    return validateMoveDown(piecesInPlay, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
+                }
             }
         }
-
-
-        return true;
     }
 
-    private boolean isMoveEitherHorizontalOrVertical(BoardPosition current, BoardPosition desired) {
-        return (current.getPositionY() != desired.getPositionY()
-                && current.getPositionX()== current.getPositionX())
-                ^ (current.getPositionX() != desired.getPositionX()
-                && current.getPositionY() == desired.getPositionY());
+    private boolean moveIsEitherHorizontalOrVertical(BoardPosition current, BoardPosition desired) {
+        return (current.getY() != desired.getY()
+                && current.getX() == current.getX())
+                ^ (current.getX() != desired.getX()
+                && current.getY() == desired.getY());
     }
 
-    private boolean isMoveHorizontal(BoardPosition current, BoardPosition desired) {
-        return current.getPositionX() != desired.getPositionX();
+    private boolean moveIsHorizontal(BoardPosition current, BoardPosition desired) {
+        return current.getX() != desired.getX();
     }
 
-    private boolean areTherePiecesAlongPath(Map<BoardPosition, Piece> piecesInPlay, BoardPosition current, BoardPosition desired) {
-        // given a static position along which pieces don't move
-//        Type axis = getStaticAxis(current, desired);
-//        if(axis == ) {
-//            final int y = current.getPositionY();
-//            int currentX = current.getPositionX();
-//            int desiredX = desired.getPositionX();
-//            int delta = desiredX - currentX;
-//
-//            for(int i = 0; i < delta; i++) {
-//                Piece piece = piecesInPlay.get(new BoardPosition())
-//            }
-//
-//        }
+    private boolean moveIsPositive(int current, int desired) {
+        return (desired - current) > 0;
+    }
 
-        // get difference between current and desired
-
-        // iterate through board
-
-        // for each point on board between current and desired
-
-        // get piece in position
-
-        // if piece in position is not empty return true
-
-        // default return false
+    private boolean thereArePiecesInPathRight(Map<BoardPosition, Piece> piecesInPlay, BoardPosition current, BoardPosition desired) {
+        int difference = desired.getX() - current.getX();
+        // iterate through positions on board between current and desired
+        for (int i = 1; i <= difference; i++) {
+            BoardPosition positionToCheck = new BoardPosition(current.getX() + i, current.getY());
+            Piece pieceInPosition = piecesInPlay.get(positionToCheck);
+            System.out.println(positionToCheck + " + " + pieceInPosition);
+            if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
+                    || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
+                return true;
+            }
+        }
         return false;
     }
 
-    private boolean isTherePieceInDesiredPosition(Piece pieceToMove, Piece pieceInSpot) {
+    private boolean validateMoveToRight(Map<BoardPosition, Piece> piecesInPlay, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+        // if there are no pieces in path then it is valid
+        if (!thereArePiecesInPathRight(piecesInPlay, currentPosition, desiredPosition)) {
+            return true;
+        } else {
+            // if piece in position is enemy, return true if can capture
+            if (thereIsPieceInDesiredPosition(pieceToMove, pieceInDesiredPosition)
+                    && pieceInDesiredPositionIsEnemy(pieceToMove, pieceInDesiredPosition)) {
+                return canCapture(pieceToMove, pieceInDesiredPosition);
+            }
+        }
+        return false;
+    }
+
+    private boolean thereArePiecesInPathLeft(Map<BoardPosition, Piece> piecesInPlay, BoardPosition current, BoardPosition desired) {
+        int difference = Math.abs(desired.getX() - current.getX());
+        // iterate through positions on board between current and desired
+        for (int i = 1; i <= difference; i++) {
+            BoardPosition positionToCheck = new BoardPosition(current.getX() - i, current.getY());
+            System.out.println(positionToCheck);
+            Piece pieceInPosition = piecesInPlay.get(positionToCheck);
+            System.out.println(positionToCheck + " + " + pieceInPosition);
+            if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
+                    || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean validateMoveToLeft(Map<BoardPosition, Piece> piecesInPlay, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+        // if there are no pieces in path then it is valid
+        if (!thereArePiecesInPathLeft(piecesInPlay, currentPosition, desiredPosition)) {
+            return true;
+        } else {
+            // if piece in position is enemy, return true if can capture
+            if (thereIsPieceInDesiredPosition(pieceToMove, pieceInDesiredPosition)
+                    && pieceInDesiredPositionIsEnemy(pieceToMove, pieceInDesiredPosition)) {
+                return canCapture(pieceToMove, pieceInDesiredPosition);
+            }
+        }
+        return false;
+    }
+
+    private boolean thereArePiecesInPathUp(Map<BoardPosition, Piece> piecesInPlay, BoardPosition current, BoardPosition desired) {
+        int difference = desired.getY() - current.getY();
+        // iterate through positions on board between current and desired
+        for (int i = 1; i <= difference; i++) {
+            BoardPosition positionToCheck = new BoardPosition(current.getX(), current.getY() + i);
+            System.out.println(positionToCheck);
+            Piece pieceInPosition = piecesInPlay.get(positionToCheck);
+            System.out.println(positionToCheck + " + " + pieceInPosition);
+            if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
+                    || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean validateMoveUp(Map<BoardPosition, Piece> piecesInPlay, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+        // if there are no pieces in path then it is valid
+        if (!thereArePiecesInPathUp(piecesInPlay, currentPosition, desiredPosition)) {
+            return true;
+        } else {
+            // if piece in position is enemy, return true if can capture
+            if (thereIsPieceInDesiredPosition(pieceToMove, pieceInDesiredPosition)
+                    && pieceInDesiredPositionIsEnemy(pieceToMove, pieceInDesiredPosition)) {
+                return canCapture(pieceToMove, pieceInDesiredPosition);
+            }
+        }
+        return false;
+    }
+
+    private boolean thereArePiecesInPathDown(Map<BoardPosition, Piece> piecesInPlay, BoardPosition current, BoardPosition desired) {
+        int difference = Math.abs(desired.getY() - current.getY());
+        // iterate through positions on board between current and desired
+        for (int i = 1; i <= difference; i++) {
+            BoardPosition positionToCheck = new BoardPosition(current.getX(), current.getY() - i);
+            System.out.println(positionToCheck);
+            Piece pieceInPosition = piecesInPlay.get(positionToCheck);
+            System.out.println(positionToCheck + " + " + pieceInPosition);
+            if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
+                    || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean validateMoveDown(Map<BoardPosition, Piece> piecesInPlay, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+        // if there are no pieces in path then it is valid
+        if (!thereArePiecesInPathDown(piecesInPlay, currentPosition, desiredPosition)) {
+            return true;
+        } else {
+            // if piece in position is enemy, return true if can capture
+            if (thereIsPieceInDesiredPosition(pieceToMove, pieceInDesiredPosition)
+                    && pieceInDesiredPositionIsEnemy(pieceToMove, pieceInDesiredPosition)) {
+                return canCapture(pieceToMove, pieceInDesiredPosition);
+            }
+        }
+        return false;
+    }
+
+    private boolean thereIsPieceInDesiredPosition(Piece pieceToMove, Piece pieceInSpot) {
         return pieceInSpot.getPieceName() != PieceNames.EMPTY;
     }
 
     private boolean pieceInDesiredPositionIsEnemy(Piece pieceToMove, Piece pieceInSpot) {
         return pieceToMove.getPieceTeam() != pieceInSpot.getPieceTeam();
+    }
+
+    private boolean canCapture(Piece pieceToMove, Piece pieceInSpot) {
+        return pieceToMove.getPieceTeam() != pieceInSpot.getPieceTeam() && pieceInSpot.getPieceName() != PieceNames.KING;
     }
 }

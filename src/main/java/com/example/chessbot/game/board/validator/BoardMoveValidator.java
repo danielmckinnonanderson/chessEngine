@@ -5,10 +5,11 @@ import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 public class BoardMoveValidator implements MoveValidator {
-    private PawnMoveValidator pawnMoveValidator = new PawnMoveValidator();
-    private RookMoveValidator rookMoveValidator = new RookMoveValidator();
+    private final MoveValidator pawnMoveValidator;
+    private final MoveValidator rookMoveValidator;
 
-    public BoardMoveValidator(PawnMoveValidator pawnMoveValidator, RookMoveValidator rookMoveValidator) {
+    public BoardMoveValidator(PawnMoveValidator pawnMoveValidator,
+                              RookMoveValidator rookMoveValidator) {
         this.pawnMoveValidator = pawnMoveValidator;
         this.rookMoveValidator = rookMoveValidator;
     }

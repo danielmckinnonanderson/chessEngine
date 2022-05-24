@@ -17,8 +17,8 @@ public class PawnMoveValidator implements MoveValidator {
     }
 
     public boolean isMoveValid(PieceTeam pieceTeam, boolean isFirstTurn, boolean opponentIsPresentInDesiredPosition, BoardPosition currentPosition, BoardPosition desiredPosition) {
-        int deltaX = desiredPosition.getPositionX() - currentPosition.getPositionX();
-        int deltaY = desiredPosition.getPositionY() - currentPosition.getPositionY();
+        int deltaX = desiredPosition.getX() - currentPosition.getX();
+        int deltaY = desiredPosition.getY() - currentPosition.getY();
         int absValueDeltaX = Math.abs(deltaX);
         int absValueDeltaY = Math.abs(deltaY);
 

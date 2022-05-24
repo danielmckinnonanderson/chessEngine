@@ -1,11 +1,15 @@
 package com.example.chessbot.game.state;
 
 import com.example.chessbot.model.board.BoardFactory;
-import com.example.chessbot.model.board.Board;
+import com.example.chessbot.model.board.position.BoardPosition;
+import com.example.chessbot.model.piece.Piece;
 
-public record ConcreteGameState(Board board, int moveNumber) implements GameState {
+import java.util.Hashtable;
+import java.util.Map;
 
-    public Board getBoard() {
+public record ConcreteGameState(Map<BoardPosition, Piece> board, int moveNumber) implements GameState {
+
+    public Map<BoardPosition, Piece> getBoard() {
         return this.board;
     }
 
@@ -20,7 +24,7 @@ class GameStateFactory {
         return new ConcreteGameState(BoardFactory.createInitialBoard(), 1);
     }
 
-    public static GameState createNewGameState(Board board, int moveNumber) {
+    public static GameState createNewGameState(Hashtable<BoardPosition, Piece> board, int moveNumber) {
         return new ConcreteGameState(board, moveNumber);
     }
 }

@@ -8,9 +8,9 @@ import com.example.chessbot.model.piece.PieceTeam;
 public class PawnMoveValidator implements MoveValidator {
     // TODO properly implement this function / correct pawn movement
     public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
-        Piece pieceToMove = gameState.getBoard().getPiecesInPlay().get(currentPosition);
+        Piece pieceToMove = gameState.getBoard().get(currentPosition);
         boolean isFirstTurn = gameState.getMoveNumber() == 1;
-        PieceTeam occupiedTeam = gameState.getBoard().getPiecesInPlay().get(desiredPosition).getPieceTeam();
+        PieceTeam occupiedTeam = gameState.getBoard().get(desiredPosition).getPieceTeam();
         boolean positionIsOccupied = occupiedTeam != PieceTeam.NONE;
 
         return isMoveValid(pieceToMove.getPieceTeam(), isFirstTurn, positionIsOccupied, currentPosition, desiredPosition);

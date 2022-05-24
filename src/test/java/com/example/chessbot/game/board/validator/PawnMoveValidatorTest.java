@@ -1,13 +1,14 @@
 package com.example.chessbot.game.board.validator;
 
-import com.example.chessbot.model.board.Board;
-import com.example.chessbot.model.board.ConcreteBoard;
+import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
 import com.example.chessbot.model.piece.PieceTeam;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
 
 public class PawnMoveValidatorTest {
     private final PawnMoveValidator pawnMoveValidator = new PawnMoveValidator();
@@ -19,11 +20,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(3, 6);
         final BoardPosition desiredPosition = new BoardPosition(3, 5);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, whitePawn);
+        fakeBoard.put(currentPosition, whitePawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(whitePawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(whitePawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -42,11 +43,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(1, 1);
         final BoardPosition desiredPosition = new BoardPosition(6, 2);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, whitePawn);
+        fakeBoard.put(currentPosition, whitePawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(whitePawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(whitePawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -65,11 +66,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(1, 2);
         final BoardPosition desiredPosition = new BoardPosition(1, 3);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, whitePawn);
+        fakeBoard.put(currentPosition, whitePawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(whitePawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(whitePawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -88,11 +89,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(1, 1);
         final BoardPosition desiredPosition = new BoardPosition(1, 3);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, whitePawn);
+        fakeBoard.put(currentPosition, whitePawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(whitePawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(whitePawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -113,12 +114,12 @@ public class PawnMoveValidatorTest {
         final BoardPosition desiredPosition = new BoardPosition(1, 3);
         final BoardPosition blackPawnPosition = new BoardPosition(1, 3);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, whitePawn);
-        fakeBoard.getPiecesInPlay().put(blackPawnPosition, blackPawn);
+        fakeBoard.put(currentPosition, whitePawn);
+        fakeBoard.put(blackPawnPosition, blackPawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(whitePawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(whitePawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -137,11 +138,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(1, 1);
         final BoardPosition desiredPosition = new BoardPosition(1, 3);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, whitePawn);
+        fakeBoard.put(currentPosition, whitePawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(whitePawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(whitePawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -160,11 +161,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(3, 6);
         final BoardPosition desiredPosition = new BoardPosition(3, 7);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, blackPawn);
+        fakeBoard.put(currentPosition, blackPawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(blackPawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(blackPawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -183,11 +184,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(1, 8);
         final BoardPosition desiredPosition = new BoardPosition(5, 1);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, blackPawn);
+        fakeBoard.put(currentPosition, blackPawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(blackPawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(blackPawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -206,11 +207,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(4, 6);
         final BoardPosition desiredPosition = new BoardPosition(4, 4);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, blackPawn);
+        fakeBoard.put(currentPosition, blackPawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(blackPawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(blackPawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -229,11 +230,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(8, 7);
         final BoardPosition desiredPosition = new BoardPosition(8, 5);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, blackPawn);
+        fakeBoard.put(currentPosition, blackPawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(blackPawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(blackPawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -254,12 +255,12 @@ public class PawnMoveValidatorTest {
         final BoardPosition desiredPosition = new BoardPosition(1, 3);
         final BoardPosition blackPawnPosition = new BoardPosition(1, 3);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, whitePawn);
-        fakeBoard.getPiecesInPlay().put(blackPawnPosition, blackPawn);
+        fakeBoard.put(currentPosition, whitePawn);
+        fakeBoard.put(blackPawnPosition, blackPawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(whitePawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(whitePawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(
@@ -278,11 +279,11 @@ public class PawnMoveValidatorTest {
         final BoardPosition currentPosition = new BoardPosition(1, 3);
         final BoardPosition desiredPosition = new BoardPosition(1, 1);
 
-        Board fakeBoard = new ConcreteBoard();
+        Map<BoardPosition, Piece> fakeBoard = BoardFactory.createEmptyBoard();
 
-        fakeBoard.getPiecesInPlay().put(currentPosition, blackPawn);
+        fakeBoard.put(currentPosition, blackPawn);
 
-        Assertions.assertThat(fakeBoard.getPiecesInPlay().get(currentPosition)).isEqualTo(blackPawn);
+        Assertions.assertThat(fakeBoard.get(currentPosition)).isEqualTo(blackPawn);
 
         Assertions.assertThat(
                 pawnMoveValidator.isMoveValid(

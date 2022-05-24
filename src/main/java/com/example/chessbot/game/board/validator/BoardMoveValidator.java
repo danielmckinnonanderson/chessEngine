@@ -15,7 +15,7 @@ public class BoardMoveValidator implements MoveValidator {
     }
 
     public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
-        Piece pieceToMove = gameState.getBoard().getPiecesInPlay().get(currentPosition);
+        Piece pieceToMove = gameState.getBoard().get(currentPosition);
 
         return switch (pieceToMove.getPieceName()) {
             case PAWN -> pawnMoveValidator.validate(gameState, currentPosition, desiredPosition);

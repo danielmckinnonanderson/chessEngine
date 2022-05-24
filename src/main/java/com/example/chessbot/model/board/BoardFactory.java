@@ -11,6 +11,10 @@ public class BoardFactory {
         return new ConcreteBoard().initializeBoard();
     }
 
+    public static Board createEmptyBoard() {
+        return new ConcreteBoard().initializeEmptyBoard();
+    }
+
     public static Board updateBoard(Map<BoardPosition, Piece> piecesInPlay) {
         return new ConcreteBoard().setPiecesInPlay(piecesInPlay);
     }

@@ -101,12 +101,12 @@ public class BoardFactoryTest {
             Piece pieceInPlay = PIECES_IN_PLAY.get(key);
             PieceNames pieceName = pieceInPlay.getPieceName();
 
-            switch (key.getPositionY()) {
+            switch (key.getY()) {
 
                 case 3, 4, 5, 6 -> Assertions.assertThat(pieceName).isEqualTo(PieceNames.EMPTY);
                 case 2, 7 -> Assertions.assertThat(pieceName).isEqualTo(PieceNames.PAWN);
                 case 1, 8 -> {
-                    switch (key.getPositionX()) {
+                    switch (key.getX()) {
                         case 1, 8 -> Assertions.assertThat(pieceName)
                                 .isEqualTo(PieceNames.ROOK);
                         case 2, 7 -> Assertions.assertThat(pieceName)

@@ -14,8 +14,6 @@ public class RookMoveValidator implements MoveValidator {
         Map<BoardPosition, Piece> piecesInPlay = gameState.getBoard();
         Piece pieceToMove = piecesInPlay.get(currentPosition);
         Piece pieceInDesiredPosition = piecesInPlay.get(desiredPosition);
-        System.out.println("Desired Postion Piece = " + pieceInDesiredPosition.getPieceName());
-
         if (!moveIsEitherHorizontalOrVertical(currentPosition, desiredPosition)) {
             return false;
         } else {
@@ -56,7 +54,6 @@ public class RookMoveValidator implements MoveValidator {
         for (int i = 1; i <= difference; i++) {
             BoardPosition positionToCheck = new BoardPosition(current.getX() + i, current.getY());
             Piece pieceInPosition = piecesInPlay.get(positionToCheck);
-            System.out.println(positionToCheck + " + " + pieceInPosition);
             if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
                     || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
                 return true;
@@ -84,9 +81,7 @@ public class RookMoveValidator implements MoveValidator {
         // iterate through positions on board between current and desired
         for (int i = 1; i <= difference; i++) {
             BoardPosition positionToCheck = new BoardPosition(current.getX() - i, current.getY());
-            System.out.println(positionToCheck);
             Piece pieceInPosition = piecesInPlay.get(positionToCheck);
-            System.out.println(positionToCheck + " + " + pieceInPosition);
             if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
                     || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
                 return true;
@@ -114,9 +109,7 @@ public class RookMoveValidator implements MoveValidator {
         // iterate through positions on board between current and desired
         for (int i = 1; i <= difference; i++) {
             BoardPosition positionToCheck = new BoardPosition(current.getX(), current.getY() + i);
-            System.out.println(positionToCheck);
             Piece pieceInPosition = piecesInPlay.get(positionToCheck);
-            System.out.println(positionToCheck + " + " + pieceInPosition);
             if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
                     || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
                 return true;
@@ -144,9 +137,7 @@ public class RookMoveValidator implements MoveValidator {
         // iterate through positions on board between current and desired
         for (int i = 1; i <= difference; i++) {
             BoardPosition positionToCheck = new BoardPosition(current.getX(), current.getY() - i);
-            System.out.println(positionToCheck);
             Piece pieceInPosition = piecesInPlay.get(positionToCheck);
-            System.out.println(positionToCheck + " + " + pieceInPosition);
             if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
                     || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
                 return true;

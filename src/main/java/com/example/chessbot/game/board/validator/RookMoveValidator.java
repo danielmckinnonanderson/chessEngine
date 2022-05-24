@@ -11,7 +11,7 @@ import java.util.Map;
 public class RookMoveValidator implements MoveValidator {
 
     public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
-        Map<BoardPosition, Piece> piecesInPlay = gameState.getBoard().getPiecesInPlay();
+        Map<BoardPosition, Piece> piecesInPlay = gameState.getBoard();
         Piece pieceToMove = piecesInPlay.get(currentPosition);
         Piece pieceInDesiredPosition = piecesInPlay.get(desiredPosition);
         System.out.println("Desired Postion Piece = " + pieceInDesiredPosition.getPieceName());

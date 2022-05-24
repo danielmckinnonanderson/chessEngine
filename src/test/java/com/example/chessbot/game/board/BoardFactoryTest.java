@@ -1,6 +1,5 @@
 package com.example.chessbot.game.board;
 
-import com.example.chessbot.model.board.Board;
 import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
@@ -9,12 +8,12 @@ import com.example.chessbot.model.piece.PieceTeam;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class BoardFactoryTest {
     private Map<BoardPosition, Piece> constructMockPiecesInPlay_inInitialBoardPosition() {
-        Map<BoardPosition, Piece> mockInitialPiecesInPlay = new HashMap<>();
+        Map<BoardPosition, Piece> mockInitialPiecesInPlay = new Hashtable<>();
         mockInitialPiecesInPlay.put(new BoardPosition(1, 1), new Piece(PieceNames.ROOK, PieceTeam.WHITE));
         mockInitialPiecesInPlay.put(new BoardPosition(2, 1), new Piece(PieceNames.KNIGHT, PieceTeam.WHITE));
         mockInitialPiecesInPlay.put(new BoardPosition(3, 1), new Piece(PieceNames.BISHOP, PieceTeam.WHITE));
@@ -92,13 +91,12 @@ public class BoardFactoryTest {
 
     @Test
     public void testBoardFactory_newBoard() {
-        final Board RESULT = BoardFactory.createInitialBoard();
-        final Map<BoardPosition, Piece> PIECES_IN_PLAY = RESULT.getPiecesInPlay();
+        final Map<BoardPosition, Piece> RESULT = BoardFactory.createInitialBoard();
 
-        Assertions.assertThat(PIECES_IN_PLAY).isNotNull();
+        Assertions.assertThat(RESULT).isNotNull();
 
-        for (BoardPosition key : PIECES_IN_PLAY.keySet()) {
-            Piece pieceInPlay = PIECES_IN_PLAY.get(key);
+        for (BoardPosition key : RESULT.keySet()) {
+            Piece pieceInPlay = RESULT.get(key);
             PieceNames pieceName = pieceInPlay.getPieceName();
 
             switch (key.getY()) {
@@ -120,19 +118,6 @@ public class BoardFactoryTest {
                     }
                 }
             }
-        }
-    }
-
-    @Test
-    public void testBoardFactory_updateBoard() {
-        final Map<BoardPosition, Piece> MOCK_PIECES_IN_PLAY = constructMockPiecesInPlay_inInitialBoardPosition();
-        final Board RESULT = BoardFactory.updateBoard(MOCK_PIECES_IN_PLAY);
-
-        for (BoardPosition key : RESULT.getPiecesInPlay().keySet()) {
-            Assertions.assertThat(RESULT.getPiecesInPlay().get(key).getPieceName())
-                    .isEqualTo(MOCK_PIECES_IN_PLAY.get(key).getPieceName());
-            Assertions.assertThat(RESULT.getPiecesInPlay().get(key).getPieceTeam())
-                    .isEqualTo(MOCK_PIECES_IN_PLAY.get(key).getPieceTeam());
         }
     }
 }

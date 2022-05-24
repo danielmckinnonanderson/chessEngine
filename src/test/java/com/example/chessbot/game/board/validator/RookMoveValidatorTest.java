@@ -27,7 +27,6 @@ public class RookMoveValidatorTest {
     @Test
     public void givenNoPiecesInWay_RookCanMoveVertically() {
         Map<BoardPosition, Piece> piecesInPlayOne = emptyBoard;
-        System.out.println(piecesInPlayOne);
 
         final BoardPosition startingPosition = new BoardPosition(1, 1);
         final BoardPosition endingPosition = new BoardPosition(1, 5);

@@ -11,23 +11,23 @@ import java.util.Map;
 public class RookMoveValidator implements MoveValidator {
 
     public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
-        Map<BoardPosition, Piece> piecesInPlay = gameState.getBoard();
-        Piece pieceToMove = piecesInPlay.get(currentPosition);
-        Piece pieceInDesiredPosition = piecesInPlay.get(desiredPosition);
+        Map<BoardPosition, Piece> board = gameState.getBoard();
+        Piece pieceToMove = board.get(currentPosition);
+        Piece pieceInDesiredPosition = board.get(desiredPosition);
         if (!moveIsEitherHorizontalOrVertical(currentPosition, desiredPosition)) {
             return false;
         } else {
             if (moveIsHorizontal(currentPosition, desiredPosition)) {
                 if (moveIsPositive(currentPosition.getX(), desiredPosition.getX())) {
-                    return validateMoveToRight(piecesInPlay, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
+                    return validateMoveToRight(board, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
                 } else {
-                    return validateMoveToLeft(piecesInPlay, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
+                    return validateMoveToLeft(board, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
                 }
             } else {
                 if (moveIsPositive(currentPosition.getY(), desiredPosition.getY())) {
-                    return validateMoveUp(piecesInPlay, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
+                    return validateMoveUp(board, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
                 } else {
-                    return validateMoveDown(piecesInPlay, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
+                    return validateMoveDown(board, currentPosition, desiredPosition, pieceToMove, pieceInDesiredPosition);
                 }
             }
         }
@@ -48,12 +48,12 @@ public class RookMoveValidator implements MoveValidator {
         return (desired - current) > 0;
     }
 
-    private boolean thereArePiecesInPathRight(Map<BoardPosition, Piece> piecesInPlay, BoardPosition current, BoardPosition desired) {
+    private boolean thereArePiecesInPathRight(Map<BoardPosition, Piece> board, BoardPosition current, BoardPosition desired) {
         int difference = desired.getX() - current.getX();
         // iterate through positions on board between current and desired
         for (int i = 1; i <= difference; i++) {
             BoardPosition positionToCheck = new BoardPosition(current.getX() + i, current.getY());
-            Piece pieceInPosition = piecesInPlay.get(positionToCheck);
+            Piece pieceInPosition = board.get(positionToCheck);
             if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
                     || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
                 return true;
@@ -62,9 +62,9 @@ public class RookMoveValidator implements MoveValidator {
         return false;
     }
 
-    private boolean validateMoveToRight(Map<BoardPosition, Piece> piecesInPlay, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+    private boolean validateMoveToRight(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
         // if there are no pieces in path then it is valid
-        if (!thereArePiecesInPathRight(piecesInPlay, currentPosition, desiredPosition)) {
+        if (!thereArePiecesInPathRight(board, currentPosition, desiredPosition)) {
             return true;
         } else {
             // if piece in position is enemy, return true if can capture
@@ -76,12 +76,12 @@ public class RookMoveValidator implements MoveValidator {
         return false;
     }
 
-    private boolean thereArePiecesInPathLeft(Map<BoardPosition, Piece> piecesInPlay, BoardPosition current, BoardPosition desired) {
+    private boolean thereArePiecesInPathLeft(Map<BoardPosition, Piece> board, BoardPosition current, BoardPosition desired) {
         int difference = Math.abs(desired.getX() - current.getX());
         // iterate through positions on board between current and desired
         for (int i = 1; i <= difference; i++) {
             BoardPosition positionToCheck = new BoardPosition(current.getX() - i, current.getY());
-            Piece pieceInPosition = piecesInPlay.get(positionToCheck);
+            Piece pieceInPosition = board.get(positionToCheck);
             if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
                     || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
                 return true;
@@ -90,9 +90,9 @@ public class RookMoveValidator implements MoveValidator {
         return false;
     }
 
-    private boolean validateMoveToLeft(Map<BoardPosition, Piece> piecesInPlay, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+    private boolean validateMoveToLeft(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
         // if there are no pieces in path then it is valid
-        if (!thereArePiecesInPathLeft(piecesInPlay, currentPosition, desiredPosition)) {
+        if (!thereArePiecesInPathLeft(board, currentPosition, desiredPosition)) {
             return true;
         } else {
             // if piece in position is enemy, return true if can capture
@@ -104,12 +104,12 @@ public class RookMoveValidator implements MoveValidator {
         return false;
     }
 
-    private boolean thereArePiecesInPathUp(Map<BoardPosition, Piece> piecesInPlay, BoardPosition current, BoardPosition desired) {
+    private boolean thereArePiecesInPathUp(Map<BoardPosition, Piece> board, BoardPosition current, BoardPosition desired) {
         int difference = desired.getY() - current.getY();
         // iterate through positions on board between current and desired
         for (int i = 1; i <= difference; i++) {
             BoardPosition positionToCheck = new BoardPosition(current.getX(), current.getY() + i);
-            Piece pieceInPosition = piecesInPlay.get(positionToCheck);
+            Piece pieceInPosition = board.get(positionToCheck);
             if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
                     || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
                 return true;
@@ -118,9 +118,9 @@ public class RookMoveValidator implements MoveValidator {
         return false;
     }
 
-    private boolean validateMoveUp(Map<BoardPosition, Piece> piecesInPlay, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+    private boolean validateMoveUp(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
         // if there are no pieces in path then it is valid
-        if (!thereArePiecesInPathUp(piecesInPlay, currentPosition, desiredPosition)) {
+        if (!thereArePiecesInPathUp(board, currentPosition, desiredPosition)) {
             return true;
         } else {
             // if piece in position is enemy, return true if can capture
@@ -132,12 +132,12 @@ public class RookMoveValidator implements MoveValidator {
         return false;
     }
 
-    private boolean thereArePiecesInPathDown(Map<BoardPosition, Piece> piecesInPlay, BoardPosition current, BoardPosition desired) {
+    private boolean thereArePiecesInPathDown(Map<BoardPosition, Piece> board, BoardPosition current, BoardPosition desired) {
         int difference = Math.abs(desired.getY() - current.getY());
         // iterate through positions on board between current and desired
         for (int i = 1; i <= difference; i++) {
             BoardPosition positionToCheck = new BoardPosition(current.getX(), current.getY() - i);
-            Piece pieceInPosition = piecesInPlay.get(positionToCheck);
+            Piece pieceInPosition = board.get(positionToCheck);
             if (pieceInPosition.getPieceTeam() != PieceTeam.NONE
                     || pieceInPosition.getPieceName() != PieceNames.EMPTY) {
                 return true;
@@ -146,9 +146,9 @@ public class RookMoveValidator implements MoveValidator {
         return false;
     }
 
-    private boolean validateMoveDown(Map<BoardPosition, Piece> piecesInPlay, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+    private boolean validateMoveDown(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
         // if there are no pieces in path then it is valid
-        if (!thereArePiecesInPathDown(piecesInPlay, currentPosition, desiredPosition)) {
+        if (!thereArePiecesInPathDown(board, currentPosition, desiredPosition)) {
             return true;
         } else {
             // if piece in position is enemy, return true if can capture

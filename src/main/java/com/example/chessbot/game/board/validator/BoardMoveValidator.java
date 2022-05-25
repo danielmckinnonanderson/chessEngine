@@ -8,8 +8,8 @@ public class BoardMoveValidator implements MoveValidator {
     private final MoveValidator pawnMoveValidator;
     private final MoveValidator rookMoveValidator;
 
-    public BoardMoveValidator(PawnMoveValidator pawnMoveValidator,
-                              RookMoveValidator rookMoveValidator) {
+    public BoardMoveValidator(MoveValidator pawnMoveValidator,
+                              MoveValidator rookMoveValidator) {
         this.pawnMoveValidator = pawnMoveValidator;
         this.rookMoveValidator = rookMoveValidator;
     }

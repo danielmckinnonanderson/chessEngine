@@ -25,13 +25,15 @@ public class BoardMoveValidatorTest {
     private Pair<PlayerState, PlayerState> playerStates;
     private MoveValidator mockPawnMoveValidator;
     private MoveValidator mockRookMoveValidator;
+    private MoveValidator mockknightMoveValidator;
     private BoardMoveValidator boardPositionValidator;
 
     @BeforeEach
     public void setup_mockMoveValidators() {
         this.mockPawnMoveValidator = Mockito.mock(PawnMoveValidator.class);
         this.mockRookMoveValidator = Mockito.mock(RookMoveValidator.class);
-        this.boardPositionValidator = new BoardMoveValidator(mockPawnMoveValidator, mockRookMoveValidator);
+        this.mockknightMoveValidator = Mockito.mock(KnightMoveValidator.class);
+        this.boardPositionValidator = new BoardMoveValidator(mockPawnMoveValidator, mockRookMoveValidator, mockknightMoveValidator);
     }
 
     @BeforeEach
@@ -54,7 +56,7 @@ public class BoardMoveValidatorTest {
 
         Mockito.when(mockPawnMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
-        boolean result = boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockPawnMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
@@ -74,8 +76,28 @@ public class BoardMoveValidatorTest {
 
         Mockito.when(mockRookMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
-        boolean result = boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockRookMoveValidator, Mockito.times(1)).validate(any(), any(), any());
+    }
+
+    @Test
+    public void testGivenPieceIsKnight_whenBoardPositionValidatorReads_shouldSendToKnight() {
+        Map<BoardPosition, Piece> board = BoardFactory.createInitialBoard();
+
+        final Piece whiteRook = new Piece(PieceNames.KNIGHT, PieceTeam.WHITE);
+
+        final BoardPosition currentPosition = new BoardPosition(1, 1);
+        final BoardPosition desiredPosition = new BoardPosition(1, 2);
+
+        board.put(currentPosition, whiteRook);
+
+        GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
+
+        Mockito.when(mockknightMoveValidator.validate(any(), any(), any())).thenReturn(true);
+
+        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+
+        verify(mockknightMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
 }

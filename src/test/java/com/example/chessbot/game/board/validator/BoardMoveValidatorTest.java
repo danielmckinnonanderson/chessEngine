@@ -26,6 +26,7 @@ public class BoardMoveValidatorTest {
     private MoveValidator mockPawnMoveValidator;
     private MoveValidator mockRookMoveValidator;
     private MoveValidator mockknightMoveValidator;
+    private MoveValidator mockBishopMoveValidator;
     private BoardMoveValidator boardPositionValidator;
 
     @BeforeEach
@@ -33,7 +34,8 @@ public class BoardMoveValidatorTest {
         this.mockPawnMoveValidator = Mockito.mock(PawnMoveValidator.class);
         this.mockRookMoveValidator = Mockito.mock(RookMoveValidator.class);
         this.mockknightMoveValidator = Mockito.mock(KnightMoveValidator.class);
-        this.boardPositionValidator = new BoardMoveValidator(mockPawnMoveValidator, mockRookMoveValidator, mockknightMoveValidator);
+        this.mockBishopMoveValidator = Mockito.mock(BishopMoveValidator.class);
+        this.boardPositionValidator = new BoardMoveValidator(mockPawnMoveValidator, mockRookMoveValidator, mockknightMoveValidator, mockBishopMoveValidator);
     }
 
     @BeforeEach
@@ -99,5 +101,25 @@ public class BoardMoveValidatorTest {
         boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockknightMoveValidator, Mockito.times(1)).validate(any(), any(), any());
+    }
+
+    @Test
+    public void testGivenPieceIsBishop_whenBoardPositionValidatorReads_shouldSendToBishop() {
+        Map<BoardPosition, Piece> board = BoardFactory.createInitialBoard();
+
+        final Piece whiteRook = new Piece(PieceNames.BISHOP, PieceTeam.WHITE);
+
+        final BoardPosition currentPosition = new BoardPosition(1, 1);
+        final BoardPosition desiredPosition = new BoardPosition(1, 2);
+
+        board.put(currentPosition, whiteRook);
+
+        GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
+
+        Mockito.when(mockBishopMoveValidator.validate(any(), any(), any())).thenReturn(true);
+
+        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+
+        verify(mockBishopMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
 }

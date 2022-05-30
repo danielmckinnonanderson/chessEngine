@@ -10,17 +10,20 @@ public class BoardMoveValidator implements MoveValidator {
     private final MoveValidator knightMoveValidator;
     private final MoveValidator bishopMoveValidator;
     private final MoveValidator queenMoveValidator;
+    private final MoveValidator kingMoveValidator;
 
     public BoardMoveValidator(MoveValidator pawnMoveValidator,
                               MoveValidator rookMoveValidator,
                               MoveValidator knightMoveValidator,
                               MoveValidator bishopMoveValidator,
-                              MoveValidator queenMoveValidator) {
+                              MoveValidator queenMoveValidator,
+                              MoveValidator kingMoveValidator) {
         this.pawnMoveValidator = pawnMoveValidator;
         this.rookMoveValidator = rookMoveValidator;
         this.knightMoveValidator = knightMoveValidator;
         this.bishopMoveValidator = bishopMoveValidator;
         this.queenMoveValidator = queenMoveValidator;
+        this.kingMoveValidator = kingMoveValidator;
     }
 
     public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
@@ -32,7 +35,7 @@ public class BoardMoveValidator implements MoveValidator {
             case KNIGHT -> knightMoveValidator.validate(gameState, currentPosition, desiredPosition);
             case BISHOP -> bishopMoveValidator.validate(gameState, currentPosition, desiredPosition);
             case QUEEN -> queenMoveValidator.validate(gameState, currentPosition, desiredPosition);
-            case KING -> false;
+            case KING -> kingMoveValidator.validate(gameState, currentPosition, desiredPosition);
             case EMPTY -> false;
         };
     }

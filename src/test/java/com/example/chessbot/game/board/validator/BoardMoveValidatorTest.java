@@ -25,17 +25,19 @@ public class BoardMoveValidatorTest {
     private Pair<PlayerState, PlayerState> playerStates;
     private MoveValidator mockPawnMoveValidator;
     private MoveValidator mockRookMoveValidator;
-    private MoveValidator mockknightMoveValidator;
+    private MoveValidator mockKnightMoveValidator;
     private MoveValidator mockBishopMoveValidator;
+    private MoveValidator mockQueenMoveValidator;
     private BoardMoveValidator boardPositionValidator;
 
     @BeforeEach
     public void setup_mockMoveValidators() {
         this.mockPawnMoveValidator = Mockito.mock(PawnMoveValidator.class);
         this.mockRookMoveValidator = Mockito.mock(RookMoveValidator.class);
-        this.mockknightMoveValidator = Mockito.mock(KnightMoveValidator.class);
+        this.mockKnightMoveValidator = Mockito.mock(KnightMoveValidator.class);
         this.mockBishopMoveValidator = Mockito.mock(BishopMoveValidator.class);
-        this.boardPositionValidator = new BoardMoveValidator(mockPawnMoveValidator, mockRookMoveValidator, mockknightMoveValidator, mockBishopMoveValidator);
+        this.mockQueenMoveValidator = Mockito.mock(QueenMoveValidator.class);
+        this.boardPositionValidator = new BoardMoveValidator(mockPawnMoveValidator, mockRookMoveValidator, mockKnightMoveValidator, mockBishopMoveValidator, mockQueenMoveValidator);
     }
 
     @BeforeEach
@@ -96,23 +98,23 @@ public class BoardMoveValidatorTest {
 
         GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
 
-        Mockito.when(mockknightMoveValidator.validate(any(), any(), any())).thenReturn(true);
+        Mockito.when(mockKnightMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
         boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
 
-        verify(mockknightMoveValidator, Mockito.times(1)).validate(any(), any(), any());
+        verify(mockKnightMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
 
     @Test
     public void testGivenPieceIsBishop_whenBoardPositionValidatorReads_shouldSendToBishop() {
         Map<BoardPosition, Piece> board = BoardFactory.createInitialBoard();
 
-        final Piece whiteRook = new Piece(PieceNames.BISHOP, PieceTeam.WHITE);
+        final Piece whiteBishop = new Piece(PieceNames.BISHOP, PieceTeam.WHITE);
 
         final BoardPosition currentPosition = new BoardPosition(1, 1);
         final BoardPosition desiredPosition = new BoardPosition(1, 2);
 
-        board.put(currentPosition, whiteRook);
+        board.put(currentPosition, whiteBishop);
 
         GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
 
@@ -121,5 +123,25 @@ public class BoardMoveValidatorTest {
         boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockBishopMoveValidator, Mockito.times(1)).validate(any(), any(), any());
+    }
+
+    @Test
+    public void testGivenPieceIsQueen_whenBoardPositionValidatorReads_shouldSendToQueen() {
+        Map<BoardPosition, Piece> board = BoardFactory.createInitialBoard();
+
+        final Piece whiteQueen = new Piece(PieceNames.QUEEN, PieceTeam.WHITE);
+
+        final BoardPosition currentPosition = new BoardPosition(1, 1);
+        final BoardPosition desiredPosition = new BoardPosition(1, 2);
+
+        board.put(currentPosition, whiteQueen);
+
+        GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
+
+        Mockito.when(mockQueenMoveValidator.validate(any(), any(), any())).thenReturn(true);
+
+        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+
+        verify(mockQueenMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
 }

@@ -385,6 +385,50 @@ public class RookMoveValidatorTest {
     }
 
     @Test
+    public void testGivenPiecesInPath_AndEnemyInDesiredSpot_WhenRookTriesCapture_ThenMoveIsInvalid() {
+        Map<BoardPosition, Piece> boardOne = emptyBoard;
+
+        final BoardPosition whiteRookStartingPosition = new BoardPosition(5, 3);
+        final BoardPosition whiteRookEndingLeft = new BoardPosition(2, 3);
+        final BoardPosition whiteRookEndingDown = new BoardPosition(5, 1);
+        final BoardPosition whiteRookEndingRight = new BoardPosition(7, 3);
+        final BoardPosition whiteRookEndingUp = new BoardPosition(5, 8);
+
+        final BoardPosition left = new BoardPosition(3, 3);
+        final BoardPosition down = new BoardPosition(5, 2);
+        final BoardPosition right = new BoardPosition(6, 3);
+        final BoardPosition up = new BoardPosition(5, 7);
+
+        final Piece whiteRook = new Piece(PieceNames.ROOK, PieceTeam.WHITE);     
+        final Piece whiteBishop = new Piece(PieceNames.BISHOP, PieceTeam.WHITE);
+        final Piece whiteKing = new Piece(PieceNames.KING, PieceTeam.WHITE);
+        final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE);
+        final Piece whiteQueen = new Piece(PieceNames.QUEEN, PieceTeam.WHITE);
+        final Piece blackKnight = new Piece(PieceNames.QUEEN, PieceTeam.BLACK);
+
+        boardOne.put(whiteRookStartingPosition, whiteRook);
+        boardOne.put(left, whiteBishop);
+        boardOne.put(down, whitePawn);
+        boardOne.put(right, whiteKing);
+        boardOne.put(up, whiteQueen);
+        boardOne.put(whiteRookEndingLeft, blackKnight);
+        boardOne.put(whiteRookEndingDown, blackKnight);
+        boardOne.put(whiteRookEndingRight, blackKnight);
+        boardOne.put(whiteRookEndingUp, blackKnight);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+
+        final boolean whiteRookCanMovePastWhitePieceLeft = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingLeft);
+        final boolean whiteRookCanMovePastWhitePieceDown = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingDown);
+        final boolean whiteRookCanMovePastWhitePieceRight = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingRight);
+        final boolean whiteRookCanMovePastWhitePieceUp = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingUp);
+
+        Assertions.assertThat(whiteRookCanMovePastWhitePieceLeft).isFalse();
+        Assertions.assertThat(whiteRookCanMovePastWhitePieceDown).isFalse();
+        Assertions.assertThat(whiteRookCanMovePastWhitePieceRight).isFalse();
+        Assertions.assertThat(whiteRookCanMovePastWhitePieceUp).isFalse();
+    }
+
+    @Test
     public void whenDesiredPositionIsSamePositionAsCurrent_ThenRookCannotStandStill() {
         final BoardPosition startingPosition = new BoardPosition(3, 8);
         final Piece blackRook = new Piece(PieceNames.ROOK, PieceTeam.BLACK);

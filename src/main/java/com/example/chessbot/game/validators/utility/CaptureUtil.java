@@ -3,9 +3,9 @@ package com.example.chessbot.game.validators.utility;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
 
-public final class CaptureChecker {
+public final class CaptureUtil {
     public static boolean canCapture(Piece self, Piece target) {
-        return EnemyPieceChecker.isPieceEnemy(self, target)
+        return EnemyPieceUtil.isPieceEnemy(self, target)
                 && target.getPieceName() != PieceNames.KING;
     }
 }

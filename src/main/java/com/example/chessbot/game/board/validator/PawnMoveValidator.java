@@ -1,54 +1,93 @@
 package com.example.chessbot.game.board.validator;
 
+import com.example.chessbot.game.board.validator.checks.CaptureChecker;
+import com.example.chessbot.game.board.validator.checks.EmptyPieceChecker;
+import com.example.chessbot.game.board.validator.checks.EnemyPieceChecker;
+import com.example.chessbot.game.board.validator.checks.PathCollisionChecker;
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
+import com.example.chessbot.model.piece.PieceNames;
 import com.example.chessbot.model.piece.PieceTeam;
+
+import java.util.Map;
 
 public class PawnMoveValidator implements MoveValidator {
     // TODO properly implement this function / correct pawn movement
     public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
-        Piece pieceToMove = gameState.getBoard().get(currentPosition);
-        boolean isFirstTurn = gameState.getMoveNumber() == 1;
-        PieceTeam occupiedTeam = gameState.getBoard().get(desiredPosition).getPieceTeam();
-        boolean positionIsOccupied = occupiedTeam != PieceTeam.NONE;
+        Piece toMove = gameState.getBoard().get(currentPosition);
+        int difX = desiredPosition.getX() - currentPosition.getX();
+        int difY = desiredPosition.getY() - currentPosition.getY();
 
-        return isMoveValid(pieceToMove.getPieceTeam(), isFirstTurn, positionIsOccupied, currentPosition, desiredPosition);
-    }
-
-    public boolean isMoveValid(PieceTeam pieceTeam, boolean isFirstTurn, boolean opponentIsPresentInDesiredPosition, BoardPosition currentPosition, BoardPosition desiredPosition) {
-        int deltaX = desiredPosition.getX() - currentPosition.getX();
-        int deltaY = desiredPosition.getY() - currentPosition.getY();
-        int absValueDeltaX = Math.abs(deltaX);
-        int absValueDeltaY = Math.abs(deltaY);
-
-        boolean onlyMovesForward = onlyMovesForward(pieceTeam, deltaY);
-
-        if (onlyMovesForward) {
-            if (isFirstTurn) {
-                return isDesiredPositionOneOrTwoSpacesForward(absValueDeltaX, absValueDeltaY);
-            }
-            if (opponentIsPresentInDesiredPosition) {
-                return isDesiredPositionInCaptureRange(absValueDeltaX, absValueDeltaY);
-            }
-            return isDesiredPositionOneSpaceForward(absValueDeltaX, absValueDeltaY);
+        // filter out moves that are not 'forward' for given team
+        if (!onlyMovesForward(toMove.getPieceTeam(), difY)) {
+            return false;
         }
+
+        // if move is straight ahead - one or two spaces - verify that there is nothing in path
+        Map<BoardPosition, Piece> board = gameState.getBoard();
+        int deltaX = Math.abs(difX);
+        int deltaY = Math.abs(difY);
+
+        // if move is 2 check for touched
+        if (deltaY == 2 && deltaX == 0 && !toMove.getTouched()) {
+            if (PathCollisionChecker.checkForCollisionsOnVerticalPath(board, currentPosition, desiredPosition)) {
+                return false;
+            }
+            Piece inDesired = board.get(desiredPosition);
+            return EmptyPieceChecker.isPieceEmpty(inDesired);
+        }
+
+        // if move is 1 check for empty
+        if (deltaY == 1 && deltaX == 0) {
+            Piece inDesired = board.get(desiredPosition);
+            return EmptyPieceChecker.isPieceEmpty(inDesired);
+        }
+
+        // if move is diagonal verify that there is piece in desired position to capture
+        if (deltaY == 1 && deltaX == 1) {
+            Piece inDesired = board.get(desiredPosition);
+            if (!EmptyPieceChecker.isPieceEmpty(inDesired)) {
+                if (EnemyPieceChecker.isPieceEnemy(toMove, inDesired)) {
+                    return CaptureChecker.canCapture(toMove, inDesired);
+                } else return false;
+                // if desired is empty, check for en passant capture
+            } else return captureEnPassant(gameState, currentPosition, desiredPosition, toMove.getPieceTeam());
+        }
+        // finally return false
         return false;
     }
 
     private boolean onlyMovesForward(PieceTeam pieceTeam, int deltaY) {
-        return pieceTeam == PieceTeam.WHITE ?  deltaY > 0 : deltaY < 0;
+        return pieceTeam == PieceTeam.WHITE ? deltaY > 0 : deltaY < 0;
     }
 
-    private boolean isDesiredPositionInCaptureRange(int deltaX, int deltaY) {
-        return deltaX == 1 && deltaY == 1;
-    }
+    private boolean captureEnPassant(GameState gameState, BoardPosition current, BoardPosition desired, PieceTeam allies) {
+        Map<BoardPosition, Piece> board = gameState.getBoard();
 
-    private boolean isDesiredPositionOneSpaceForward(int deltaX, int deltaY) {
-        return deltaX == 0 && deltaY == 1;
-    }
+        int difX = desired.getX() - current.getX();
+        int oneFileOver = desired.getX();
+        BoardPosition oneFileOverPos = new BoardPosition(desired.getX(), current.getY());
 
-    private boolean isDesiredPositionOneOrTwoSpacesForward(int deltaX, int deltaY) {
-        return deltaX == 0 && (deltaY == 1 || deltaY == 2);
+        Piece nextToCurrent = board.get(oneFileOverPos);
+
+        // is square next to pawn occupied by enemy
+        if (nextToCurrent.getPieceName() != PieceNames.PAWN || nextToCurrent.getPieceTeam() == allies) {
+            return false;
+        }
+
+        // check previous turn
+        Map<BoardPosition, Piece> lastTurn = gameState.getPreviousBoardStates().get(gameState.getMoveNumber() - 1);
+        // was square occupied previous turn?
+        if (EmptyPieceChecker.isPieceEmpty(lastTurn.get(oneFileOverPos))) {
+            return false;
+        }
+        // was square one file & two rows back occupied by enemy last turn?
+        int difY = desired.getY() - current.getY();
+        int twoRowsFwd = desired.getY() + difY;
+        BoardPosition oneFileTwoRowsFwd = new BoardPosition(oneFileOver, twoRowsFwd);
+        Piece oneFileTwoRowsPiece = lastTurn.get(oneFileTwoRowsFwd);
+
+        return oneFileTwoRowsPiece.getPieceName() == PieceNames.PAWN && oneFileTwoRowsPiece.getPieceTeam() != allies;
     }
 }

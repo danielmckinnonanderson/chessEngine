@@ -1,9 +1,10 @@
-package com.example.chessbot.game.board.validator;
+package com.example.chessbot.game.validators;
 
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.game.state.GameStateFactory;
 import com.example.chessbot.game.state.player.PlayerState;
 import com.example.chessbot.game.state.player.PlayerStateFactory;
+import com.example.chessbot.game.validators.movement.KingMoveValidator;
 import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.board.position.Pair;
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
 
 public class KingMoveValidatorTest {

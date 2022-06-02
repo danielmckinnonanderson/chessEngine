@@ -1,7 +1,7 @@
-package com.example.chessbot.game.board.validator;
+package com.example.chessbot.game.validators.movement;
 
-import com.example.chessbot.game.board.validator.checks.CaptureChecker;
-import com.example.chessbot.game.board.validator.checks.EmptyPieceChecker;
+import com.example.chessbot.game.validators.utility.CaptureChecker;
+import com.example.chessbot.game.validators.utility.EmptyPieceChecker;
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;

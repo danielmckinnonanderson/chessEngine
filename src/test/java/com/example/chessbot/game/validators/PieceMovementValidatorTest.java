@@ -1,9 +1,10 @@
-package com.example.chessbot.game.board.validator;
+package com.example.chessbot.game.validators;
 
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.game.state.GameStateFactory;
 import com.example.chessbot.game.state.player.PlayerState;
 import com.example.chessbot.game.state.player.PlayerStateFactory;
+import com.example.chessbot.game.validators.movement.*;
 import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.board.position.Pair;
@@ -20,7 +21,7 @@ import java.util.Map;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-public class BoardMoveValidatorTest {
+public class PieceMovementValidatorTest {
 
     private Pair<PlayerState, PlayerState> playerStates;
     private MoveValidator mockPawnMoveValidator;
@@ -29,7 +30,7 @@ public class BoardMoveValidatorTest {
     private MoveValidator mockBishopMoveValidator;
     private MoveValidator mockQueenMoveValidator;
     private MoveValidator mockKingMoveValidator;
-    private BoardMoveValidator boardPositionValidator;
+    private PieceMovementValidator pieceMovementValidator;
 
     @BeforeEach
     public void setup_mockMoveValidators() {
@@ -39,7 +40,7 @@ public class BoardMoveValidatorTest {
         this.mockBishopMoveValidator = Mockito.mock(BishopMoveValidator.class);
         this.mockQueenMoveValidator = Mockito.mock(QueenMoveValidator.class);
         this.mockKingMoveValidator = Mockito.mock(KingMoveValidator.class);
-        this.boardPositionValidator = new BoardMoveValidator(
+        this.pieceMovementValidator = new PieceMovementValidator(
                 mockPawnMoveValidator,
                 mockRookMoveValidator,
                 mockKnightMoveValidator,
@@ -68,7 +69,7 @@ public class BoardMoveValidatorTest {
 
         Mockito.when(mockPawnMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
-        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+        pieceMovementValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockPawnMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
@@ -88,7 +89,7 @@ public class BoardMoveValidatorTest {
 
         Mockito.when(mockRookMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
-        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+        pieceMovementValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockRookMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
@@ -108,7 +109,7 @@ public class BoardMoveValidatorTest {
 
         Mockito.when(mockKnightMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
-        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+        pieceMovementValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockKnightMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
@@ -128,7 +129,7 @@ public class BoardMoveValidatorTest {
 
         Mockito.when(mockBishopMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
-        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+        pieceMovementValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockBishopMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
@@ -148,7 +149,7 @@ public class BoardMoveValidatorTest {
 
         Mockito.when(mockQueenMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
-        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+        pieceMovementValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockQueenMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }
@@ -168,7 +169,7 @@ public class BoardMoveValidatorTest {
 
         Mockito.when(mockKingMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
-        boardPositionValidator.validate(gameState, currentPosition, desiredPosition);
+        pieceMovementValidator.validate(gameState, currentPosition, desiredPosition);
 
         verify(mockKingMoveValidator, Mockito.times(1)).validate(any(), any(), any());
     }

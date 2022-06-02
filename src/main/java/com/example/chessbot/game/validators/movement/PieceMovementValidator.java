@@ -1,10 +1,10 @@
-package com.example.chessbot.game.board.validator;
+package com.example.chessbot.game.validators.movement;
 
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
-public class BoardMoveValidator implements MoveValidator {
+public class PieceMovementValidator implements MoveValidator {
     private final MoveValidator pawnMoveValidator;
     private final MoveValidator rookMoveValidator;
     private final MoveValidator knightMoveValidator;
@@ -12,12 +12,12 @@ public class BoardMoveValidator implements MoveValidator {
     private final MoveValidator queenMoveValidator;
     private final MoveValidator kingMoveValidator;
 
-    public BoardMoveValidator(MoveValidator pawnMoveValidator,
-                              MoveValidator rookMoveValidator,
-                              MoveValidator knightMoveValidator,
-                              MoveValidator bishopMoveValidator,
-                              MoveValidator queenMoveValidator,
-                              MoveValidator kingMoveValidator) {
+    public PieceMovementValidator(MoveValidator pawnMoveValidator,
+                                  MoveValidator rookMoveValidator,
+                                  MoveValidator knightMoveValidator,
+                                  MoveValidator bishopMoveValidator,
+                                  MoveValidator queenMoveValidator,
+                                  MoveValidator kingMoveValidator) {
         this.pawnMoveValidator = pawnMoveValidator;
         this.rookMoveValidator = rookMoveValidator;
         this.knightMoveValidator = knightMoveValidator;

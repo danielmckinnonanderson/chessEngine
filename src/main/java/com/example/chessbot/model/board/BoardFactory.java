@@ -14,7 +14,7 @@ import java.util.Map;
 public class BoardFactory {
 
     public static Map<BoardPosition, Piece> createInitialBoard() {
-        Map<BoardPosition, Piece> initialBoard = new Hashtable<>();
+        Map<BoardPosition, Piece> initialBoard = new HashMap<>();
         // TODO refactor this lol
         initialBoard.put(new BoardPosition(1, 1), new Piece(PieceNames.ROOK, PieceTeam.WHITE));
         initialBoard.put(new BoardPosition(2, 1), new Piece(PieceNames.KNIGHT, PieceTeam.WHITE));
@@ -92,7 +92,7 @@ public class BoardFactory {
     }
 
     public static Map<BoardPosition, Piece> createEmptyBoard() {
-        Map<BoardPosition, Piece> emptyBoard = new Hashtable<>();
+        Map<BoardPosition, Piece> emptyBoard = new HashMap<>();
 
         // TODO refactor this lol
         emptyBoard.put(new BoardPosition(1, 1), new Piece(PieceNames.EMPTY, PieceTeam.NONE));

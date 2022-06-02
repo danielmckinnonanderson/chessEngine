@@ -14,7 +14,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public class RookMoveValidatorTest {
@@ -38,7 +38,7 @@ public class RookMoveValidatorTest {
         final Piece whiteRook = new Piece(PieceNames.ROOK, PieceTeam.WHITE);
 
         boardOne.put(startingPosition, whiteRook);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = rookMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
         Assertions.assertThat(resultOne).isTrue();
@@ -50,7 +50,7 @@ public class RookMoveValidatorTest {
         Map<BoardPosition, Piece> boardTwo = emptyBoard;
 
         boardTwo.put(startingPositionTwo, whiteRook);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isTrue();
@@ -65,7 +65,7 @@ public class RookMoveValidatorTest {
         final Piece whiteRook = new Piece(PieceNames.ROOK, PieceTeam.WHITE);
 
         boardOne.put(startingPosition, whiteRook);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = rookMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
         Assertions.assertThat(resultOne).isTrue();
@@ -78,7 +78,7 @@ public class RookMoveValidatorTest {
         Map<BoardPosition, Piece> boardTwo = emptyBoard;
 
         boardTwo.put(startingPositionTwo, blackRook);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isTrue();
@@ -110,7 +110,7 @@ public class RookMoveValidatorTest {
         boardOne.put(oneRankFrontWhiteRook, whitePawn);
         boardOne.put(oneFileRightWhiteRook, whiteKing);
         boardOne.put(oneFileLeftWhiteRook, whiteRookTwo);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteRookCanMovePastWhitePieceBehind = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingPositionDown);
         final boolean whiteRookCanMovePastWhitePieceInFront = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingPositionTop);
@@ -146,7 +146,7 @@ public class RookMoveValidatorTest {
         boardTwo.put(oneRankFrontBlackRook, blackPawn);
         boardTwo.put(oneFileRightBlackRook, blackKing);
         boardTwo.put(oneFileLeftBlackRook, blackRookTwo);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean blackRookCanMovePastBlackPieceBehind = rookMoveValidator.validate(gameStateTwo, blackRookStartingPosition, blackRookEndingPositionDown);
         final boolean blackRookCanMovePastBlackPieceInFront = rookMoveValidator.validate(gameStateTwo, blackRookStartingPosition, blackRookEndingPositionTop);
@@ -185,7 +185,7 @@ public class RookMoveValidatorTest {
         boardOne.put(oneRankFrontWhiteRook, blackPawn);
         boardOne.put(oneFileRightWhiteRook, blackKing);
         boardOne.put(oneFileLeftWhiteRook, blackRookTwo);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteRookCanMovePastWhitePieceBehind = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingPositionDown);
         final boolean whiteRookCanMovePastWhitePieceInFront = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingPositionTop);
@@ -221,7 +221,7 @@ public class RookMoveValidatorTest {
         boardTwo.put(oneRankFrontBlackRook, whiteKing);
         boardTwo.put(oneFileRightBlackRook, whitePawn);
         boardTwo.put(oneFileLeftBlackRook, whiteRookTwo);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean blackRookCanMovePastBlackPieceBehind = rookMoveValidator.validate(gameStateTwo, blackRookStartingPosition, blackRookEndingPositionDown);
         final boolean blackRookCanMovePastBlackPieceInFront = rookMoveValidator.validate(gameStateTwo, blackRookStartingPosition, blackRookEndingPositionTop);
@@ -275,7 +275,7 @@ public class RookMoveValidatorTest {
         boardOne.put(twoFilesLeftWhiteRook, whiteQueen);
 
 
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteRookCanMovePastWhitePieceBehind = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingPositionDown);
         final boolean whiteRookCanMovePastWhitePieceInFront = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingPositionTop);
@@ -300,7 +300,7 @@ public class RookMoveValidatorTest {
         boardOne.put(endingPosition, whiteKnight);
 
         Assertions.assertThat(boardOne.size()).isEqualTo(64);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = rookMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
         Assertions.assertThat(resultOne).isFalse();
@@ -314,7 +314,7 @@ public class RookMoveValidatorTest {
         Map<BoardPosition, Piece> boardTwo = emptyBoard;
         boardTwo.put(startingPositionTwo, blackRook);
         boardTwo.put(endingPositionTwo, blackQueen);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isFalse();
@@ -331,7 +331,7 @@ public class RookMoveValidatorTest {
 
         boardOne.put(startingPosition, whiteRook);
         boardOne.put(endingPosition, blackKing);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = rookMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
         Assertions.assertThat(resultOne).isTrue();
@@ -346,7 +346,7 @@ public class RookMoveValidatorTest {
 
         boardTwo.put(startingPositionTwo, blackRook);
         boardTwo.put(endingPositionTwo, whiteKing);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isTrue();
@@ -363,7 +363,7 @@ public class RookMoveValidatorTest {
 
         boardOne.put(startingPosition, whiteRook);
         boardOne.put(endingPosition, blackKing);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = rookMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
         Assertions.assertThat(resultOne).isFalse();
@@ -378,7 +378,7 @@ public class RookMoveValidatorTest {
 
         boardTwo.put(startingPositionTwo, blackRook);
         boardTwo.put(endingPositionTwo, whiteKing);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean resultTwo = rookMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isFalse();
@@ -415,7 +415,7 @@ public class RookMoveValidatorTest {
         boardOne.put(whiteRookEndingDown, blackKnight);
         boardOne.put(whiteRookEndingRight, blackKnight);
         boardOne.put(whiteRookEndingUp, blackKnight);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteRookCanMovePastWhitePieceLeft = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingLeft);
         final boolean whiteRookCanMovePastWhitePieceDown = rookMoveValidator.validate(gameStateOne, whiteRookStartingPosition, whiteRookEndingDown);
@@ -436,7 +436,7 @@ public class RookMoveValidatorTest {
         Map<BoardPosition, Piece> boardOne = emptyBoard;
 
         boardOne.put(startingPosition, blackRook);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = rookMoveValidator.validate(gameStateOne, startingPosition, startingPosition);
         Assertions.assertThat(resultOne).isFalse();

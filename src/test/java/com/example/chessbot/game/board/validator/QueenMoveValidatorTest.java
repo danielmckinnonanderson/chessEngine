@@ -14,7 +14,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public class QueenMoveValidatorTest {
@@ -47,7 +47,7 @@ public class QueenMoveValidatorTest {
         final Piece whiteQueen = new Piece(PieceNames.QUEEN, PieceTeam.WHITE);
 
         boardOne.put(starting, whiteQueen);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean result1 = queenMoveValidator.validate(gameStateOne, starting, up);
         final boolean result2 = queenMoveValidator.validate(gameStateOne, starting, right);
@@ -86,7 +86,7 @@ public class QueenMoveValidatorTest {
         final Piece whiteQueen = new Piece(PieceNames.QUEEN, PieceTeam.WHITE);
 
         boardOne.put(starting, whiteQueen);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne,new HashMap<>(), this.playerStates);
 
         final boolean result1 = queenMoveValidator.validate(gameStateOne, starting, up);
         final boolean result2 = queenMoveValidator.validate(gameStateOne, starting, right);
@@ -149,7 +149,7 @@ public class QueenMoveValidatorTest {
         boardOne.put(upLeft, blackQueen);
         boardOne.put(right, whiteKing);
         boardOne.put(left, whiteRook);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteQueenCanMovePastPieceDown = queenMoveValidator.validate(gameStateOne, starting, endDown);
         final boolean whiteQueenCanMovePastPieceUp = queenMoveValidator.validate(gameStateOne, starting, endUp);
@@ -200,7 +200,7 @@ public class QueenMoveValidatorTest {
         boardOne.put(endDown, blackKnight);
         boardOne.put(endDownLeft, blackKnight);
 
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteQueenCanMovePastWhitePieceDown = queenMoveValidator.validate(gameStateOne, starting, endDown);
         final boolean whiteQueenCanMovePastWhitePieceUp = queenMoveValidator.validate(gameStateOne, starting, endUp);
@@ -251,7 +251,7 @@ public class QueenMoveValidatorTest {
         boardOne.put(endDown, blackKing);
         boardOne.put(endDownLeft, blackKing);
 
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteQueenCanMovePastWhitePieceDown = queenMoveValidator.validate(gameStateOne, starting, endDown);
         final boolean whiteQueenCanMovePastWhitePieceUp = queenMoveValidator.validate(gameStateOne, starting, endUp);
@@ -327,7 +327,7 @@ public class QueenMoveValidatorTest {
         boardOne.put(endDown, blackKnight);
         boardOne.put(endDownLeft, blackKnight);
 
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteQueenCanMovePastWhitePieceDown = queenMoveValidator.validate(gameStateOne, starting, endDown);
         final boolean whiteQueenCanMovePastWhitePieceUp = queenMoveValidator.validate(gameStateOne, starting, endUp);
@@ -358,7 +358,7 @@ public class QueenMoveValidatorTest {
 
         boardOne.put(starting, blackQueen);
 
-        GameState gameState = GameStateFactory.createNewGameState(420, boardOne, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(420, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteQueenCanSitStill = queenMoveValidator.validate(gameState, starting, starting);
 

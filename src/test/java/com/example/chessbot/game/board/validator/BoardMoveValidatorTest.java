@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -64,7 +64,7 @@ public class BoardMoveValidatorTest {
 
         board.put(currentPosition, whitePawn);
 
-        GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(1, board, new HashMap<>(), this.playerStates);
 
         Mockito.when(mockPawnMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
@@ -84,7 +84,7 @@ public class BoardMoveValidatorTest {
 
         board.put(currentPosition, whiteRook);
 
-        GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(1, board, new HashMap<>(), this.playerStates);
 
         Mockito.when(mockRookMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
@@ -104,7 +104,7 @@ public class BoardMoveValidatorTest {
 
         board.put(currentPosition, whiteRook);
 
-        GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(1, board, new HashMap<>(), this.playerStates);
 
         Mockito.when(mockKnightMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
@@ -124,7 +124,7 @@ public class BoardMoveValidatorTest {
 
         board.put(currentPosition, whiteBishop);
 
-        GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(1, board, new HashMap<>(), this.playerStates);
 
         Mockito.when(mockBishopMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
@@ -144,7 +144,7 @@ public class BoardMoveValidatorTest {
 
         board.put(currentPosition, whiteQueen);
 
-        GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(1, board, new HashMap<>(), this.playerStates);
 
         Mockito.when(mockQueenMoveValidator.validate(any(), any(), any())).thenReturn(true);
 
@@ -164,7 +164,7 @@ public class BoardMoveValidatorTest {
 
         board.put(currentPosition, whiteKing);
 
-        GameState gameState = GameStateFactory.createNewGameState(1, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(1, board, new HashMap<>(), this.playerStates);
 
         Mockito.when(mockKingMoveValidator.validate(any(), any(), any())).thenReturn(true);
 

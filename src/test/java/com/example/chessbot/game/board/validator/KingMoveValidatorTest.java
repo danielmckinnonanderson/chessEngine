@@ -14,7 +14,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class KingMoveValidatorTest {
@@ -47,7 +48,7 @@ public class KingMoveValidatorTest {
 
         board.put(start, blackKing);
 
-        GameState gameState = GameStateFactory.createNewGameState(333, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
         final boolean result1 = kingMoveValidator.validate(gameState, start, up);
         final boolean result2 = kingMoveValidator.validate(gameState, start, right);
@@ -86,7 +87,7 @@ public class KingMoveValidatorTest {
 
         board.put(start, blackKing);
 
-        GameState gameState = GameStateFactory.createNewGameState(333, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
         final boolean result1 = kingMoveValidator.validate(gameState, start, one);
         final boolean result2 = kingMoveValidator.validate(gameState, start, two);
@@ -134,7 +135,7 @@ public class KingMoveValidatorTest {
         board.put(downLeft, whitePawn);
         board.put(upLeft, whitePawn);
 
-        GameState gameState = GameStateFactory.createNewGameState(333, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
         final boolean result1 = kingMoveValidator.validate(gameState, start, up);
         final boolean result2 = kingMoveValidator.validate(gameState, start, right);
@@ -182,7 +183,7 @@ public class KingMoveValidatorTest {
         board.put(downLeft, blackPawn);
         board.put(upLeft, blackPawn);
 
-        GameState gameState = GameStateFactory.createNewGameState(333, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
         final boolean result1 = kingMoveValidator.validate(gameState, start, up);
         final boolean result2 = kingMoveValidator.validate(gameState, start, right);
@@ -230,7 +231,7 @@ public class KingMoveValidatorTest {
         board.put(downLeft, whiteKing);
         board.put(upLeft, whiteKing);
 
-        GameState gameState = GameStateFactory.createNewGameState(333, board, List.of(), this.playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
         final boolean result1 = kingMoveValidator.validate(gameState, start, up);
         final boolean result2 = kingMoveValidator.validate(gameState, start, right);

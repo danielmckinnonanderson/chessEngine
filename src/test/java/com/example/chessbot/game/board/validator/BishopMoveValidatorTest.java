@@ -14,7 +14,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BishopMoveValidatorTest {
@@ -48,7 +48,7 @@ public class BishopMoveValidatorTest {
 
         board.put(starting, whiteBishop);
 
-        GameState gameState = GameStateFactory.createNewGameState(9_999, board, List.of(), playerStates);
+        GameState gameState = GameStateFactory.createNewGameState(9_999, board, new HashMap<>(), playerStates);
 
         final boolean result1 = bishopMoveValidator.validate(gameState, starting, one);
         final boolean result2 = bishopMoveValidator.validate(gameState, starting, two);
@@ -82,7 +82,7 @@ public class BishopMoveValidatorTest {
         final BoardPosition endingPosition = new BoardPosition(6, 6);
 
         boardOne.put(startingPosition, whiteBishop);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = bishopMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
         Assertions.assertThat(resultOne).isTrue();
@@ -94,7 +94,7 @@ public class BishopMoveValidatorTest {
         Map<BoardPosition, Piece> boardTwo = emptyBoard;
 
         boardTwo.put(startingPositionTwo, whiteBishop);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean resultTwo = bishopMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isTrue();
@@ -105,7 +105,7 @@ public class BishopMoveValidatorTest {
         final BoardPosition endingPositionThree = new BoardPosition(7, 1);
 
         boardOne.put(startingPosition, blackBishop);
-        GameState gameStateThree = GameStateFactory.createNewGameState(1, boardThree, List.of(), this.playerStates);
+        GameState gameStateThree = GameStateFactory.createNewGameState(1, boardThree, new HashMap<>(), this.playerStates);
 
         final boolean resultThree = bishopMoveValidator.validate(gameStateThree, startingPositionThree, endingPositionThree);
         Assertions.assertThat(resultThree).isTrue();
@@ -117,7 +117,7 @@ public class BishopMoveValidatorTest {
         Map<BoardPosition, Piece> boardFour = emptyBoard;
 
         boardTwo.put(startingPositionTwo, blackBishop);
-        GameState gameStateFour = GameStateFactory.createNewGameState(1, boardFour, List.of(), this.playerStates);
+        GameState gameStateFour = GameStateFactory.createNewGameState(1, boardFour, new HashMap<>(), this.playerStates);
 
         final boolean resultFour = bishopMoveValidator.validate(gameStateFour, startingPositionFour, endingPositionFour);
         Assertions.assertThat(resultFour).isTrue();
@@ -149,7 +149,7 @@ public class BishopMoveValidatorTest {
         boardOne.put(downLeftFromStarting, whitePawn);
         boardOne.put(upRightFromStarting, whiteKing);
         boardOne.put(downRightFromStarting, whiteQueen);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteBishopCanMovePastWhitePieceBehind = bishopMoveValidator.validate(gameStateOne, whiteBishopStartingPosition, whiteBishopEndingPositionDownRight);
         final boolean whiteBishopCanMovePastWhitePieceInFront = bishopMoveValidator.validate(gameStateOne, whiteBishopStartingPosition, whiteBishopEndingPositionUpRight);
@@ -185,7 +185,7 @@ public class BishopMoveValidatorTest {
         boardTwo.put(downLeftFromStartingTwo, blackPawn);
         boardTwo.put(upRightFromStartingTwo, blackKing);
         boardTwo.put(downRightFromStartingTwo, blackQueen);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean blackRookCanMovePastBlackPieceBehind = bishopMoveValidator.validate(gameStateTwo, blackBishopStartingPosition, blackBishopEndingPositionUpLeft);
         final boolean blackRookCanMovePastBlackPieceInFront = bishopMoveValidator.validate(gameStateTwo, blackBishopStartingPosition, blackBishopEndingPositionDownLeft);
@@ -229,7 +229,7 @@ public class BishopMoveValidatorTest {
         boardOne.put(whiteBishopEndingPositionDownLeft, blackKnight);
         boardOne.put(whiteBishopEndingPositionUpRight, blackKnight);
         boardOne.put(whiteBishopEndingPositionDownRight, blackKnight);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean whiteBishopCanMovePastWhitePieceBehind = bishopMoveValidator.validate(gameStateOne, whiteBishopStartingPosition, whiteBishopEndingPositionDownRight);
         final boolean whiteBishopCanMovePastWhitePieceInFront = bishopMoveValidator.validate(gameStateOne, whiteBishopStartingPosition, whiteBishopEndingPositionUpRight);
@@ -265,7 +265,7 @@ public class BishopMoveValidatorTest {
         boardTwo.put(downLeftFromStartingTwo, blackPawn);
         boardTwo.put(upRightFromStartingTwo, blackKing);
         boardTwo.put(downRightFromStartingTwo, blackQueen);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean blackRookCanMovePastBlackPieceBehind = bishopMoveValidator.validate(gameStateTwo, blackBishopStartingPosition, blackBishopEndingPositionUpLeft);
         final boolean blackRookCanMovePastBlackPieceInFront = bishopMoveValidator.validate(gameStateTwo, blackBishopStartingPosition, blackBishopEndingPositionDownLeft);
@@ -292,7 +292,7 @@ public class BishopMoveValidatorTest {
 
         boardOne.put(startingPosition, whiteBishop);
         boardOne.put(endingPosition, blackKnight);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = bishopMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
         Assertions.assertThat(resultOne).isTrue();
@@ -305,7 +305,7 @@ public class BishopMoveValidatorTest {
 
         boardTwo.put(startingPositionTwo, whiteBishop);
         boardTwo.put(endingPositionTwo, blackKnight);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean resultTwo = bishopMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isTrue();
@@ -317,7 +317,7 @@ public class BishopMoveValidatorTest {
 
         boardThree.put(startingPositionThree, blackBishop);
         boardThree.put(endingPositionThree, whiteKnight);
-        GameState gameStateThree = GameStateFactory.createNewGameState(1, boardThree, List.of(), this.playerStates);
+        GameState gameStateThree = GameStateFactory.createNewGameState(1, boardThree, new HashMap<>(), this.playerStates);
 
         final boolean resultThree = bishopMoveValidator.validate(gameStateThree, startingPositionThree, endingPositionThree);
         Assertions.assertThat(resultThree).isTrue();
@@ -330,7 +330,7 @@ public class BishopMoveValidatorTest {
 
         boardFour.put(startingPositionFour, blackBishop);
         boardFour.put(endingPositionFour, whiteKnight);
-        GameState gameStateFour = GameStateFactory.createNewGameState(1, boardFour, List.of(), this.playerStates);
+        GameState gameStateFour = GameStateFactory.createNewGameState(1, boardFour, new HashMap<>(), this.playerStates);
 
         final boolean resultFour = bishopMoveValidator.validate(gameStateFour, startingPositionFour, endingPositionFour);
         Assertions.assertThat(resultFour).isTrue();
@@ -350,7 +350,7 @@ public class BishopMoveValidatorTest {
 
         boardOne.put(startingPosition, whiteBishop);
         boardOne.put(endingPosition, blackKing);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = bishopMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
         Assertions.assertThat(resultOne).isFalse();
@@ -363,7 +363,7 @@ public class BishopMoveValidatorTest {
 
         boardTwo.put(startingPositionTwo, whiteBishop);
         boardTwo.put(endingPositionTwo, blackKing);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean resultTwo = bishopMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isFalse();
@@ -375,7 +375,7 @@ public class BishopMoveValidatorTest {
 
         boardThree.put(startingPositionThree, blackBishop);
         boardThree.put(endingPositionThree, whiteKing);
-        GameState gameStateThree = GameStateFactory.createNewGameState(1, boardThree, List.of(), this.playerStates);
+        GameState gameStateThree = GameStateFactory.createNewGameState(1, boardThree, new HashMap<>(), this.playerStates);
 
         final boolean resultThree = bishopMoveValidator.validate(gameStateThree, startingPositionThree, endingPositionThree);
         Assertions.assertThat(resultThree).isFalse();
@@ -388,7 +388,7 @@ public class BishopMoveValidatorTest {
 
         boardFour.put(startingPositionFour, blackBishop);
         boardFour.put(endingPositionFour, whiteKing);
-        GameState gameStateFour = GameStateFactory.createNewGameState(1, boardFour, List.of(), this.playerStates);
+        GameState gameStateFour = GameStateFactory.createNewGameState(1, boardFour, new HashMap<>(), this.playerStates);
 
         final boolean resultFour = bishopMoveValidator.validate(gameStateFour, startingPositionFour, endingPositionFour);
         Assertions.assertThat(resultFour).isFalse();
@@ -410,7 +410,7 @@ public class BishopMoveValidatorTest {
 
         boardOne.put(startingPosition, whiteBishop);
         boardOne.put(endingPosition, whiteKing);
-        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, List.of(), this.playerStates);
+        GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
         final boolean resultOne = bishopMoveValidator.validate(gameStateOne, startingPosition, endingPosition);
         Assertions.assertThat(resultOne).isFalse();
@@ -423,7 +423,7 @@ public class BishopMoveValidatorTest {
 
         boardTwo.put(startingPositionTwo, whiteBishop);
         boardTwo.put(endingPositionTwo, whitePawn);
-        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, List.of(), this.playerStates);
+        GameState gameStateTwo = GameStateFactory.createNewGameState(1, boardTwo, new HashMap<>(), this.playerStates);
 
         final boolean resultTwo = bishopMoveValidator.validate(gameStateTwo, startingPositionTwo, endingPositionTwo);
         Assertions.assertThat(resultTwo).isFalse();
@@ -435,7 +435,7 @@ public class BishopMoveValidatorTest {
 
         boardThree.put(startingPositionThree, blackBishop);
         boardThree.put(endingPositionThree, blackKing);
-        GameState gameStateThree = GameStateFactory.createNewGameState(1, boardThree, List.of(), this.playerStates);
+        GameState gameStateThree = GameStateFactory.createNewGameState(1, boardThree, new HashMap<>(), this.playerStates);
 
         final boolean resultThree = bishopMoveValidator.validate(gameStateThree, startingPositionThree, endingPositionThree);
         Assertions.assertThat(resultThree).isFalse();
@@ -448,7 +448,7 @@ public class BishopMoveValidatorTest {
 
         boardFour.put(startingPositionFour, blackBishop);
         boardFour.put(endingPositionFour, blackPawn);
-        GameState gameStateFour = GameStateFactory.createNewGameState(1, boardFour, List.of(), this.playerStates);
+        GameState gameStateFour = GameStateFactory.createNewGameState(1, boardFour, new HashMap<>(), this.playerStates);
 
         final boolean resultFour = bishopMoveValidator.validate(gameStateFour, startingPositionFour, endingPositionFour);
         Assertions.assertThat(resultFour).isFalse();

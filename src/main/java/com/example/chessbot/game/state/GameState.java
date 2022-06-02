@@ -5,12 +5,11 @@ import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.board.position.Pair;
 import com.example.chessbot.model.piece.Piece;
 
-import java.util.List;
 import java.util.Map;
 
 public interface GameState {
     int getMoveNumber();
     Map<BoardPosition, Piece> getBoard();
-    List<Map<BoardPosition, Piece>> getLastFiftyMoves();
+    Map<Integer, Map<BoardPosition, Piece>> getPreviousBoardStates();
     Pair<PlayerState, PlayerState> getPlayerStates();
 }

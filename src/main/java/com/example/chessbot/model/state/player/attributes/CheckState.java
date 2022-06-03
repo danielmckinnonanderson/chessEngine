@@ -1,4 +1,4 @@
-package com.example.chessbot.game.state.player.attributes;
+package com.example.chessbot.model.state.player.attributes;
 
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.board.position.Pair;

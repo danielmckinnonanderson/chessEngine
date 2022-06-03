@@ -1,9 +1,9 @@
 package com.example.chessbot.game.validators.movement;
 
-import com.example.chessbot.game.validators.utility.CaptureChecker;
-import com.example.chessbot.game.validators.utility.EmptyPieceChecker;
-import com.example.chessbot.game.validators.utility.EnemyPieceChecker;
-import com.example.chessbot.game.validators.utility.PathCollisionChecker;
+import com.example.chessbot.game.validators.utility.CaptureUtil;
+import com.example.chessbot.game.validators.utility.EmptyPieceUtil;
+import com.example.chessbot.game.validators.utility.EnemyPieceUtil;
+import com.example.chessbot.game.validators.utility.PathCollisionUtil;
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
@@ -12,9 +12,9 @@ import com.example.chessbot.model.piece.PieceTeam;
 
 import java.util.Map;
 
-public class PawnMoveValidator implements MoveValidator {
+public final class PawnMoveValidator {
     // TODO properly implement this function / correct pawn movement
-    public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
+    public static boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
         Piece toMove = gameState.getBoard().get(currentPosition);
         int difX = desiredPosition.getX() - currentPosition.getX();
         int difY = desiredPosition.getY() - currentPosition.getY();
@@ -31,25 +31,25 @@ public class PawnMoveValidator implements MoveValidator {
 
         // if move is 2 check for touched
         if (deltaY == 2 && deltaX == 0 && !toMove.getTouched()) {
-            if (PathCollisionChecker.checkForCollisionsOnVerticalPath(board, currentPosition, desiredPosition)) {
+            if (PathCollisionUtil.checkForCollisionsOnVerticalPath(board, currentPosition, desiredPosition)) {
                 return false;
             }
             Piece inDesired = board.get(desiredPosition);
-            return EmptyPieceChecker.isPieceEmpty(inDesired);
+            return EmptyPieceUtil.isPieceEmpty(inDesired);
         }
 
         // if move is 1 check for empty
         if (deltaY == 1 && deltaX == 0) {
             Piece inDesired = board.get(desiredPosition);
-            return EmptyPieceChecker.isPieceEmpty(inDesired);
+            return EmptyPieceUtil.isPieceEmpty(inDesired);
         }
 
         // if move is diagonal verify that there is piece in desired position to capture
         if (deltaY == 1 && deltaX == 1) {
             Piece inDesired = board.get(desiredPosition);
-            if (!EmptyPieceChecker.isPieceEmpty(inDesired)) {
-                if (EnemyPieceChecker.isPieceEnemy(toMove, inDesired)) {
-                    return CaptureChecker.canCapture(toMove, inDesired);
+            if (!EmptyPieceUtil.isPieceEmpty(inDesired)) {
+                if (EnemyPieceUtil.isPieceEnemy(toMove, inDesired)) {
+                    return CaptureUtil.canCapture(toMove, inDesired);
                 } else return false;
                 // if desired is empty, check for en passant capture
             } else return captureEnPassant(gameState, currentPosition, desiredPosition, toMove.getPieceTeam());
@@ -58,11 +58,11 @@ public class PawnMoveValidator implements MoveValidator {
         return false;
     }
 
-    private boolean onlyMovesForward(PieceTeam pieceTeam, int deltaY) {
+    private static boolean onlyMovesForward(PieceTeam pieceTeam, int deltaY) {
         return pieceTeam == PieceTeam.WHITE ? deltaY > 0 : deltaY < 0;
     }
 
-    private boolean captureEnPassant(GameState gameState, BoardPosition current, BoardPosition desired, PieceTeam allies) {
+    private static boolean captureEnPassant(GameState gameState, BoardPosition current, BoardPosition desired, PieceTeam allies) {
         Map<BoardPosition, Piece> board = gameState.getBoard();
 
         int difX = desired.getX() - current.getX();
@@ -79,7 +79,7 @@ public class PawnMoveValidator implements MoveValidator {
         // check previous turn
         Map<BoardPosition, Piece> lastTurn = gameState.getPreviousBoardStates().get(gameState.getMoveNumber() - 1);
         // was square occupied previous turn?
-        if (EmptyPieceChecker.isPieceEmpty(lastTurn.get(oneFileOverPos))) {
+        if (EmptyPieceUtil.isPieceEmpty(lastTurn.get(oneFileOverPos))) {
             return false;
         }
         // was square one file & two rows back occupied by enemy last turn?

@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PawnMoveValidatorTest {
-    private final PawnMoveValidator pawnMoveValidator = new PawnMoveValidator();
 
     private Map<BoardPosition, Piece> emptyBoard;
     private Pair<PlayerState, PlayerState> playerStates;
@@ -43,7 +42,7 @@ public class PawnMoveValidatorTest {
 
         GameState gameState = GameStateFactory.createNewGameState(42, board, new HashMap<>(), playerStates);
 
-        final boolean result = pawnMoveValidator.validate(gameState, start, backwards1);
+        final boolean result = PawnMoveValidator.validate(gameState, start, backwards1);
 
         Assertions.assertThat(result).isFalse();
 
@@ -57,7 +56,7 @@ public class PawnMoveValidatorTest {
 
         GameState gameState2 = GameStateFactory.createNewGameState(42, board, new HashMap<>(), playerStates);
 
-        final boolean result2 = pawnMoveValidator.validate(gameState2, start, backwards2);
+        final boolean result2 = PawnMoveValidator.validate(gameState2, start, backwards2);
 
         Assertions.assertThat(result2).isFalse();
     }
@@ -78,10 +77,10 @@ public class PawnMoveValidatorTest {
 
         GameState gameState1 = GameStateFactory.createNewGameState(7_777_777, board1, new HashMap<>(), playerStates);
 
-        final boolean resultb1 = pawnMoveValidator.validate(gameState1, start1, invalidb1);
-        final boolean resultb2 = pawnMoveValidator.validate(gameState1, start1, invalidb2);
-        final boolean resultb3 = pawnMoveValidator.validate(gameState1, start1, invalidb3);
-        final boolean resultb4 = pawnMoveValidator.validate(gameState1, start1, invalidb4);
+        final boolean resultb1 = PawnMoveValidator.validate(gameState1, start1, invalidb1);
+        final boolean resultb2 = PawnMoveValidator.validate(gameState1, start1, invalidb2);
+        final boolean resultb3 = PawnMoveValidator.validate(gameState1, start1, invalidb3);
+        final boolean resultb4 = PawnMoveValidator.validate(gameState1, start1, invalidb4);
 
         Assertions.assertThat(resultb1).isFalse();
         Assertions.assertThat(resultb2).isFalse();
@@ -102,10 +101,10 @@ public class PawnMoveValidatorTest {
 
         GameState gameState2 = GameStateFactory.createNewGameState(12, board2, new HashMap<>(), playerStates);
 
-        final boolean resultw1 = pawnMoveValidator.validate(gameState2, start2, invalidw1);
-        final boolean resultw2 = pawnMoveValidator.validate(gameState2, start2, invalidw2);
-        final boolean resultw3 = pawnMoveValidator.validate(gameState2, start2, invalidw3);
-        final boolean resultw4 = pawnMoveValidator.validate(gameState2, start2, invalidw4);
+        final boolean resultw1 = PawnMoveValidator.validate(gameState2, start2, invalidw1);
+        final boolean resultw2 = PawnMoveValidator.validate(gameState2, start2, invalidw2);
+        final boolean resultw3 = PawnMoveValidator.validate(gameState2, start2, invalidw3);
+        final boolean resultw4 = PawnMoveValidator.validate(gameState2, start2, invalidw4);
 
         Assertions.assertThat(resultw1).isFalse();
         Assertions.assertThat(resultw2).isFalse();
@@ -126,7 +125,7 @@ public class PawnMoveValidatorTest {
 
         GameState gameState1 = GameStateFactory.createNewGameState(720, board1, new HashMap<>(), playerStates);
 
-        final boolean result1 = pawnMoveValidator.validate(gameState1, start1, invalid1);
+        final boolean result1 = PawnMoveValidator.validate(gameState1, start1, invalid1);
 
         Assertions.assertThat(result1).isTrue();
 
@@ -141,7 +140,7 @@ public class PawnMoveValidatorTest {
 
         GameState gameState2 = GameStateFactory.createNewGameState(1080, board2, new HashMap<>(), playerStates);
 
-        final boolean result2 = pawnMoveValidator.validate(gameState2, start2, invalid2);
+        final boolean result2 = PawnMoveValidator.validate(gameState2, start2, invalid2);
 
         Assertions.assertThat(result2).isTrue();
     }
@@ -159,7 +158,7 @@ public class PawnMoveValidatorTest {
 
         GameState gameState1 = GameStateFactory.createNewGameState(720, board1, new HashMap<>(), playerStates);
 
-        final boolean result1 = pawnMoveValidator.validate(gameState1, start1, invalid1);
+        final boolean result1 = PawnMoveValidator.validate(gameState1, start1, invalid1);
 
         Assertions.assertThat(result1).isTrue();
 
@@ -174,7 +173,7 @@ public class PawnMoveValidatorTest {
 
         GameState gameState2 = GameStateFactory.createNewGameState(1080, board2, new HashMap<>(), playerStates);
 
-        final boolean result2 = pawnMoveValidator.validate(gameState2, start2, invalid2);
+        final boolean result2 = PawnMoveValidator.validate(gameState2, start2, invalid2);
 
         Assertions.assertThat(result2).isTrue();
     }
@@ -195,7 +194,7 @@ public class PawnMoveValidatorTest {
 
         GameState gameState = GameStateFactory.createNewGameState(-99_999_999, board, new HashMap<>(), playerStates);
 
-        final boolean result = pawnMoveValidator.validate(gameState, start, desired);
+        final boolean result = PawnMoveValidator.validate(gameState, start, desired);
 
         Assertions.assertThat(result).isFalse();
     }
@@ -220,12 +219,12 @@ public class PawnMoveValidatorTest {
 
         GameState gameState1 = GameStateFactory.createNewGameState(720, board1, new HashMap<>(), playerStates);
 
-        final boolean result1 = pawnMoveValidator.validate(gameState1, start1, invalid1);
-        final boolean result2 = pawnMoveValidator.validate(gameState1, start1, invalid2);
-        final boolean result3 = pawnMoveValidator.validate(gameState1, start1, invalid3);
-        final boolean result4 = pawnMoveValidator.validate(gameState1, start1, invalid4);
-        final boolean result5 = pawnMoveValidator.validate(gameState1, start1, invalid5);
-        final boolean result6 = pawnMoveValidator.validate(gameState1, start1, invalid6);
+        final boolean result1 = PawnMoveValidator.validate(gameState1, start1, invalid1);
+        final boolean result2 = PawnMoveValidator.validate(gameState1, start1, invalid2);
+        final boolean result3 = PawnMoveValidator.validate(gameState1, start1, invalid3);
+        final boolean result4 = PawnMoveValidator.validate(gameState1, start1, invalid4);
+        final boolean result5 = PawnMoveValidator.validate(gameState1, start1, invalid5);
+        final boolean result6 = PawnMoveValidator.validate(gameState1, start1, invalid6);
 
         Assertions.assertThat(result1).isFalse();
         Assertions.assertThat(result2).isFalse();
@@ -256,12 +255,12 @@ public class PawnMoveValidatorTest {
 
         GameState gameState1 = GameStateFactory.createNewGameState(720, board1, new HashMap<>(), playerStates);
 
-        final boolean result1 = pawnMoveValidator.validate(gameState1, start1, invalid1);
-        final boolean result2 = pawnMoveValidator.validate(gameState1, start1, invalid2);
-        final boolean result3 = pawnMoveValidator.validate(gameState1, start1, invalid3);
-        final boolean result4 = pawnMoveValidator.validate(gameState1, start1, invalid4);
-        final boolean result5 = pawnMoveValidator.validate(gameState1, start1, invalid5);
-        final boolean result6 = pawnMoveValidator.validate(gameState1, start1, invalid6);
+        final boolean result1 = PawnMoveValidator.validate(gameState1, start1, invalid1);
+        final boolean result2 = PawnMoveValidator.validate(gameState1, start1, invalid2);
+        final boolean result3 = PawnMoveValidator.validate(gameState1, start1, invalid3);
+        final boolean result4 = PawnMoveValidator.validate(gameState1, start1, invalid4);
+        final boolean result5 = PawnMoveValidator.validate(gameState1, start1, invalid5);
+        final boolean result6 = PawnMoveValidator.validate(gameState1, start1, invalid6);
 
         Assertions.assertThat(result1).isFalse();
         Assertions.assertThat(result2).isFalse();
@@ -301,7 +300,7 @@ public class PawnMoveValidatorTest {
 
         GameState gameState1 = GameStateFactory.createNewGameState(currentTurn, current1, Map.of(turnToGrab, prev1), playerStates);
 
-        final boolean result1 = pawnMoveValidator.validate(gameState1, w2, w3);
+        final boolean result1 = PawnMoveValidator.validate(gameState1, w2, w3);
 
         Assertions.assertThat(result1).isTrue();
 
@@ -329,7 +328,7 @@ public class PawnMoveValidatorTest {
 
         GameState gameState2 = GameStateFactory.createNewGameState(currentTurn, current2, Map.of(turnToGrab, prev2), playerStates);
 
-        final boolean result2 = pawnMoveValidator.validate(gameState2, bb2, bb3);
+        final boolean result2 = PawnMoveValidator.validate(gameState2, bb2, bb3);
 
         Assertions.assertThat(result2).isTrue();
     }

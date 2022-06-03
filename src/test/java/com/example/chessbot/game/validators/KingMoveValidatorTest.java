@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KingMoveValidatorTest {
-    private final KingMoveValidator kingMoveValidator = new KingMoveValidator();
 
     private Map<BoardPosition, Piece> emptyBoard;
     private Pair<PlayerState, PlayerState> playerStates;
@@ -50,14 +49,14 @@ public class KingMoveValidatorTest {
 
         GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
-        final boolean result1 = kingMoveValidator.validate(gameState, start, up);
-        final boolean result2 = kingMoveValidator.validate(gameState, start, right);
-        final boolean result3 = kingMoveValidator.validate(gameState, start, down);
-        final boolean result4 = kingMoveValidator.validate(gameState, start, left);
-        final boolean result5 = kingMoveValidator.validate(gameState, start, upRight);
-        final boolean result6 = kingMoveValidator.validate(gameState, start, downRight);
-        final boolean result7 = kingMoveValidator.validate(gameState, start, downLeft);
-        final boolean result8 = kingMoveValidator.validate(gameState, start, upLeft);
+        final boolean result1 = KingMoveValidator.validate(gameState, start, up);
+        final boolean result2 = KingMoveValidator.validate(gameState, start, right);
+        final boolean result3 = KingMoveValidator.validate(gameState, start, down);
+        final boolean result4 = KingMoveValidator.validate(gameState, start, left);
+        final boolean result5 = KingMoveValidator.validate(gameState, start, upRight);
+        final boolean result6 = KingMoveValidator.validate(gameState, start, downRight);
+        final boolean result7 = KingMoveValidator.validate(gameState, start, downLeft);
+        final boolean result8 = KingMoveValidator.validate(gameState, start, upLeft);
 
         Assertions.assertThat(result1).isTrue();
         Assertions.assertThat(result2).isTrue();
@@ -89,14 +88,14 @@ public class KingMoveValidatorTest {
 
         GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
-        final boolean result1 = kingMoveValidator.validate(gameState, start, one);
-        final boolean result2 = kingMoveValidator.validate(gameState, start, two);
-        final boolean result3 = kingMoveValidator.validate(gameState, start, three);
-        final boolean result4 = kingMoveValidator.validate(gameState, start, four);
-        final boolean result5 = kingMoveValidator.validate(gameState, start, five);
-        final boolean result6 = kingMoveValidator.validate(gameState, start, six);
-        final boolean result7 = kingMoveValidator.validate(gameState, start, seven);
-        final boolean result8 = kingMoveValidator.validate(gameState, start, eight);
+        final boolean result1 = KingMoveValidator.validate(gameState, start, one);
+        final boolean result2 = KingMoveValidator.validate(gameState, start, two);
+        final boolean result3 = KingMoveValidator.validate(gameState, start, three);
+        final boolean result4 = KingMoveValidator.validate(gameState, start, four);
+        final boolean result5 = KingMoveValidator.validate(gameState, start, five);
+        final boolean result6 = KingMoveValidator.validate(gameState, start, six);
+        final boolean result7 = KingMoveValidator.validate(gameState, start, seven);
+        final boolean result8 = KingMoveValidator.validate(gameState, start, eight);
 
         Assertions.assertThat(result1).isFalse();
         Assertions.assertThat(result2).isFalse();
@@ -137,14 +136,14 @@ public class KingMoveValidatorTest {
 
         GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
-        final boolean result1 = kingMoveValidator.validate(gameState, start, up);
-        final boolean result2 = kingMoveValidator.validate(gameState, start, right);
-        final boolean result3 = kingMoveValidator.validate(gameState, start, down);
-        final boolean result4 = kingMoveValidator.validate(gameState, start, left);
-        final boolean result5 = kingMoveValidator.validate(gameState, start, upRight);
-        final boolean result6 = kingMoveValidator.validate(gameState, start, downRight);
-        final boolean result7 = kingMoveValidator.validate(gameState, start, downLeft);
-        final boolean result8 = kingMoveValidator.validate(gameState, start, upLeft);
+        final boolean result1 = KingMoveValidator.validate(gameState, start, up);
+        final boolean result2 = KingMoveValidator.validate(gameState, start, right);
+        final boolean result3 = KingMoveValidator.validate(gameState, start, down);
+        final boolean result4 = KingMoveValidator.validate(gameState, start, left);
+        final boolean result5 = KingMoveValidator.validate(gameState, start, upRight);
+        final boolean result6 = KingMoveValidator.validate(gameState, start, downRight);
+        final boolean result7 = KingMoveValidator.validate(gameState, start, downLeft);
+        final boolean result8 = KingMoveValidator.validate(gameState, start, upLeft);
 
         Assertions.assertThat(result1).isTrue();
         Assertions.assertThat(result2).isTrue();
@@ -185,14 +184,14 @@ public class KingMoveValidatorTest {
 
         GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
-        final boolean result1 = kingMoveValidator.validate(gameState, start, up);
-        final boolean result2 = kingMoveValidator.validate(gameState, start, right);
-        final boolean result3 = kingMoveValidator.validate(gameState, start, down);
-        final boolean result4 = kingMoveValidator.validate(gameState, start, left);
-        final boolean result5 = kingMoveValidator.validate(gameState, start, upRight);
-        final boolean result6 = kingMoveValidator.validate(gameState, start, downRight);
-        final boolean result7 = kingMoveValidator.validate(gameState, start, downLeft);
-        final boolean result8 = kingMoveValidator.validate(gameState, start, upLeft);
+        final boolean result1 = KingMoveValidator.validate(gameState, start, up);
+        final boolean result2 = KingMoveValidator.validate(gameState, start, right);
+        final boolean result3 = KingMoveValidator.validate(gameState, start, down);
+        final boolean result4 = KingMoveValidator.validate(gameState, start, left);
+        final boolean result5 = KingMoveValidator.validate(gameState, start, upRight);
+        final boolean result6 = KingMoveValidator.validate(gameState, start, downRight);
+        final boolean result7 = KingMoveValidator.validate(gameState, start, downLeft);
+        final boolean result8 = KingMoveValidator.validate(gameState, start, upLeft);
 
         Assertions.assertThat(result1).isFalse();
         Assertions.assertThat(result2).isFalse();
@@ -233,14 +232,14 @@ public class KingMoveValidatorTest {
 
         GameState gameState = GameStateFactory.createNewGameState(333, board, new HashMap<>(), this.playerStates);
 
-        final boolean result1 = kingMoveValidator.validate(gameState, start, up);
-        final boolean result2 = kingMoveValidator.validate(gameState, start, right);
-        final boolean result3 = kingMoveValidator.validate(gameState, start, down);
-        final boolean result4 = kingMoveValidator.validate(gameState, start, left);
-        final boolean result5 = kingMoveValidator.validate(gameState, start, upRight);
-        final boolean result6 = kingMoveValidator.validate(gameState, start, downRight);
-        final boolean result7 = kingMoveValidator.validate(gameState, start, downLeft);
-        final boolean result8 = kingMoveValidator.validate(gameState, start, upLeft);
+        final boolean result1 = KingMoveValidator.validate(gameState, start, up);
+        final boolean result2 = KingMoveValidator.validate(gameState, start, right);
+        final boolean result3 = KingMoveValidator.validate(gameState, start, down);
+        final boolean result4 = KingMoveValidator.validate(gameState, start, left);
+        final boolean result5 = KingMoveValidator.validate(gameState, start, upRight);
+        final boolean result6 = KingMoveValidator.validate(gameState, start, downRight);
+        final boolean result7 = KingMoveValidator.validate(gameState, start, downLeft);
+        final boolean result8 = KingMoveValidator.validate(gameState, start, upLeft);
 
         Assertions.assertThat(result1).isFalse();
         Assertions.assertThat(result2).isFalse();

@@ -1,16 +1,16 @@
 package com.example.chessbot.game.validators.movement;
 
-import com.example.chessbot.game.validators.utility.CaptureChecker;
-import com.example.chessbot.game.validators.utility.EmptyPieceChecker;
+import com.example.chessbot.game.validators.utility.CaptureUtil;
+import com.example.chessbot.game.validators.utility.EmptyPieceUtil;
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 import java.util.Map;
 
-public class KingMoveValidator implements MoveValidator {
-    @Override
-    public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
+public final class KingMoveValidator {
+
+    public static boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
         Map<BoardPosition, Piece> board = gameState.getBoard();
         int difX = desiredPosition.getX() - currentPosition.getX();
         int difY = desiredPosition.getY() - currentPosition.getY();
@@ -22,14 +22,14 @@ public class KingMoveValidator implements MoveValidator {
         Piece toMove = board.get(currentPosition);
         Piece inDesired = board.get(desiredPosition);
 
-        if(EmptyPieceChecker.isPieceEmpty(inDesired)) {
+        if(EmptyPieceUtil.isPieceEmpty(inDesired)) {
             return true;
         } else {
-            return CaptureChecker.canCapture(toMove, inDesired);
+            return CaptureUtil.canCapture(toMove, inDesired);
         }
     }
 
-    private boolean isMoveDeltaOne(int difX, int difY) {
+    private static boolean isMoveDeltaOne(int difX, int difY) {
         int absX = Math.abs(difX);
         int absY = Math.abs(difY);
 

@@ -1,18 +1,18 @@
 package com.example.chessbot.game.validators.movement;
 
-import com.example.chessbot.game.validators.utility.CaptureChecker;
-import com.example.chessbot.game.validators.utility.EmptyPieceChecker;
-import com.example.chessbot.game.validators.utility.EnemyPieceChecker;
-import com.example.chessbot.game.validators.utility.PathCollisionChecker;
+import com.example.chessbot.game.validators.utility.CaptureUtil;
+import com.example.chessbot.game.validators.utility.EmptyPieceUtil;
+import com.example.chessbot.game.validators.utility.EnemyPieceUtil;
+import com.example.chessbot.game.validators.utility.PathCollisionUtil;
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 import java.util.Map;
 
-public class RookMoveValidator implements MoveValidator {
+public final class RookMoveValidator {
 
-    public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
+    public static boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
         Map<BoardPosition, Piece> board = gameState.getBoard();
         Piece pieceToMove = board.get(currentPosition);
         Piece pieceInDesiredPosition = board.get(desiredPosition);
@@ -28,38 +28,38 @@ public class RookMoveValidator implements MoveValidator {
         }
     }
 
-    private boolean moveIsEitherHorizontalOrVertical(BoardPosition current, BoardPosition desired) {
+    private static boolean moveIsEitherHorizontalOrVertical(BoardPosition current, BoardPosition desired) {
         return (current.getY() != desired.getY()
                 && current.getX() == current.getX())
                 ^ (current.getX() != desired.getX()
                 && current.getY() == desired.getY());
     }
 
-    private boolean moveIsHorizontal(BoardPosition current, BoardPosition desired) {
+    private static boolean moveIsHorizontal(BoardPosition current, BoardPosition desired) {
         return current.getX() != desired.getX();
     }
 
-    private boolean validateHorizontalMove(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+    private static boolean validateHorizontalMove(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
         // if there are no pieces in path then it is valid
-        if (PathCollisionChecker.checkForCollisionsOnHorizontalPath(board, currentPosition, desiredPosition)) {
+        if (PathCollisionUtil.checkForCollisionsOnHorizontalPath(board, currentPosition, desiredPosition)) {
             return false;
         } else {
             // if piece in position is enemy, return true if can capture
-            if(EnemyPieceChecker.isPieceEnemy(pieceToMove, pieceInDesiredPosition)) {
-                return CaptureChecker.canCapture(pieceToMove, pieceInDesiredPosition);
-            } else return EmptyPieceChecker.isPieceEmpty(pieceInDesiredPosition);
+            if(EnemyPieceUtil.isPieceEnemy(pieceToMove, pieceInDesiredPosition)) {
+                return CaptureUtil.canCapture(pieceToMove, pieceInDesiredPosition);
+            } else return EmptyPieceUtil.isPieceEmpty(pieceInDesiredPosition);
         }
     }
 
-    private boolean validateVerticalMove(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
+    private static boolean validateVerticalMove(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
         // if there are no pieces in path then it is valid
-        if (PathCollisionChecker.checkForCollisionsOnVerticalPath(board, currentPosition, desiredPosition)) {
+        if (PathCollisionUtil.checkForCollisionsOnVerticalPath(board, currentPosition, desiredPosition)) {
             return false;
         } else {
             // if piece in position is enemy, return true if can capture
-            if (EnemyPieceChecker.isPieceEnemy(pieceToMove, pieceInDesiredPosition)) {
-                return CaptureChecker.canCapture(pieceToMove, pieceInDesiredPosition);
-            } else return EmptyPieceChecker.isPieceEmpty(pieceInDesiredPosition);
+            if (EnemyPieceUtil.isPieceEnemy(pieceToMove, pieceInDesiredPosition)) {
+                return CaptureUtil.canCapture(pieceToMove, pieceInDesiredPosition);
+            } else return EmptyPieceUtil.isPieceEmpty(pieceInDesiredPosition);
         }
     }
 }

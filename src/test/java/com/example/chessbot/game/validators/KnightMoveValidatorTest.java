@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KnightMoveValidatorTest {
+
     private Pair<PlayerState, PlayerState> playerStates;
     private Map<BoardPosition, Piece> emptyBoard;
-    private final MoveValidator knightMoveValidator = new KnightMoveValidator();
 
     @BeforeEach
     public void setup() {
@@ -48,14 +48,14 @@ public class KnightMoveValidatorTest {
         board.put(startingWhtPosition, whiteKnight);
         final GameState gameState = GameStateFactory.createNewGameState(99_999_999, board, new HashMap<>(), playerStates);
 
-        final boolean result1 = knightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition1);
-        final boolean result2 = knightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition2);
-        final boolean result3 = knightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition3);
-        final boolean result4 = knightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition4);
-        final boolean result5 = knightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition5);
-        final boolean result6 = knightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition6);
-        final boolean result7 = knightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition7);
-        final boolean result8 = knightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition8);
+        final boolean result1 = KnightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition1);
+        final boolean result2 = KnightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition2);
+        final boolean result3 = KnightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition3);
+        final boolean result4 = KnightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition4);
+        final boolean result5 = KnightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition5);
+        final boolean result6 = KnightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition6);
+        final boolean result7 = KnightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition7);
+        final boolean result8 = KnightMoveValidator.validate(gameState, startingWhtPosition, desiredWhtPosition8);
 
         Assertions.assertThat(result1).isTrue();
         Assertions.assertThat(result2).isTrue();
@@ -81,9 +81,9 @@ public class KnightMoveValidatorTest {
 
         final GameState gameState = GameStateFactory.createNewGameState(1337, board, new HashMap<>(), playerStates);
 
-        final boolean result1 = knightMoveValidator.validate(gameState, blackKnightStartingPosition, desiredBlkPosition1);
-        final boolean result2 = knightMoveValidator.validate(gameState, blackKnightStartingPosition, desiredBlkPosition2);
-        final boolean result3 = knightMoveValidator.validate(gameState, blackKnightStartingPosition, desiredBlkPosition3);
+        final boolean result1 = KnightMoveValidator.validate(gameState, blackKnightStartingPosition, desiredBlkPosition1);
+        final boolean result2 = KnightMoveValidator.validate(gameState, blackKnightStartingPosition, desiredBlkPosition2);
+        final boolean result3 = KnightMoveValidator.validate(gameState, blackKnightStartingPosition, desiredBlkPosition3);
 
         Assertions.assertThat(result1).isTrue();
         Assertions.assertThat(result2).isTrue();
@@ -108,8 +108,8 @@ public class KnightMoveValidatorTest {
 
         final GameState gameState = GameStateFactory.createNewGameState(69_420, board, new HashMap<>(), playerStates);
 
-        final boolean result1 = knightMoveValidator.validate(gameState, whiteKnightStartingPosition, desiredWhtPosition1);
-        final boolean result2 = knightMoveValidator.validate(gameState, whiteKnightStartingPosition, desiredWhtPosition2);
+        final boolean result1 = KnightMoveValidator.validate(gameState, whiteKnightStartingPosition, desiredWhtPosition1);
+        final boolean result2 = KnightMoveValidator.validate(gameState, whiteKnightStartingPosition, desiredWhtPosition2);
 
         Assertions.assertThat(result1).isTrue();
         Assertions.assertThat(result2).isTrue();
@@ -130,7 +130,7 @@ public class KnightMoveValidatorTest {
 
         final GameState gameState = GameStateFactory.createNewGameState(654_321, board, new HashMap<>(), playerStates);
 
-        final boolean result1 = knightMoveValidator.validate(gameState, blackKnightStartingPosition, desiredBlkPosition1);
+        final boolean result1 = KnightMoveValidator.validate(gameState, blackKnightStartingPosition, desiredBlkPosition1);
 
         Assertions.assertThat(result1).isFalse();
     }

@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class QueenMoveValidatorTest {
-    private final QueenMoveValidator queenMoveValidator = new QueenMoveValidator();
 
     private Map<BoardPosition, Piece> emptyBoard;
     private Pair<PlayerState, PlayerState> playerStates;
@@ -50,14 +49,14 @@ public class QueenMoveValidatorTest {
         boardOne.put(starting, whiteQueen);
         GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
-        final boolean result1 = queenMoveValidator.validate(gameStateOne, starting, up);
-        final boolean result2 = queenMoveValidator.validate(gameStateOne, starting, right);
-        final boolean result3 = queenMoveValidator.validate(gameStateOne, starting, down);
-        final boolean result4 = queenMoveValidator.validate(gameStateOne, starting, left);
-        final boolean result5 = queenMoveValidator.validate(gameStateOne, starting, upRight);
-        final boolean result6 = queenMoveValidator.validate(gameStateOne, starting, downRight);
-        final boolean result7 = queenMoveValidator.validate(gameStateOne, starting, downLeft);
-        final boolean result8 = queenMoveValidator.validate(gameStateOne, starting, upLeft);
+        final boolean result1 = QueenMoveValidator.validate(gameStateOne, starting, up);
+        final boolean result2 = QueenMoveValidator.validate(gameStateOne, starting, right);
+        final boolean result3 = QueenMoveValidator.validate(gameStateOne, starting, down);
+        final boolean result4 = QueenMoveValidator.validate(gameStateOne, starting, left);
+        final boolean result5 = QueenMoveValidator.validate(gameStateOne, starting, upRight);
+        final boolean result6 = QueenMoveValidator.validate(gameStateOne, starting, downRight);
+        final boolean result7 = QueenMoveValidator.validate(gameStateOne, starting, downLeft);
+        final boolean result8 = QueenMoveValidator.validate(gameStateOne, starting, upLeft);
 
         Assertions.assertThat(result1).isTrue();
         Assertions.assertThat(result2).isTrue();
@@ -89,14 +88,14 @@ public class QueenMoveValidatorTest {
         boardOne.put(starting, whiteQueen);
         GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne,new HashMap<>(), this.playerStates);
 
-        final boolean result1 = queenMoveValidator.validate(gameStateOne, starting, up);
-        final boolean result2 = queenMoveValidator.validate(gameStateOne, starting, right);
-        final boolean result3 = queenMoveValidator.validate(gameStateOne, starting, down);
-        final boolean result4 = queenMoveValidator.validate(gameStateOne, starting, left);
-        final boolean result5 = queenMoveValidator.validate(gameStateOne, starting, upRight);
-        final boolean result6 = queenMoveValidator.validate(gameStateOne, starting, downRight);
-        final boolean result7 = queenMoveValidator.validate(gameStateOne, starting, downLeft);
-        final boolean result8 = queenMoveValidator.validate(gameStateOne, starting, upLeft);
+        final boolean result1 = QueenMoveValidator.validate(gameStateOne, starting, up);
+        final boolean result2 = QueenMoveValidator.validate(gameStateOne, starting, right);
+        final boolean result3 = QueenMoveValidator.validate(gameStateOne, starting, down);
+        final boolean result4 = QueenMoveValidator.validate(gameStateOne, starting, left);
+        final boolean result5 = QueenMoveValidator.validate(gameStateOne, starting, upRight);
+        final boolean result6 = QueenMoveValidator.validate(gameStateOne, starting, downRight);
+        final boolean result7 = QueenMoveValidator.validate(gameStateOne, starting, downLeft);
+        final boolean result8 = QueenMoveValidator.validate(gameStateOne, starting, upLeft);
 
         Assertions.assertThat(result1).isFalse();
         Assertions.assertThat(result2).isFalse();
@@ -152,14 +151,14 @@ public class QueenMoveValidatorTest {
         boardOne.put(left, whiteRook);
         GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
-        final boolean whiteQueenCanMovePastPieceDown = queenMoveValidator.validate(gameStateOne, starting, endDown);
-        final boolean whiteQueenCanMovePastPieceUp = queenMoveValidator.validate(gameStateOne, starting, endUp);
-        final boolean whiteQueenCanMovePastPieceRight = queenMoveValidator.validate(gameStateOne, starting, endRight);
-        final boolean whiteQueenCanMovePastPieceLeft = queenMoveValidator.validate(gameStateOne, starting, endLeft);
-        final boolean whiteQueenCanMovePastPieceUpRight = queenMoveValidator.validate(gameStateOne, starting, endTopRight);
-        final boolean whiteQueenCanMovePastPieceUpLeft = queenMoveValidator.validate(gameStateOne, starting, endTopLeft);
-        final boolean whiteQueenCanMovePastPieceDownRight = queenMoveValidator.validate(gameStateOne, starting, endDownRight);
-        final boolean whiteQueenCanMovePastPieceDownLeft = queenMoveValidator.validate(gameStateOne, starting, endDownLeft);
+        final boolean whiteQueenCanMovePastPieceDown = QueenMoveValidator.validate(gameStateOne, starting, endDown);
+        final boolean whiteQueenCanMovePastPieceUp = QueenMoveValidator.validate(gameStateOne, starting, endUp);
+        final boolean whiteQueenCanMovePastPieceRight = QueenMoveValidator.validate(gameStateOne, starting, endRight);
+        final boolean whiteQueenCanMovePastPieceLeft = QueenMoveValidator.validate(gameStateOne, starting, endLeft);
+        final boolean whiteQueenCanMovePastPieceUpRight = QueenMoveValidator.validate(gameStateOne, starting, endTopRight);
+        final boolean whiteQueenCanMovePastPieceUpLeft = QueenMoveValidator.validate(gameStateOne, starting, endTopLeft);
+        final boolean whiteQueenCanMovePastPieceDownRight = QueenMoveValidator.validate(gameStateOne, starting, endDownRight);
+        final boolean whiteQueenCanMovePastPieceDownLeft = QueenMoveValidator.validate(gameStateOne, starting, endDownLeft);
 
         Assertions.assertThat(whiteQueenCanMovePastPieceDown).isFalse();
         Assertions.assertThat(whiteQueenCanMovePastPieceUp).isFalse();
@@ -203,14 +202,14 @@ public class QueenMoveValidatorTest {
 
         GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
-        final boolean whiteQueenCanMovePastWhitePieceDown = queenMoveValidator.validate(gameStateOne, starting, endDown);
-        final boolean whiteQueenCanMovePastWhitePieceUp = queenMoveValidator.validate(gameStateOne, starting, endUp);
-        final boolean whiteQueenCanMovePastWhitePieceRight = queenMoveValidator.validate(gameStateOne, starting, endRight);
-        final boolean whiteQueenCanMovePastWhitePieceLeft = queenMoveValidator.validate(gameStateOne, starting, endLeft);
-        final boolean whiteQueenCanMovePastWhitePieceUpRight = queenMoveValidator.validate(gameStateOne, starting, endTopRight);
-        final boolean whiteQueenCanMovePastWhitePieceUpLeft = queenMoveValidator.validate(gameStateOne, starting, endTopLeft);
-        final boolean whiteQueenCanMovePastWhitePieceDownRight = queenMoveValidator.validate(gameStateOne, starting, endDownRight);
-        final boolean whiteQueenCanMovePastWhitePieceDownLeft = queenMoveValidator.validate(gameStateOne, starting, endDownLeft);
+        final boolean whiteQueenCanMovePastWhitePieceDown = QueenMoveValidator.validate(gameStateOne, starting, endDown);
+        final boolean whiteQueenCanMovePastWhitePieceUp = QueenMoveValidator.validate(gameStateOne, starting, endUp);
+        final boolean whiteQueenCanMovePastWhitePieceRight = QueenMoveValidator.validate(gameStateOne, starting, endRight);
+        final boolean whiteQueenCanMovePastWhitePieceLeft = QueenMoveValidator.validate(gameStateOne, starting, endLeft);
+        final boolean whiteQueenCanMovePastWhitePieceUpRight = QueenMoveValidator.validate(gameStateOne, starting, endTopRight);
+        final boolean whiteQueenCanMovePastWhitePieceUpLeft = QueenMoveValidator.validate(gameStateOne, starting, endTopLeft);
+        final boolean whiteQueenCanMovePastWhitePieceDownRight = QueenMoveValidator.validate(gameStateOne, starting, endDownRight);
+        final boolean whiteQueenCanMovePastWhitePieceDownLeft = QueenMoveValidator.validate(gameStateOne, starting, endDownLeft);
 
         Assertions.assertThat(whiteQueenCanMovePastWhitePieceDown).isTrue();
         Assertions.assertThat(whiteQueenCanMovePastWhitePieceUp).isTrue();
@@ -254,14 +253,14 @@ public class QueenMoveValidatorTest {
 
         GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
-        final boolean whiteQueenCanMovePastWhitePieceDown = queenMoveValidator.validate(gameStateOne, starting, endDown);
-        final boolean whiteQueenCanMovePastWhitePieceUp = queenMoveValidator.validate(gameStateOne, starting, endUp);
-        final boolean whiteQueenCanMovePastWhitePieceRight = queenMoveValidator.validate(gameStateOne, starting, endRight);
-        final boolean whiteQueenCanMovePastWhitePieceLeft = queenMoveValidator.validate(gameStateOne, starting, endLeft);
-        final boolean whiteQueenCanMovePastWhitePieceUpRight = queenMoveValidator.validate(gameStateOne, starting, endTopRight);
-        final boolean whiteQueenCanMovePastWhitePieceUpLeft = queenMoveValidator.validate(gameStateOne, starting, endTopLeft);
-        final boolean whiteQueenCanMovePastWhitePieceDownRight = queenMoveValidator.validate(gameStateOne, starting, endDownRight);
-        final boolean whiteQueenCanMovePastWhitePieceDownLeft = queenMoveValidator.validate(gameStateOne, starting, endDownLeft);
+        final boolean whiteQueenCanMovePastWhitePieceDown = QueenMoveValidator.validate(gameStateOne, starting, endDown);
+        final boolean whiteQueenCanMovePastWhitePieceUp = QueenMoveValidator.validate(gameStateOne, starting, endUp);
+        final boolean whiteQueenCanMovePastWhitePieceRight = QueenMoveValidator.validate(gameStateOne, starting, endRight);
+        final boolean whiteQueenCanMovePastWhitePieceLeft = QueenMoveValidator.validate(gameStateOne, starting, endLeft);
+        final boolean whiteQueenCanMovePastWhitePieceUpRight = QueenMoveValidator.validate(gameStateOne, starting, endTopRight);
+        final boolean whiteQueenCanMovePastWhitePieceUpLeft = QueenMoveValidator.validate(gameStateOne, starting, endTopLeft);
+        final boolean whiteQueenCanMovePastWhitePieceDownRight = QueenMoveValidator.validate(gameStateOne, starting, endDownRight);
+        final boolean whiteQueenCanMovePastWhitePieceDownLeft = QueenMoveValidator.validate(gameStateOne, starting, endDownLeft);
 
         Assertions.assertThat(whiteQueenCanMovePastWhitePieceDown).isFalse();
         Assertions.assertThat(whiteQueenCanMovePastWhitePieceUp).isFalse();
@@ -330,14 +329,14 @@ public class QueenMoveValidatorTest {
 
         GameState gameStateOne = GameStateFactory.createNewGameState(1, boardOne, new HashMap<>(), this.playerStates);
 
-        final boolean whiteQueenCanMovePastWhitePieceDown = queenMoveValidator.validate(gameStateOne, starting, endDown);
-        final boolean whiteQueenCanMovePastWhitePieceUp = queenMoveValidator.validate(gameStateOne, starting, endUp);
-        final boolean whiteQueenCanMovePastWhitePieceRight = queenMoveValidator.validate(gameStateOne, starting, endRight);
-        final boolean whiteQueenCanMovePastWhitePieceLeft = queenMoveValidator.validate(gameStateOne, starting, endLeft);
-        final boolean whiteQueenCanMovePastWhitePieceUpRight = queenMoveValidator.validate(gameStateOne, starting, endTopRight);
-        final boolean whiteQueenCanMovePastWhitePieceUpLeft = queenMoveValidator.validate(gameStateOne, starting, endTopLeft);
-        final boolean whiteQueenCanMovePastWhitePieceDownRight = queenMoveValidator.validate(gameStateOne, starting, endDownRight);
-        final boolean whiteQueenCanMovePastWhitePieceDownLeft = queenMoveValidator.validate(gameStateOne, starting, endDownLeft);
+        final boolean whiteQueenCanMovePastWhitePieceDown = QueenMoveValidator.validate(gameStateOne, starting, endDown);
+        final boolean whiteQueenCanMovePastWhitePieceUp = QueenMoveValidator.validate(gameStateOne, starting, endUp);
+        final boolean whiteQueenCanMovePastWhitePieceRight = QueenMoveValidator.validate(gameStateOne, starting, endRight);
+        final boolean whiteQueenCanMovePastWhitePieceLeft = QueenMoveValidator.validate(gameStateOne, starting, endLeft);
+        final boolean whiteQueenCanMovePastWhitePieceUpRight = QueenMoveValidator.validate(gameStateOne, starting, endTopRight);
+        final boolean whiteQueenCanMovePastWhitePieceUpLeft = QueenMoveValidator.validate(gameStateOne, starting, endTopLeft);
+        final boolean whiteQueenCanMovePastWhitePieceDownRight = QueenMoveValidator.validate(gameStateOne, starting, endDownRight);
+        final boolean whiteQueenCanMovePastWhitePieceDownLeft = QueenMoveValidator.validate(gameStateOne, starting, endDownLeft);
 
         Assertions.assertThat(whiteQueenCanMovePastWhitePieceDown).isFalse();
         Assertions.assertThat(whiteQueenCanMovePastWhitePieceUp).isFalse();
@@ -361,7 +360,7 @@ public class QueenMoveValidatorTest {
 
         GameState gameState = GameStateFactory.createNewGameState(420, boardOne, new HashMap<>(), this.playerStates);
 
-        final boolean whiteQueenCanSitStill = queenMoveValidator.validate(gameState, starting, starting);
+        final boolean whiteQueenCanSitStill = QueenMoveValidator.validate(gameState, starting, starting);
 
         Assertions.assertThat(whiteQueenCanSitStill).isFalse();
     }

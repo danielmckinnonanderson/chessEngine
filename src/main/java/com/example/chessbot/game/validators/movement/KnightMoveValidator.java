@@ -8,10 +8,9 @@ import com.example.chessbot.model.piece.PieceTeam;
 
 import java.util.Map;
 
-public class KnightMoveValidator implements MoveValidator {
+public class KnightMoveValidator {
 
-    @Override
-    public boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
+    public static boolean validate(GameState gameState, BoardPosition currentPosition, BoardPosition desiredPosition) {
         Map<BoardPosition, Piece> board = gameState.getBoard();
         Piece pieceToMove = board.get(currentPosition);
         Piece pieceInDesiredPosition = board.get(desiredPosition);
@@ -27,7 +26,7 @@ public class KnightMoveValidator implements MoveValidator {
         }
     }
 
-    private boolean desiredPositionIsInValidLocation(BoardPosition currentPosition, BoardPosition desiredPosition) {
+    private static boolean desiredPositionIsInValidLocation(BoardPosition currentPosition, BoardPosition desiredPosition) {
         int deltaX = Math.abs(desiredPosition.getX() - currentPosition.getX());
         int deltaY = Math.abs(desiredPosition.getY() - currentPosition.getY());
 
@@ -35,12 +34,12 @@ public class KnightMoveValidator implements MoveValidator {
     }
 
 
-    private boolean pieceIsInDesiredSpot(Piece pieceInDesiredPosition) {
+    private static boolean pieceIsInDesiredSpot(Piece pieceInDesiredPosition) {
         return pieceInDesiredPosition.getPieceTeam() != PieceTeam.NONE
                 && pieceInDesiredPosition.getPieceName() != PieceNames.EMPTY;
     }
 
-    private boolean canCapturePieceInDesiredSpot(Piece pieceToMove, Piece pieceInDesiredPosition) {
+    private static boolean canCapturePieceInDesiredSpot(Piece pieceToMove, Piece pieceInDesiredPosition) {
         return pieceInDesiredPosition.getPieceName() != PieceNames.KING
                 && pieceInDesiredPosition.getPieceTeam() != pieceToMove.getPieceTeam();
     }

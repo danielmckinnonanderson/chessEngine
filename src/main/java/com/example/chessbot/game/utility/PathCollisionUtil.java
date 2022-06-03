@@ -1,4 +1,4 @@
-package com.example.chessbot.game.validators.utility;
+package com.example.chessbot.game.utility;
 
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;

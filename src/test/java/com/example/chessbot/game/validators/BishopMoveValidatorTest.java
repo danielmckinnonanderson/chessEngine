@@ -1,11 +1,10 @@
 package com.example.chessbot.game.validators;
 
-import com.example.chessbot.game.state.GameState;
-import com.example.chessbot.game.state.GameStateFactory;
-import com.example.chessbot.game.state.player.PlayerState;
-import com.example.chessbot.game.state.player.PlayerStateFactory;
+import com.example.chessbot.model.state.GameState;
+import com.example.chessbot.model.state.GameStateFactory;
+import com.example.chessbot.model.state.player.PlayerState;
+import com.example.chessbot.model.state.player.PlayerStateFactory;
 import com.example.chessbot.game.validators.movement.BishopMoveValidator;
-import com.example.chessbot.game.validators.movement.MoveValidator;
 import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.board.position.Pair;

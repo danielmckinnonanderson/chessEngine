@@ -2,7 +2,7 @@ package com.example.chessbot.game.validators.movement;
 
 import com.example.chessbot.game.validators.utility.CaptureUtil;
 import com.example.chessbot.game.validators.utility.EmptyPieceUtil;
-import com.example.chessbot.game.state.GameState;
+import com.example.chessbot.model.state.GameState;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 

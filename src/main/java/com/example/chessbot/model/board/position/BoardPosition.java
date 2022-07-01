@@ -1,5 +1,7 @@
 package com.example.chessbot.model.board.position;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class BoardPosition {
@@ -57,5 +59,27 @@ public class BoardPosition {
         int differenceX = one.getX() - two.getX();
         int differenceY = one.getY() - two.getY();
         return new BoardPosition(differenceX, differenceY);
+    }
+
+    public static List<BoardPosition> getPointsAroundOrigin(BoardPosition origin, int radius) {
+        int absRadius = Math.abs(radius);
+
+        List<BoardPosition> result = new ArrayList<>();
+
+        int x = origin.getX();
+        int y = origin.getY();
+
+        for(int i = 0; i <= radius; i++) {
+            result.add(new BoardPosition(x-i, y-i));
+            result.add(new BoardPosition(x, y-i));
+            result.add(new BoardPosition(x-i, y));
+            result.add(new BoardPosition(x+i, y+i));
+            result.add(new BoardPosition(x, y+i));
+            result.add(new BoardPosition(x+i, y));
+            result.add(new BoardPosition(x-i, y+i));
+            result.add(new BoardPosition(x+i, y-i));
+        }
+
+        return result;
     }
 }

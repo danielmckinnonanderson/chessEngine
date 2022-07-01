@@ -39,4 +39,9 @@ public class BishopMoveValidator {
             } else return EmptyPieceUtil.isPieceEmpty(inDesired);
         }
     }
+
+    public static boolean canPutOpponentInCheck(Map<BoardPosition, Piece> board, BoardPosition current, BoardPosition opponenetKingLocation) {
+        //TODO implement
+       return false;
+    }
 }

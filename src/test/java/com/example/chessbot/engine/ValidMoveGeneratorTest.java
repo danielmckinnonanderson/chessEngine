@@ -68,8 +68,6 @@ public class ValidMoveGeneratorTest {
         int y = 1;
         final BoardPosition pos = new BoardPosition(x, y);
 
-        board.put(pos, rook);
-
         final List<BoardPosition> result = ValidMoveGenerator.listOfPotentialMovesFromPieceName(rook, pos);
 
         Assertions.assertThat(result.contains(new BoardPosition(x + 1, y))).isTrue();
@@ -89,5 +87,41 @@ public class ValidMoveGeneratorTest {
         Assertions.assertThat(result.contains(new BoardPosition(x, y + 7))).isTrue();
 
         Assertions.assertThat(result.size()).isEqualTo(14);
+    }
+
+    @Test
+    public void testGenerateKnightPath() {
+        int x = 6;
+        int y = 3;
+        final BoardPosition pos = new BoardPosition(x, y);
+
+        final List<BoardPosition> result = ValidMoveGenerator.listOfPotentialMovesFromPieceName(knight, pos);
+
+        Assertions.assertThat(result.contains(new BoardPosition(x + 1, y + 2))).isTrue();
+        Assertions.assertThat(result.contains(new BoardPosition(x + 2, y + 1))).isTrue();
+        Assertions.assertThat(result.contains(new BoardPosition(x - 1, y + 2))).isTrue();
+        Assertions.assertThat(result.contains(new BoardPosition(x - 2, y + 1))).isTrue();
+        Assertions.assertThat(result.contains(new BoardPosition(x + 1, y - 2))).isTrue();
+        Assertions.assertThat(result.contains(new BoardPosition(x + 2, y - 1))).isTrue();
+        Assertions.assertThat(result.contains(new BoardPosition(x - 1, y - 2))).isTrue();
+        Assertions.assertThat(result.contains(new BoardPosition(x - 2, y - 1))).isTrue();
+        Assertions.assertThat(result.size()).isEqualTo(8);
+
+        // testing that out of bounds positions are not include in list
+        int xX = 7;
+        int yY = 7;
+        final BoardPosition pos2 = new BoardPosition(xX, yY);
+
+        final List<BoardPosition> result2 = ValidMoveGenerator.listOfPotentialMovesFromPieceName(knight, pos2);
+
+        Assertions.assertThat(result2.contains(new BoardPosition(xX - 1, yY + 2))).isFalse();
+        Assertions.assertThat(result2.contains(new BoardPosition(xX - 2, yY + 1))).isTrue();
+        Assertions.assertThat(result2.contains(new BoardPosition(xX + 2, yY + 1))).isFalse();
+        Assertions.assertThat(result2.contains(new BoardPosition(xX + 1, yY + 2))).isFalse();
+        Assertions.assertThat(result2.contains(new BoardPosition(xX + 1, yY - 2))).isTrue();
+        Assertions.assertThat(result2.contains(new BoardPosition(xX + 2, yY - 1))).isFalse();
+        Assertions.assertThat(result2.contains(new BoardPosition(xX - 1, yY - 2))).isTrue();
+        Assertions.assertThat(result2.contains(new BoardPosition(xX - 2, yY - 1))).isTrue();
+        Assertions.assertThat(result2.size()).isEqualTo(4);
     }
 }

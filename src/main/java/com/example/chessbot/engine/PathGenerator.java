@@ -47,7 +47,7 @@ public class PathGenerator {
         int x = origin.getX();
         int y = origin.getY();
 
-        return List.of(
+        return Stream.of(
             new BoardPosition(x + 1, y + 2),
             new BoardPosition(x + 1, y - 2),
             new BoardPosition(x - 1, y + 2),
@@ -56,7 +56,10 @@ public class PathGenerator {
             new BoardPosition(x + 2, y - 1),
             new BoardPosition(x - 2, y + 1),
             new BoardPosition(x - 2, y - 1)
-        );
+        ).filter((boardPosition ->
+                boardPosition.getY() >= 1 && boardPosition.getY() <= 8
+                && boardPosition.getX() >= 1 && boardPosition.getX() <=8 ))
+                .collect(Collectors.toList());
     }
 
     public static List<BoardPosition> generatePossibleBishopPaths(BoardPosition origin) {

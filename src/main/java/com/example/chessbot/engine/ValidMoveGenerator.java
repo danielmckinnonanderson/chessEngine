@@ -1,6 +1,5 @@
 package com.example.chessbot.engine;
 
-import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.game.utility.CaptureUtility;
 import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;

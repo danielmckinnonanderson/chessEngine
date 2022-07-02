@@ -106,13 +106,17 @@ public class PathGenerator {
 
 
     public static List<BoardPosition> generateUpPath(BoardPosition origin) {
-        List<BoardPosition> result = new ArrayList<>();
-
         int originY = origin.getY();
         int originX = origin.getX();
         int spacesToEdge = 8 - originY;
 
-        for(int i = originY; i <= 8; i++) {
+        if (spacesToEdge == 0) {
+            return List.of();
+        }
+
+        List<BoardPosition> result = new ArrayList<>();
+
+        for(int i = originY + 1; i <= spacesToEdge + 1; i++) {
             result.add(new BoardPosition(originX, i));
         }
 
@@ -120,11 +124,15 @@ public class PathGenerator {
     }
 
     public static List<BoardPosition> generateUpRightPath(BoardPosition origin) {
-        List<BoardPosition> result = new ArrayList<>();
-
         int originY = origin.getY();
         int originX = origin.getX();
         int spacesToEdge = 8 - originX < 8 - origin.getY() ? 8 - originX : 8 - originY;
+
+        if(spacesToEdge == 0) {
+            return List.of();
+        }
+
+        List<BoardPosition> result = new ArrayList<>();
 
         for(int i = 0; i < spacesToEdge; i++) {
             result.add(new BoardPosition(originX + 1, originY + 1));
@@ -134,13 +142,18 @@ public class PathGenerator {
     }
 
     public static List<BoardPosition> generateRightPath(BoardPosition origin) {
-        List<BoardPosition> result = new ArrayList<>();
 
         int originY = origin.getY();
         int originX = origin.getX();
         int spacesToEdge = 8 - originX;
 
-        for(int i = originX; i <= spacesToEdge; i++) {
+        if(spacesToEdge == 0) {
+            return List.of();
+        }
+
+        List<BoardPosition> result = new ArrayList<>();
+
+        for(int i = originX + 1; i <= spacesToEdge + 1; i++) {
             result.add(new BoardPosition(i, originY));
         }
 
@@ -148,11 +161,15 @@ public class PathGenerator {
     }
 
     public static List<BoardPosition> generateDownRightPath(BoardPosition origin) {
-        List<BoardPosition> result = new ArrayList<>();
-
         int originY = origin.getY();
         int originX = origin.getX();
         int spacesToEdge = 8 - originX < origin.getY() - 1 ? 8 - originX : originY - 1;
+
+        if (spacesToEdge == 0) {
+            return List.of();
+        }
+
+        List<BoardPosition> result = new ArrayList<>();
 
         for(int i = originX; i <= spacesToEdge; i++) {
             result.add(new BoardPosition(i, originY));
@@ -162,13 +179,17 @@ public class PathGenerator {
     }
 
     public static List<BoardPosition> generateDownPath(BoardPosition origin) {
-        List<BoardPosition> result = new ArrayList<>();
-
         int originY = origin.getY();
         int originX = origin.getX();
         int spacesToEdge = originY - 1;
 
-        for(int i = originY; i >= spacesToEdge; i--) {
+        if(spacesToEdge == 0 ) {
+            return List.of();
+        }
+
+        List<BoardPosition> result = new ArrayList<>();
+
+        for(int i = originY - 1; i >= spacesToEdge - 1; i--) {
             result.add(new BoardPosition(originX, i));
         }
 
@@ -180,11 +201,15 @@ public class PathGenerator {
     }
 
     public static List<BoardPosition> generateLeftPath(BoardPosition origin) {
-        List<BoardPosition> result = new ArrayList<>();
-
         int originY = origin.getY();
         int originX = origin.getX();
         int spacesToEdge = originX - 1;
+
+        if(spacesToEdge == 0) {
+            return List.of();
+        }
+
+        List<BoardPosition> result = new ArrayList<>();
 
         for(int i = originY; i >= spacesToEdge; i--) {
             result.add(new BoardPosition(originX, i));

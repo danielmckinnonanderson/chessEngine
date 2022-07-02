@@ -1,6 +1,6 @@
 package com.example.chessbot.game.board.validator.checks;
 
-import com.example.chessbot.model.board.position.BoardPosition;
+import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 import java.util.Map;

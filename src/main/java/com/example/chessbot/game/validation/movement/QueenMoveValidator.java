@@ -5,7 +5,7 @@ import com.example.chessbot.game.board.validator.checks.EmptyPieceChecker;
 import com.example.chessbot.game.board.validator.checks.EnemyPieceChecker;
 import com.example.chessbot.game.board.validator.checks.PathCollisionChecker;
 import com.example.chessbot.game.state.GameState;
-import com.example.chessbot.model.board.position.BoardPosition;
+import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 import java.util.Map;

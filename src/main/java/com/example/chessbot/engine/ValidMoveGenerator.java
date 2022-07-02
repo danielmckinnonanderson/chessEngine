@@ -2,7 +2,7 @@ package com.example.chessbot.engine;
 
 import com.example.chessbot.game.board.validator.checks.CaptureChecker;
 import com.example.chessbot.game.state.GameState;
-import com.example.chessbot.model.board.position.BoardPosition;
+import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 import java.util.ArrayList;

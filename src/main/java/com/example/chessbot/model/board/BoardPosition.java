@@ -1,4 +1,4 @@
-package com.example.chessbot.model.board.position;
+package com.example.chessbot.model.board;
 
 import java.util.Objects;
 

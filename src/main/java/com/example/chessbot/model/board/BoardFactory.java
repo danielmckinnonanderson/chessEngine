@@ -7,7 +7,6 @@ import com.example.chessbot.model.piece.PieceNames;
 import com.example.chessbot.model.piece.PieceTeam;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 

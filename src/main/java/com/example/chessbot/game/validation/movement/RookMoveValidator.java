@@ -1,9 +1,9 @@
 package com.example.chessbot.game.validation.movement;
 
-import com.example.chessbot.game.board.validator.checks.CaptureChecker;
-import com.example.chessbot.game.board.validator.checks.EmptyPieceChecker;
-import com.example.chessbot.game.board.validator.checks.EnemyPieceChecker;
-import com.example.chessbot.game.board.validator.checks.PathCollisionChecker;
+import com.example.chessbot.game.utility.CaptureUtility;
+import com.example.chessbot.game.utility.EmptyPieceUtility;
+import com.example.chessbot.game.utility.EnemyPieceUtility;
+import com.example.chessbot.game.utility.PathCollisionUtility;
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
@@ -41,25 +41,25 @@ public class RookMoveValidator implements MoveValidator {
 
     private boolean validateHorizontalMove(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
         // if there are no pieces in path then it is valid
-        if (PathCollisionChecker.checkForCollisionsOnHorizontalPath(board, currentPosition, desiredPosition)) {
+        if (PathCollisionUtility.checkForCollisionsOnHorizontalPath(board, currentPosition, desiredPosition)) {
             return false;
         } else {
             // if piece in position is enemy, return true if can capture
-            if(EnemyPieceChecker.isPieceEnemy(pieceToMove, pieceInDesiredPosition)) {
-                return CaptureChecker.canCapture(pieceToMove, pieceInDesiredPosition);
-            } else return EmptyPieceChecker.isPieceEmpty(pieceInDesiredPosition);
+            if(EnemyPieceUtility.isPieceEnemy(pieceToMove, pieceInDesiredPosition)) {
+                return CaptureUtility.canCapture(pieceToMove, pieceInDesiredPosition);
+            } else return EmptyPieceUtility.isPieceEmpty(pieceInDesiredPosition);
         }
     }
 
     private boolean validateVerticalMove(Map<BoardPosition, Piece> board, BoardPosition currentPosition, BoardPosition desiredPosition, Piece pieceToMove, Piece pieceInDesiredPosition) {
         // if there are no pieces in path then it is valid
-        if (PathCollisionChecker.checkForCollisionsOnVerticalPath(board, currentPosition, desiredPosition)) {
+        if (PathCollisionUtility.checkForCollisionsOnVerticalPath(board, currentPosition, desiredPosition)) {
             return false;
         } else {
             // if piece in position is enemy, return true if can capture
-            if (EnemyPieceChecker.isPieceEnemy(pieceToMove, pieceInDesiredPosition)) {
-                return CaptureChecker.canCapture(pieceToMove, pieceInDesiredPosition);
-            } else return EmptyPieceChecker.isPieceEmpty(pieceInDesiredPosition);
+            if (EnemyPieceUtility.isPieceEnemy(pieceToMove, pieceInDesiredPosition)) {
+                return CaptureUtility.canCapture(pieceToMove, pieceInDesiredPosition);
+            } else return EmptyPieceUtility.isPieceEmpty(pieceInDesiredPosition);
         }
     }
 }

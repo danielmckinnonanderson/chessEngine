@@ -1,11 +1,11 @@
-package com.example.chessbot.game.board.validator.checks;
+package com.example.chessbot.game.utility;
 
 import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 import java.util.Map;
 
-public final class PathCollisionChecker {
+public final class PathCollisionUtility {
     /**
      * @param board representing current state of pieces on board for a game
      * @param current position of piece seeking to be moved
@@ -19,7 +19,7 @@ public final class PathCollisionChecker {
             for (int i = -1; i > differenceX; i--) {
                 BoardPosition positionToCheck = new BoardPosition(current.getX() + i, current.getY());
                 Piece pieceInPosition = board.get(positionToCheck);
-                if (!EmptyPieceChecker.isPieceEmpty(pieceInPosition)) {
+                if (!EmptyPieceUtility.isPieceEmpty(pieceInPosition)) {
                     return true;
                 }
             }
@@ -27,7 +27,7 @@ public final class PathCollisionChecker {
             for (int i = 1; i < differenceX; i++) {
                 BoardPosition positionToCheck = new BoardPosition(current.getX() + i, current.getY());
                 Piece pieceInPosition = board.get(positionToCheck);
-                if (!EmptyPieceChecker.isPieceEmpty(pieceInPosition)) {
+                if (!EmptyPieceUtility.isPieceEmpty(pieceInPosition)) {
                     return true;
                 }
             }
@@ -42,7 +42,7 @@ public final class PathCollisionChecker {
             for (int i = -1; i > differenceY; i--) {
                 BoardPosition positionToCheck = new BoardPosition(current.getX(), current.getY() + i);
                 Piece pieceInPosition = board.get(positionToCheck);
-                if (!EmptyPieceChecker.isPieceEmpty(pieceInPosition)) {
+                if (!EmptyPieceUtility.isPieceEmpty(pieceInPosition)) {
                     return true;
                 }
             }
@@ -50,7 +50,7 @@ public final class PathCollisionChecker {
             for (int i = 1; i < differenceY; i++) {
                 BoardPosition positionToCheck = new BoardPosition(current.getX(), current.getY() + i);
                 Piece pieceInPosition = board.get(positionToCheck);
-                if (!EmptyPieceChecker.isPieceEmpty(pieceInPosition)) {
+                if (!EmptyPieceUtility.isPieceEmpty(pieceInPosition)) {
                     return true;
                 }
             }
@@ -66,7 +66,7 @@ public final class PathCollisionChecker {
             for(int i = 1; i < differenceY; i++) {
                 BoardPosition positionToCheck = new BoardPosition(current.getX() + i, current.getY() + i);
                 Piece inPosition = board.get(positionToCheck);
-                if(!EmptyPieceChecker.isPieceEmpty(inPosition)) {
+                if(!EmptyPieceUtility.isPieceEmpty(inPosition)) {
                     return true;
                 }
             }
@@ -75,7 +75,7 @@ public final class PathCollisionChecker {
             for(int i = -1; i > differenceY; i--) {
                 BoardPosition positionToCheck = new BoardPosition(current.getX() + i, current.getY() + i);
                 Piece inPosition = board.get(positionToCheck);
-                if(!EmptyPieceChecker.isPieceEmpty(inPosition)) {
+                if(!EmptyPieceUtility.isPieceEmpty(inPosition)) {
                     return true;
                 }
             }
@@ -84,7 +84,7 @@ public final class PathCollisionChecker {
             for(int i = 1; i < differenceX; i++) {
                 BoardPosition positionToCheck = new BoardPosition(current.getX() + i, current.getY() - i);
                 Piece inPosition = board.get(positionToCheck);
-                if(!EmptyPieceChecker.isPieceEmpty(inPosition)) {
+                if(!EmptyPieceUtility.isPieceEmpty(inPosition)) {
                     return true;
                 }
             }
@@ -93,7 +93,7 @@ public final class PathCollisionChecker {
             for(int i = 1; i < differenceY; i++) {
                 BoardPosition positionToCheck = new BoardPosition(current.getX() - i, current.getY() + i);
                 Piece inPosition = board.get(positionToCheck);
-                if(!EmptyPieceChecker.isPieceEmpty(inPosition)) {
+                if(!EmptyPieceUtility.isPieceEmpty(inPosition)) {
                     return true;
                 }
             }

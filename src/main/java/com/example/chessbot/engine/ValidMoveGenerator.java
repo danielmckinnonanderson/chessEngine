@@ -1,6 +1,6 @@
 package com.example.chessbot.engine;
 
-import com.example.chessbot.game.board.validator.checks.CaptureChecker;
+import com.example.chessbot.game.utility.CaptureUtility;
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
@@ -45,7 +45,7 @@ public class ValidMoveGenerator {
         final List<BoardPosition> result = new ArrayList<>();
 
         for (BoardPosition p : potentialMoves) {
-            if (CaptureChecker.canCapture(toMove, board.get(p))) {
+            if (CaptureUtility.canCapture(toMove, board.get(p))) {
                 result.add(p);
             }
         }

@@ -1,9 +1,9 @@
 package com.example.chessbot.game.validation.movement;
 
-import com.example.chessbot.game.board.validator.checks.CaptureChecker;
-import com.example.chessbot.game.board.validator.checks.EmptyPieceChecker;
-import com.example.chessbot.game.board.validator.checks.EnemyPieceChecker;
-import com.example.chessbot.game.board.validator.checks.PathCollisionChecker;
+import com.example.chessbot.game.utility.CaptureUtility;
+import com.example.chessbot.game.utility.EmptyPieceUtility;
+import com.example.chessbot.game.utility.EnemyPieceUtility;
+import com.example.chessbot.game.utility.PathCollisionUtility;
 import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
@@ -43,36 +43,36 @@ public class QueenMoveValidator implements MoveValidator {
     private boolean validateMoveForVerticalPath(Map<BoardPosition, Piece> board, BoardPosition current, BoardPosition desired) {
         Piece toMove = board.get(current);
         Piece inDesired = board.get(desired);
-        if(PathCollisionChecker.checkForCollisionsOnVerticalPath(board, current, desired)) {
+        if(PathCollisionUtility.checkForCollisionsOnVerticalPath(board, current, desired)) {
             return false;
         } else {
-            if(EnemyPieceChecker.isPieceEnemy(toMove, inDesired)) {
-                return CaptureChecker.canCapture(toMove, inDesired);
-            } else return EmptyPieceChecker.isPieceEmpty(inDesired);
+            if(EnemyPieceUtility.isPieceEnemy(toMove, inDesired)) {
+                return CaptureUtility.canCapture(toMove, inDesired);
+            } else return EmptyPieceUtility.isPieceEmpty(inDesired);
         }
     }
 
     private boolean validateMoveForHorizontalPath(Map<BoardPosition, Piece> board, BoardPosition current, BoardPosition desired) {
         Piece toMove = board.get(current);
         Piece inDesired = board.get(desired);
-        if(PathCollisionChecker.checkForCollisionsOnHorizontalPath(board, current, desired)) {
+        if(PathCollisionUtility.checkForCollisionsOnHorizontalPath(board, current, desired)) {
             return false;
         } else {
-            if(EnemyPieceChecker.isPieceEnemy(toMove, inDesired)) {
-                return CaptureChecker.canCapture(toMove, inDesired);
-            } else return EmptyPieceChecker.isPieceEmpty(inDesired);
+            if(EnemyPieceUtility.isPieceEnemy(toMove, inDesired)) {
+                return CaptureUtility.canCapture(toMove, inDesired);
+            } else return EmptyPieceUtility.isPieceEmpty(inDesired);
         }
     }
 
     private boolean validateMoveForDiagonalPath(Map<BoardPosition, Piece> board, BoardPosition current, BoardPosition desired) {
         Piece toMove = board.get(current);
         Piece inDesired = board.get(desired);
-        if(PathCollisionChecker.checkForCollisionsOnDiagonalPath(board, current, desired)) {
+        if(PathCollisionUtility.checkForCollisionsOnDiagonalPath(board, current, desired)) {
             return false;
         } else {
-            if(EnemyPieceChecker.isPieceEnemy(toMove, inDesired)) {
-                return CaptureChecker.canCapture(toMove, inDesired);
-            } else return EmptyPieceChecker.isPieceEmpty(inDesired);
+            if(EnemyPieceUtility.isPieceEnemy(toMove, inDesired)) {
+                return CaptureUtility.canCapture(toMove, inDesired);
+            } else return EmptyPieceUtility.isPieceEmpty(inDesired);
         }
     }
 }

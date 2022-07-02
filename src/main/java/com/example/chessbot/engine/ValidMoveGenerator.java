@@ -1,7 +1,7 @@
 package com.example.chessbot.engine;
 
-import com.example.chessbot.game.utility.CaptureUtility;
 import com.example.chessbot.game.state.GameState;
+import com.example.chessbot.game.utility.CaptureUtility;
 import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
@@ -14,19 +14,26 @@ public class ValidMoveGenerator {
                                                                BoardPosition position,
                                                                GameState gameState) {
         Map<BoardPosition, Piece> board = gameState.getBoard();
-        return removeIllegalCheckStates(position, removeIllegalCaptures(piece,
-                removeOutOfBoundsMoves(listOfPotentialMovesFromPieceName(piece, position)),
-                board));
+        return removeIllegalCheckStates(position,
+                removeIllegalCaptures(piece,
+                        removeOutOfBoundsMoves(
+                                listOfPotentialMovesFromPieceName(piece, position)),
+                                board));
     }
 
     public static List<BoardPosition> listOfPotentialMovesFromPieceName(Piece p, BoardPosition b) {
-        return switch (p.getPieceName()) {
-            case PAWN -> List.of();
-            case ROOK -> List.of();
-            default -> throw new IllegalStateException("Unexpected value: " + p.getPieceName());
-        };
+        switch (p.getPieceName()) {
+            case PAWN -> PathGenerator.generatePossiblePawnPaths(p.getPieceTeam(), b);
+            case ROOK -> PathGenerator.generatePossibleRookPaths(b);
+            case KNIGHT -> PathGenerator.generatePossibleKnightPaths(b);
+            case BISHOP -> PathGenerator.generatePossibleBishopPaths(b);
+            case QUEEN -> PathGenerator.generatePossibleQueenPaths(b);
+            case KING -> PathGenerator.generatePossibleKingPaths(b);
+            default -> List.of();
+        }
     }
 
+    // TODO this will probably not be necessary if I just do the first pass path generation right
     public static List<BoardPosition> removeOutOfBoundsMoves(List<BoardPosition> potentialMoves) {
         final List<BoardPosition> result = new ArrayList<>();
 

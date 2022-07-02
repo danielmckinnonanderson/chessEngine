@@ -7,7 +7,7 @@ import com.example.chessbot.game.state.player.PlayerStateFactory;
 import com.example.chessbot.game.validation.movement.KingMoveValidator;
 import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.board.position.BoardPosition;
-import com.example.chessbot.model.board.position.Pair;
+import com.example.chessbot.model.Pair;
 import com.example.chessbot.model.piece.Piece;
 import com.example.chessbot.model.piece.PieceNames;
 import com.example.chessbot.model.piece.PieceTeam;

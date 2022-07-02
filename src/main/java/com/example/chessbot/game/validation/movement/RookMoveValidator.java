@@ -1,4 +1,4 @@
-package com.example.chessbot.game.board.validator;
+package com.example.chessbot.game.validation.movement;
 
 import com.example.chessbot.game.board.validator.checks.CaptureChecker;
 import com.example.chessbot.game.board.validator.checks.EmptyPieceChecker;

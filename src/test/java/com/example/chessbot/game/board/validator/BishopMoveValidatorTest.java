@@ -4,6 +4,8 @@ import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.game.state.GameStateFactory;
 import com.example.chessbot.game.state.player.PlayerState;
 import com.example.chessbot.game.state.player.PlayerStateFactory;
+import com.example.chessbot.game.validation.movement.BishopMoveValidator;
+import com.example.chessbot.game.validation.movement.MoveValidator;
 import com.example.chessbot.model.board.BoardFactory;
 import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.board.position.Pair;

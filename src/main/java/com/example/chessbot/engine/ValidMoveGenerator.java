@@ -12,8 +12,7 @@ import java.util.Map;
 public class ValidMoveGenerator {
     public static List<BoardPosition> generateListOfValidMoves(Piece piece,
                                                                BoardPosition position,
-                                                               GameState gameState) {
-        Map<BoardPosition, Piece> board = gameState.getBoard();
+                                                               Map<BoardPosition, Piece> board) {
         return removeIllegalCheckStates(position,
                 removeIllegalCaptures(piece,
                         removeOutOfBoundsMoves(
@@ -22,7 +21,7 @@ public class ValidMoveGenerator {
     }
 
     public static List<BoardPosition> listOfPotentialMovesFromPieceName(Piece p, BoardPosition b) {
-        switch (p.getPieceName()) {
+        return switch (p.getPieceName()) {
             case PAWN -> PathGenerator.generatePossiblePawnPaths(p.getPieceTeam(), b);
             case ROOK -> PathGenerator.generatePossibleRookPaths(b);
             case KNIGHT -> PathGenerator.generatePossibleKnightPaths(b);
@@ -30,7 +29,7 @@ public class ValidMoveGenerator {
             case QUEEN -> PathGenerator.generatePossibleQueenPaths(b);
             case KING -> PathGenerator.generatePossibleKingPaths(b);
             default -> List.of();
-        }
+        };
     }
 
     // TODO this will probably not be necessary if I just do the first pass path generation right

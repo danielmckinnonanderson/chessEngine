@@ -1,13 +1,11 @@
 package com.example.chessbot.model.board;
 
-import com.example.chessbot.model.board.position.Pair;
+import com.example.chessbot.model.Pair;
 import com.example.chessbot.model.piece.Piece;
-import com.example.chessbot.model.board.position.BoardPosition;
 import com.example.chessbot.model.piece.PieceNames;
 import com.example.chessbot.model.piece.PieceTeam;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 

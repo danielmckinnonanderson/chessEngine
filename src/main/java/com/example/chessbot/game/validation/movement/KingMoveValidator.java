@@ -1,9 +1,9 @@
-package com.example.chessbot.game.board.validator;
+package com.example.chessbot.game.validation.movement;
 
-import com.example.chessbot.game.board.validator.checks.CaptureChecker;
-import com.example.chessbot.game.board.validator.checks.EmptyPieceChecker;
+import com.example.chessbot.game.utility.CaptureUtility;
+import com.example.chessbot.game.utility.EmptyPieceUtility;
 import com.example.chessbot.game.state.GameState;
-import com.example.chessbot.model.board.position.BoardPosition;
+import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 import java.util.Map;
@@ -22,10 +22,10 @@ public class KingMoveValidator implements MoveValidator {
         Piece toMove = board.get(currentPosition);
         Piece inDesired = board.get(desiredPosition);
 
-        if(EmptyPieceChecker.isPieceEmpty(inDesired)) {
+        if(EmptyPieceUtility.isPieceEmpty(inDesired)) {
             return true;
         } else {
-            return CaptureChecker.canCapture(toMove, inDesired);
+            return CaptureUtility.canCapture(toMove, inDesired);
         }
     }
 

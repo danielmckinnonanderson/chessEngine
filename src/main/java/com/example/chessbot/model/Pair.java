@@ -1,4 +1,4 @@
-package com.example.chessbot.model.board.position;
+package com.example.chessbot.model;
 
 public class Pair<L, R> {
     private final L left;

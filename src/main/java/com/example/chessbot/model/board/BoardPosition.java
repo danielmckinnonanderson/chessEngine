@@ -1,24 +1,14 @@
-package com.example.chessbot.model.board.position;
+package com.example.chessbot.model.board;
 
 import java.util.Objects;
 
 public class BoardPosition {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public BoardPosition(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    public BoardPosition setBoardPositionX(int x) {
-        this.x = x;
-        return this;
-    }
-
-    public BoardPosition setBoardPositionY(int y) {
-        this.y = y;
-        return this;
     }
 
     public int getX() {

@@ -1,7 +1,7 @@
-package com.example.chessbot.game.board.validator;
+package com.example.chessbot.game.validation.movement;
 
 import com.example.chessbot.game.state.GameState;
-import com.example.chessbot.model.board.position.BoardPosition;
+import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 public class BoardMoveValidator implements MoveValidator {

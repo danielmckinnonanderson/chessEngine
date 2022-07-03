@@ -14,9 +14,8 @@ public class ValidMoveGenerator {
                                                                Map<BoardPosition, Piece> board) {
         return removeIllegalCheckStates(position,
                 removeIllegalCaptures(piece,
-                        removeOutOfBoundsMoves(
-                                listOfPotentialMovesFromPieceName(piece, position)),
-                                board));
+                        listOfPotentialMovesFromPieceName(piece, position),
+                        board));
     }
 
     public static List<BoardPosition> listOfPotentialMovesFromPieceName(Piece p, BoardPosition b) {
@@ -29,19 +28,6 @@ public class ValidMoveGenerator {
             case KING -> PathGenerator.generatePossibleKingPaths(b);
             default -> List.of();
         };
-    }
-
-    // TODO this will probably not be necessary if I just do the first pass path generation right
-    public static List<BoardPosition> removeOutOfBoundsMoves(List<BoardPosition> potentialMoves) {
-        final List<BoardPosition> result = new ArrayList<>();
-
-        for (BoardPosition p : potentialMoves) {
-            if (p.getX() <= 8 && p.getX() >= 1) {
-                result.add(p);
-            }
-        }
-
-        return result;
     }
 
     public static List<BoardPosition> removeIllegalCaptures(Piece toMove,
@@ -58,6 +44,7 @@ public class ValidMoveGenerator {
         return result;
     }
 
+    // TODO check check
     public static List<BoardPosition> removeIllegalCheckStates(BoardPosition currentPosition,
                                                                List<BoardPosition> potentialMoves) {
         final List<BoardPosition> result = new ArrayList<>();
@@ -66,6 +53,6 @@ public class ValidMoveGenerator {
             // if CheckValidator.validate(whatever) { result.add(p); }
         }
 
-        return result;
+        return potentialMoves;
     }
 }

@@ -11,6 +11,7 @@ import com.example.chessbot.model.piece.PieceTeam;
 import java.util.Map;
 
 public final class GameStateFactory {
+    private GameStateFactory() {}
 
     public static GameState createInitialGameState() {
         return new ConcreteGameState(1, BoardFactory.createInitialBoard(), Map.of(), new Pair<>(PlayerStateFactory.createInitialPlayerState(PieceTeam.WHITE), PlayerStateFactory.createInitialPlayerState(PieceTeam.BLACK)));

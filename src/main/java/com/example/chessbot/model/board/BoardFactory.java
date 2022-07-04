@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BoardFactory {
+    private BoardFactory() {}
 
     public static Map<BoardPosition, Piece> createInitialBoard() {
         Map<BoardPosition, Piece> initialBoard = new HashMap<>();

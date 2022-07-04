@@ -1,21 +1,28 @@
 package com.example.chessbot.engine;
 
+import com.example.chessbot.game.state.GameState;
 import com.example.chessbot.game.utility.CaptureUtility;
+import com.example.chessbot.game.validation.movement.MoveValidator;
 import com.example.chessbot.model.board.BoardPosition;
 import com.example.chessbot.model.piece.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ValidMoveGenerator {
+    private ValidMoveGenerator() {}
+
     public static List<BoardPosition> generateListOfValidMoves(Piece piece,
                                                                BoardPosition position,
-                                                               Map<BoardPosition, Piece> board) {
-        return removeIllegalCheckStates(position,
-                removeIllegalCaptures(piece,
-                        listOfPotentialMovesFromPieceName(piece, position),
-                        board));
+                                                               GameState gameState,
+                                                               MoveValidator validator) {
+        return listOfPotentialMovesFromPieceName(piece, position)
+                .stream()
+                .filter(potential -> validator.validate(gameState, position, potential))
+                .collect(Collectors.toList());
+                // TODO filter again for invalid check state, then return
     }
 
     public static List<BoardPosition> listOfPotentialMovesFromPieceName(Piece p, BoardPosition b) {

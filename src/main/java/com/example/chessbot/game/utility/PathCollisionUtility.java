@@ -6,6 +6,8 @@ import com.example.chessbot.model.piece.Piece;
 import java.util.Map;
 
 public final class PathCollisionUtility {
+    private PathCollisionUtility() {}
+
     /**
      * @param board representing current state of pieces on board for a game
      * @param current position of piece seeking to be moved

@@ -144,11 +144,14 @@ public class ValidMoveGeneratorTest {
 
         Assertions.assertThat(result.contains(new BoardPosition(x - 1, y - 1))).isTrue();
         Assertions.assertThat(result.contains(new BoardPosition(x - 2, y - 2))).isTrue();
+        Assertions.assertThat(result.contains(new BoardPosition(x - 3, y - 3))).isFalse();
+        Assertions.assertThat(result.contains(new BoardPosition(x - 4, y - 4))).isFalse();
 
         Assertions.assertThat(result.contains(new BoardPosition(x - 1, y + 1))).isTrue();
         Assertions.assertThat(result.contains(new BoardPosition(x - 2, y + 2))).isTrue();
+        Assertions.assertThat(result.contains(new BoardPosition(x - 3, y + 2))).isFalse();
 
-        Assertions.assertThat(result.size()).isEqualTo(10);
+        Assertions.assertThat(result.size()).isEqualTo(11);
     }
 
     @Test

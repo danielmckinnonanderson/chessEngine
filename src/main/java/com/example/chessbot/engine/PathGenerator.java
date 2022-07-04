@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class PathGenerator {
+    private PathGenerator() {}
+
     public static List<BoardPosition> generatePossiblePawnPaths(PieceTeam team, BoardPosition origin) {
         int x = origin.getX();
         int y = origin.getY();
@@ -211,7 +213,7 @@ public final class PathGenerator {
     public static List<BoardPosition> generateDownLeftPath(BoardPosition origin) {
         int originY = origin.getY();
         int originX = origin.getX();
-        int spacesToEdge = 8 - originX < origin.getY() - 1 ? 8 - originX : originY - 1;
+        int spacesToEdge = originX - 1 < origin.getY() - 1 ? originX - 1 : originY - 1;
 
         if (spacesToEdge == 0) {
             return List.of();
@@ -247,7 +249,7 @@ public final class PathGenerator {
     public static List<BoardPosition> generateUpLeftPath(BoardPosition origin) {
         int originY = origin.getY();
         int originX = origin.getX();
-        int spacesToEdge = 8 - originX < origin.getY() - 1 ? 8 - originX : originY - 1;
+        int spacesToEdge = originX - 1 < 8 - origin.getY() ? originX - 1 : 8 - originY;
 
         if(spacesToEdge == 0) {
             return List.of();

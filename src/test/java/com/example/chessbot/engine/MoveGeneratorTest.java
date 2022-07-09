@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-public class ValidMoveGeneratorTest {
+public class MoveGeneratorTest {
     static final Piece whitePawn = new Piece(PieceNames.PAWN, PieceTeam.WHITE, true);
     static final Piece blackPawn = new Piece(PieceNames.PAWN, PieceTeam.BLACK, true);
     static final Piece rook = new Piece(PieceNames.ROOK, PieceTeam.WHITE, true);
@@ -36,7 +36,7 @@ public class ValidMoveGeneratorTest {
 
         board.put(pos, whitePawn);
 
-        final List<BoardPosition> result = ValidMoveGenerator.listOfPotentialMovesFromPieceName(whitePawn, pos);
+        final List<BoardPosition> result = MoveGenerator.listOfPotentialMovesFromPieceName(whitePawn, pos);
 
         Assertions.assertThat(result.contains(new BoardPosition(x + 1, y + 1))).isTrue();
         Assertions.assertThat(result.contains(new BoardPosition(x, y + 2))).isTrue();
@@ -53,7 +53,7 @@ public class ValidMoveGeneratorTest {
 
         board.put(pos, whitePawn);
 
-        final List<BoardPosition> result = ValidMoveGenerator.listOfPotentialMovesFromPieceName(blackPawn, pos);
+        final List<BoardPosition> result = MoveGenerator.listOfPotentialMovesFromPieceName(blackPawn, pos);
 
         Assertions.assertThat(result.contains(new BoardPosition(x + 1, y - 1))).isTrue();
         Assertions.assertThat(result.contains(new BoardPosition(x, y - 2))).isTrue();
@@ -68,7 +68,7 @@ public class ValidMoveGeneratorTest {
         int y = 1;
         final BoardPosition pos = new BoardPosition(x, y);
 
-        final List<BoardPosition> result = ValidMoveGenerator.listOfPotentialMovesFromPieceName(rook, pos);
+        final List<BoardPosition> result = MoveGenerator.listOfPotentialMovesFromPieceName(rook, pos);
 
         Assertions.assertThat(result.contains(new BoardPosition(x + 1, y))).isTrue();
         Assertions.assertThat(result.contains(new BoardPosition(x + 2, y))).isTrue();
@@ -95,7 +95,7 @@ public class ValidMoveGeneratorTest {
         int y = 3;
         final BoardPosition pos = new BoardPosition(x, y);
 
-        final List<BoardPosition> result = ValidMoveGenerator.listOfPotentialMovesFromPieceName(knight, pos);
+        final List<BoardPosition> result = MoveGenerator.listOfPotentialMovesFromPieceName(knight, pos);
 
         Assertions.assertThat(result.contains(new BoardPosition(x + 1, y + 2))).isTrue();
         Assertions.assertThat(result.contains(new BoardPosition(x + 2, y + 1))).isTrue();
@@ -111,7 +111,7 @@ public class ValidMoveGeneratorTest {
         int yY = 7;
         final BoardPosition pos2 = new BoardPosition(xX, yY);
 
-        final List<BoardPosition> result2 = ValidMoveGenerator.listOfPotentialMovesFromPieceName(knight, pos2);
+        final List<BoardPosition> result2 = MoveGenerator.listOfPotentialMovesFromPieceName(knight, pos2);
 
         Assertions.assertThat(result2.contains(new BoardPosition(xX - 1, yY + 2))).isFalse();
         Assertions.assertThat(result2.contains(new BoardPosition(xX - 2, yY + 1))).isTrue();
@@ -130,7 +130,7 @@ public class ValidMoveGeneratorTest {
         int y = 5;
         final BoardPosition pos = new BoardPosition(x, y);
 
-        final List<BoardPosition> result = ValidMoveGenerator.listOfPotentialMovesFromPieceName(bishop, pos);
+        final List<BoardPosition> result = MoveGenerator.listOfPotentialMovesFromPieceName(bishop, pos);
 
         Assertions.assertThat(result.contains(new BoardPosition(x + 1, y + 1))).isTrue();
         Assertions.assertThat(result.contains(new BoardPosition(x + 2, y + 2))).isTrue();
@@ -157,7 +157,7 @@ public class ValidMoveGeneratorTest {
         int y = 4;
         final BoardPosition pos = new BoardPosition(x, y);
 
-        final List<BoardPosition> result = ValidMoveGenerator.listOfPotentialMovesFromPieceName(queen, pos);
+        final List<BoardPosition> result = MoveGenerator.listOfPotentialMovesFromPieceName(queen, pos);
 
         Assertions.assertThat(result.contains(new BoardPosition(x + 1, y))).isTrue();
         Assertions.assertThat(result.contains(new BoardPosition(x + 2, y))).isTrue();
@@ -205,7 +205,7 @@ public class ValidMoveGeneratorTest {
         int y = 7;
         final BoardPosition pos = new BoardPosition(x, y);
 
-        final List<BoardPosition> result = ValidMoveGenerator.listOfPotentialMovesFromPieceName(king, pos);
+        final List<BoardPosition> result = MoveGenerator.listOfPotentialMovesFromPieceName(king, pos);
 
         Assertions.assertThat(result.contains(new BoardPosition(x, y + 1))).isTrue();
         Assertions.assertThat(result.contains(new BoardPosition(x + 1, y + 1))).isTrue();
@@ -222,7 +222,7 @@ public class ValidMoveGeneratorTest {
         int yY = 8;
         final BoardPosition pos2 = new BoardPosition(xX, yY);
 
-        final List<BoardPosition> result2 = ValidMoveGenerator.listOfPotentialMovesFromPieceName(king, pos2);
+        final List<BoardPosition> result2 = MoveGenerator.listOfPotentialMovesFromPieceName(king, pos2);
 
         Assertions.assertThat(result2.contains(new BoardPosition(xX, yY + 1))).isFalse();
         Assertions.assertThat(result2.contains(new BoardPosition(xX + 1, yY + 1))).isFalse();

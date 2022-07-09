@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ValidMoveGenerator {
+public class MoveGenerator {
     public static List<BoardPosition> generateListOfValidMoves(Piece piece,
                                                                BoardPosition position,
                                                                Map<BoardPosition, Piece> board) {
